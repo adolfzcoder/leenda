@@ -6,7 +6,9 @@ SQL
 create database leenda
 use leenda
 --create tables
+#
 --AppUser
+#
 create table AppUser(
 userID INT PRIMARY KEY ,
 firstName VARCHAR (45) NOT NULL,
@@ -23,7 +25,9 @@ verificationStatus VARCHAR(10) CHECK (verificationStatus IN ('verified', 'pendin
 phoneNumber VARCHAR(20) NOT NULL CHECK (phoneNumber LIKE '+%' AND
 LEN(phoneNumber) BETWEEN 10 AND 20))
 ; -- Constraint for verification status;
+#
 --HouseAddress
+#
 CREATE TABLE HouseAddress(
 houseAddressID INT PRIMARY KEY ,
 country NVARCHAR(100) NOT NULL,
@@ -36,7 +40,9 @@ erf NVARCHAR(50) NOT NULL CHECK (LEN(erf) <= 50), -- Limit length of erf to
 userID INT NOT NULL,
 FOREIGN KEY (userID) REFERENCES appUser(userID)
 );
+#
 --DriverLicenseExpiryDate
+# 
 CREATE TABLE DriverLicenseExpiryDate(
 driverLicenseExpiryDateID INT PRIMARY KEY,
 driverLicenseExpiryDate DATE,
@@ -45,6 +51,7 @@ FOREIGN KEY (userID) REFERENCES appUser(userID),
 driverLicenseExpiryDate DATE NOT NULL CHECK (driverLicenseExpiryDate >
 GETDATE()) -- Expiry date must be in the future
 );
+#
 --Review
 CREATE TABLE Review(
 reviewID INT PRIMARY KEY,
@@ -55,6 +62,7 @@ datePosted DATE NOT NULL,
 userID INT NOT NULL,
 FOREIGN KEY (userID) REFERENCES AppUser(userID)
 );
+#
 --Vehicle
 CREATE TABLE Vehicle (
 vehicleIdentificationNumber CHAR(17) PRIMARY KEY,
@@ -79,6 +87,7 @@ vehicleStatus VARCHAR(20)NOT NULL CHECK (vehicleStatus IN ('available',
 userID INT,
 FOREIGN KEY (userID) REFERENCES AppUser(userID)
 );
+#
 --Maintenance
 CREATE TABLE Maintenance (
 maintenanceID INT PRIMARY KEY ,
@@ -90,6 +99,7 @@ vehicleIdentificationNumber CHAR(17) NOT NULL,
 FOREIGN KEY (vehicleIdentificationNumber) REFERENCES
 Vehicle(vehicleIdentificationNumber)
 );
+#
 --Booking
 CREATE TABLE Booking(
 bookingID INT PRIMARY KEY,
@@ -104,6 +114,7 @@ Vehicle(vehicleIdentificationNumber),
 userID INT NOT NULL,
 FOREIGN KEY (userID) REFERENCES appUser(userID)
 );
+#
 --Booking location
 CREATE TABLE BookingLocation(
 bookingLocationID INT PRIMARY KEY,
@@ -116,6 +127,7 @@ locationType VARCHAR (15),
 bookingID INT NOT NULL,
 FOREIGN KEY (bookingID) REFERENCES Booking(bookingID)
 );
+#
 --payment
 CREATE TABLE Payment (
 paymentID INT PRIMARY KEY,
