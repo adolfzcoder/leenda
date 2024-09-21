@@ -1,5 +1,5 @@
 # leenda
- 
+# With File Based System (FBS). Values are stored in a comma seperated value file (csv), and they are read by splitting the values at the comma, the user email is always at index 0 and password at index 1, comparissions can be made to these index positions to authenticate the user 
 SQL 
 
 --create database to store the tables
