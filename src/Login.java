@@ -12,7 +12,7 @@ public class Login {
         String regex = "[:]";
         String[] userInfoCredentials = userInfo.split(regex);
             
-        // Store the email and password in separate variables
+        // store user submitted email and password in userEmail & userPassword
         String userEmail = userInfoCredentials[0];
         String userPassword = userInfoCredentials[1];
 
