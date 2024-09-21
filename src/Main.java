@@ -66,7 +66,7 @@ public class Main {
     }
 
     public static String loginOrSignIn(){
-        System.out.println("login or sign in: (l/s)");
+        System.out.println("login or sign up: (l/s)");
 
         String choice = scan.nextLine();
 

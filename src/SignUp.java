@@ -8,7 +8,7 @@ public class SignUp {
             try (FileWriter writer = new FileWriter("src\\userDetails.txt", true)) {
                 writer.append(userInfo+ "\n");
                 writer.close();
-                System.out.println("User inserted succesfully");
+                System.out.println("User created succesfully");
             }
     
     
