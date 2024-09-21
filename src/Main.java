@@ -1,36 +1,38 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args) {
-       
-        JFrame frame = new JFrame("Car Rental System");
-        frame.setSize(400, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
+    static Scanner scan = new Scanner(System.in);
 
-        // Login button
-        JButton loginButton = new JButton("Login");
-        loginButton.setBounds(50, 50, 100, 30);
-        frame.add(loginButton);
+    public static void main(String[] args) throws FileNotFoundException {
+        storeEmailPassword storeEmailPassword = new storeEmailPassword();
+        File file = new File("src\\emails-passwords.txt");
+        
+        Scanner reader = new Scanner(file);
+        // get user credentials
 
-        // Signup button
-        JButton signupButton = new JButton("Sign Up");
-        signupButton.setBounds(200, 50, 100, 30);
-        frame.add(signupButton);
+        String userInfo = getUserCredentials();
+        // write user credentials to file
+        storeEmailPassword.writeToEmailPasswordFile(userInfo);
 
-        // Action listeners wait until button is clicked then it does function/job
-        loginButton.addActionListener(e -> {
-            // once clicks login button, close the current window, then open login page
-            frame.dispose(); 
-            new LoginPage(); 
-        });
 
-        signupButton.addActionListener(e -> {
-            // once clicks signin button, close th ecurrent windown then open the sign up Window
-            frame.dispose(); 
-            new SignupPage(); 
-        });
+        System.out.println(userInfo);
+        
+        
+    }
+    public static String getUserCredentials(){
 
-        frame.setVisible(true); // Make frame visible
+        System.out.println("Enter your email: ");
+        
+        String email = scan.nextLine();
+        System.out.println("Enter your password: ");
+        String password = scan.nextLine();
+
+        return email + " " + password;
+
+
     }
 }
