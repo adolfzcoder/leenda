@@ -2,11 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import javax.swing.*;
-
 public class Main {
     static Scanner scan = new Scanner(System.in);
-
+    Login login = new Login();
     public static void main(String[] args) throws FileNotFoundException {
         storeEmailPassword storeEmailPassword = new storeEmailPassword();
         File file = new File("src\\emails-passwords.txt");
@@ -18,7 +16,7 @@ public class Main {
         // write user credentials to file
         storeEmailPassword.writeToEmailPasswordFile(userInfo);
 
-
+        Login.login(userInfo);
         System.out.println(userInfo);
         
         
