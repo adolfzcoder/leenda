@@ -9,15 +9,24 @@ public class Main {
         storeEmailPassword storeEmailPassword = new storeEmailPassword();
         File file = new File("src\\emails-passwords.txt");
         
-        Scanner reader = new Scanner(file);
-        // get user credentials
 
-        String userInfo = getUserCredentials();
-        // write user credentials to file
-        storeEmailPassword.writeToEmailPasswordFile(userInfo);
+        String choice = loginOrSignIn();
 
-        Login.login(userInfo);
-        System.out.println(userInfo);
+        if (choice.equals("l")){
+            Login.login(getUserCredentials());
+
+        }else if(choice.equals("s")){
+            // get user credentials
+
+            String userInfo = getUserCredentials();
+            // write user credentials to file
+            storeEmailPassword.writeToEmailPasswordFile(userInfo);
+        }else {
+            System.out.println("Incorrect Character, please try again");
+        }
+        
+
+       
         
         
     }
@@ -29,8 +38,16 @@ public class Main {
         System.out.println("Enter your password: ");
         String password = scan.nextLine();
 
-        return email + " " + password;
+        return email+":"+ password;
 
 
+    }
+
+    public static String loginOrSignIn(){
+        System.out.println("login or sign in: (l/s)");
+
+        String choice = scan.nextLine();
+
+        return choice;
     }
 }

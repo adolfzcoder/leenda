@@ -8,6 +8,7 @@ public class storeEmailPassword {
             try (FileWriter writer = new FileWriter("src\\emails-passwords.txt", true)) {
                 writer.append(userInfo+ "\n");
                 writer.close();
+                System.out.println("User inserted succesfully");
             }
     
     
