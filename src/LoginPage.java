@@ -1,73 +1,80 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection; //sql connection
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
-public class LoginPage {
+public class LoginPage extends JFrame {
+    private JTextField emailField;
+    private JPasswordField passwordField;
+    private JButton loginButton;
+    private static final String FILE_PATH = "users.csv";
+
     public LoginPage() {
-        JFrame frame = new JFrame("Login");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
+        setTitle("Login");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(null);
 
+        // Create UI components
         JLabel emailLabel = new JLabel("Email:");
         emailLabel.setBounds(50, 50, 80, 25);
-        frame.add(emailLabel);
+        add(emailLabel);
 
-        JTextField emailField = new JTextField();
+        emailField = new JTextField();
         emailField.setBounds(150, 50, 160, 25);
-        frame.add(emailField);
+        add(emailField);
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(50, 100, 80, 25);
-        frame.add(passwordLabel);
+        add(passwordLabel);
 
-        JPasswordField passwordField = new JPasswordField();
+        passwordField = new JPasswordField();
         passwordField.setBounds(150, 100, 160, 25);
-        frame.add(passwordField);
+        add(passwordField);
 
-        // Login button
-        JButton loginButton = new JButton("Login");
-        loginButton.setBounds(150, 150, 100, 30);
-        frame.add(loginButton);
+        loginButton = new JButton("Login");
+        loginButton.setBounds(150, 150, 80, 25);
+        add(loginButton);
 
-        // if login button clicked do
+        // Add action listener to the button
         loginButton.addActionListener(new ActionListener() {
-            
+            @Override
             public void actionPerformed(ActionEvent e) {
-                String email = emailField.getText();
-                String password = new String(passwordField.getPassword());
-
-                if (validateUser(email, password)) {
-                    JOptionPane.showMessageDialog(frame, "Login successful!");
-                    frame.dispose(); 
-                    new HomePage(); 
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Invalid credentials.");
-                }
+                handleLogin();
             }
         });
 
-        frame.setVisible(true); // Make frame visible
+        setVisible(true);
     }
 
-    // Method to validate user login using JDBC
-    private boolean validateUser(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        try (Connection conn = DatabaseConnection.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    private void handleLogin() {
+        String email = emailField.getText();
+        String password = new String(passwordField.getPassword());
 
-            pstmt.setString(1, email);
-            pstmt.setString(2, password);
-            ResultSet rs = pstmt.executeQuery();
-
-            return rs.next(); // Returns true if a record is found
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            return false;
+        // Validate login credentials
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(FILE_PATH));
+            for (String line : lines) {
+                String[] userDetails = line.split(",");
+                if (userDetails[1].equals(email) && userDetails[2].equals(password)) {
+                    JOptionPane.showMessageDialog(this, "Login Successful");
+                    new Dashboard();
+                    this.dispose();
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(this, "Invalid Credentials");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Login Failed: " + ex.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new LoginPage();
     }
 }

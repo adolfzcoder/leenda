@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "lib",
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Users\\Jaden\\OneDrive - NUST\\Programming\\Github\\leenda\\lib\\mssql-jdbc-12.8.1.jre11.jar"
+    ]
+}
