@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -6,21 +5,21 @@ public class Main {
     static Scanner scan = new Scanner(System.in);
     Login login = new Login();
     public static void main(String[] args) throws FileNotFoundException {
-        storeEmailPassword storeEmailPassword = new storeEmailPassword();
-        File file = new File("src\\emails-passwords.txt");
+        SignUp signup = new SignUp();
+        // File file = new File("src\\userDetails.txt");
         
 
         String choice = loginOrSignIn();
 
         if (choice.equals("l")){
-            Login.login(getUserCredentials());
+            Login.login(getUserEmailAndPassword());
 
         }else if(choice.equals("s")){
             // get user credentials
 
             String userInfo = getUserCredentials();
             // write user credentials to file
-            storeEmailPassword.writeToEmailPasswordFile(userInfo);
+            signup.writeToEmailPasswordFile(userInfo);
         }else {
             System.out.println("Incorrect Character, please try again");
         }
@@ -30,15 +29,38 @@ public class Main {
         
         
     }
-    public static String getUserCredentials(){
-
+    private static String getUserEmailAndPassword() {
         System.out.println("Enter your email: ");
-        
         String email = scan.nextLine();
+        email = email.toLowerCase();
+
         System.out.println("Enter your password: ");
         String password = scan.nextLine();
 
         return email+":"+ password;
+    }
+    public static String getUserCredentials(){
+
+        System.out.println("Enter your email: ");
+        String email = scan.nextLine();
+        email = email.toLowerCase();
+
+        System.out.println("Enter your password: ");
+        String password = scan.nextLine();
+
+        System.out.println("Enter Phone number: ");
+        String phoneNumber = scan.nextLine();
+        System.out.println("Enter your user type Car Owner, Customer: (co/c)");
+        String userType = scan.nextLine();
+        userType = userType.toLowerCase();
+
+        if (userType.equals("co")){
+            userType = "Car owner";
+
+        } else if(userType.equals("c")){
+            userType = "Customer";
+        }
+        return email+":"+ password+":"+phoneNumber+":"+userType;
 
 
     }
@@ -48,6 +70,6 @@ public class Main {
 
         String choice = scan.nextLine();
 
-        return choice;
+        return choice.toLowerCase();
     }
 }
