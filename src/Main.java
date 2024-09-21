@@ -1,36 +1,75 @@
-import javax.swing.*;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    static Scanner scan = new Scanner(System.in);
+    Login login = new Login();
+    public static void main(String[] args) throws FileNotFoundException {
+        SignUp signup = new SignUp();
+        // File file = new File("src\\userDetails.txt");
+        
+
+        String choice = loginOrSignIn();
+
+        if (choice.equals("l")){
+            Login.login(getUserEmailAndPassword());
+
+        }else if(choice.equals("s")){
+            // get user credentials
+
+            String userInfo = getUserCredentials();
+            // write user credentials to file
+            signup.writeToEmailPasswordFile(userInfo);
+        }else {
+            System.out.println("Incorrect Character, please try again");
+        }
+        
+
        
-        JFrame frame = new JFrame("Car Rental System");
-        frame.setSize(400, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(null);
+        
+        
+    }
+    private static String getUserEmailAndPassword() {
+        System.out.println("Enter your email: ");
+        String email = scan.nextLine();
+        email = email.toLowerCase();
 
-        // Login button
-        JButton loginButton = new JButton("Login");
-        loginButton.setBounds(50, 50, 100, 30);
-        frame.add(loginButton);
+        System.out.println("Enter your password: ");
+        String password = scan.nextLine();
 
-        // Signup button
-        JButton signupButton = new JButton("Sign Up");
-        signupButton.setBounds(200, 50, 100, 30);
-        frame.add(signupButton);
+        return email+":"+ password;
+    }
+    public static String getUserCredentials(){
 
-        // Action listeners wait until button is clicked then it does function/job
-        loginButton.addActionListener(e -> {
-            // once clicks login button, close the current window, then open login page
-            frame.dispose(); 
-            new LoginPage(); 
-        });
+        System.out.println("Enter your email: ");
+        String email = scan.nextLine();
+        email = email.toLowerCase();
 
-        signupButton.addActionListener(e -> {
-            // once clicks signin button, close th ecurrent windown then open the sign up Window
-            frame.dispose(); 
-            new SignupPage(); 
-        });
+        System.out.println("Enter your password: ");
+        String password = scan.nextLine();
 
-        frame.setVisible(true); // Make frame visible
+        System.out.println("Enter Phone number: ");
+        String phoneNumber = scan.nextLine();
+        System.out.println("Enter your user type Car Owner, Customer: (co/c)");
+        String userType = scan.nextLine();
+        userType = userType.toLowerCase();
+
+        if (userType.equals("co")){
+            userType = "Car owner";
+
+        } else if(userType.equals("c")){
+            userType = "Customer";
+        }
+        return email+":"+ password+":"+phoneNumber+":"+userType;
+
+
+    }
+
+    public static String loginOrSignIn(){
+        System.out.println("login or sign up: (l/s)");
+
+        String choice = scan.nextLine();
+
+        return choice.toLowerCase();
     }
 }
