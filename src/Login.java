@@ -9,7 +9,7 @@ public class Login {
 
         Scanner scan = new Scanner(file);
         // split the line every where the ':' is
-        String regex = "[:]";
+        String regex = "[,]";
         String[] userInfoCredentials = userInfo.split(regex);
             
         // store user submitted email and password in userEmail & userPassword
@@ -21,6 +21,7 @@ public class Login {
 
         if (isAuthenticated){
             System.out.println("Succesfully logged in");
+
         }else{
             System.out.println("Wrong email or password");
         }

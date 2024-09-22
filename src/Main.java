@@ -60,7 +60,7 @@ public class Main {
         } else if(userType.equals("c")){
             userType = "Customer";
         }
-        return email+":"+ password+":"+phoneNumber+":"+userType;
+        return email+","+ password+","+phoneNumber+","+userType;
 
 
     }
