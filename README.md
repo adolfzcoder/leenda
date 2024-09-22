@@ -4,6 +4,7 @@
 # Split By Index Method
 
 This method accepts a user email, and index you would like the obtain the the line from the file. Example, provide userEmail and index 3, By convention, index 3 in the file userDetails.csv contains the phone number of the user.
-
+#
 email,    password,  phone number,   user type
 index=0   index=1    index=2         index=3
+#
