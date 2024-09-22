@@ -21,6 +21,9 @@ public class Login {
 
         if (isAuthenticated){
             System.out.println("Succesfully logged in");
+            Dashboard dashboard = new Dashboard();
+            
+            dashboard.displayUserData(userEmail);
 
         }else{
             System.out.println("Wrong email or password");

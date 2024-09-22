@@ -4,11 +4,12 @@ import java.util.Scanner;
 public class Main {
     static Scanner scan = new Scanner(System.in);
     Login login = new Login();
+    static String userEmail = "";
     public static void main(String[] args) throws FileNotFoundException {
         SignUp signup = new SignUp();
         // File file = new File("src\\userDetails.csv");
         
-
+        
         String choice = loginOrSignIn();
 
         if (choice.equals("l")){
@@ -21,7 +22,7 @@ public class Main {
             // write user credentials to file
             signup.writeToEmailPasswordFile(userInfo);
         }else {
-            System.out.println("Incorrect Character, please try again");
+            System.out.println("Incorrect Character, please try again. l or s");
         }
         
 
@@ -33,12 +34,13 @@ public class Main {
         System.out.println("Enter your email: ");
         String email = scan.nextLine();
         email = email.toLowerCase();
-
+        userEmail = email;
         System.out.println("Enter your password: ");
         String password = scan.nextLine();
-
+        
         return email+","+ password;
     }
+  
     public static String getUserCredentials(){
 
         System.out.println("Enter your email: ");
