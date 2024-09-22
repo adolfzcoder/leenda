@@ -14,12 +14,20 @@ password:index=1
 phone number:index=2
 
 user type:index=3
+
 # cars.csv
+
 userEmail:index=0
+
 carName:index=1
+
 carYear:index=2
+
 carType:index=3
+
 dailyRate:index=4
+
 status:index5
+
 #
 
