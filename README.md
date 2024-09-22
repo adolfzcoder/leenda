@@ -27,7 +27,7 @@ carType:index=3
 
 dailyRate:index=4
 
-status:index5
+status:index=5
 
 #
 
