@@ -8,8 +8,11 @@ This method accepts a user email, and index you would like the obtain the the li
 # userDetails.csv
 
 email:index=0  
+
 password:index=1 
+
 phone number:index=2
+
 user type:index=3
 # cars.csv
 userEmail:index=0
