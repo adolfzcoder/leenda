@@ -5,7 +5,7 @@ public class SignUp {
  
     public void writeToEmailPasswordFile(String userInfo){
         try {
-            try (FileWriter writer = new FileWriter("src\\userDetails.txt", true)) {
+            try (FileWriter writer = new FileWriter("src\\userDetails.csv", true)) {
                 writer.append(userInfo+ "\n");
                 writer.close();
                 System.out.println("User created succesfully");

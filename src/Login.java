@@ -5,10 +5,10 @@ import java.util.Scanner;
 public class Login {
 
     public static void login(String userInfo) throws FileNotFoundException{
-        File file = new File("src\\userDetails.txt");
+        File file = new File("src\\userDetails.csv");
 
         Scanner scan = new Scanner(file);
-        // split the line every where the ':' is
+        // split the line every where the ',' is
         String regex = "[,]";
         String[] userInfoCredentials = userInfo.split(regex);
             

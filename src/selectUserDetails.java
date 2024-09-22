@@ -13,16 +13,16 @@ import java.util.Scanner;
 public class SelectUserDetails {
 
 
-    
+
     
 
     
     public static String findUserByEmail(String userEmail) throws FileNotFoundException{
-        File file = new File("src\\userDetails.txt");
+        File file = new File("src\\userDetails.csv");
 
         try (Scanner scan = new Scanner(file)) {
-            // split the line every where the ':' is
-            String regex = "[:]";
+            // split the line every where the ',' is
+            String regex = "[,]";
             String fullLine = "";
             while (scan.hasNextLine()) {
 

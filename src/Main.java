@@ -6,7 +6,7 @@ public class Main {
     Login login = new Login();
     public static void main(String[] args) throws FileNotFoundException {
         SignUp signup = new SignUp();
-        // File file = new File("src\\userDetails.txt");
+        // File file = new File("src\\userDetails.csv");
         
 
         String choice = loginOrSignIn();
@@ -37,7 +37,7 @@ public class Main {
         System.out.println("Enter your password: ");
         String password = scan.nextLine();
 
-        return email+":"+ password;
+        return email+","+ password;
     }
     public static String getUserCredentials(){
 
