@@ -56,13 +56,11 @@ public class Main {
 
         if (userType.equals("co")){
             userType = "Car owner";
-
-        } else if(userType.equals("c")){
+        } 
+        else if(userType.equals("c")){
             userType = "Customer";
         }
         return email+":"+ password+":"+phoneNumber+":"+userType;
-
-
     }
 
     public static String loginOrSignIn(){
