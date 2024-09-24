@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class SplitByIndex {
 
     public static String splitByIndex(String userEmail, int index) throws FileNotFoundException {
-        File file = new File("src\\userDetails.csv");
+        File file = new File("src\\storage\\userDetails.csv");
 
         try (Scanner scan = new Scanner(file)) {
             // split the line wherever the ',' is

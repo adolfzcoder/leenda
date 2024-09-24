@@ -7,7 +7,7 @@ public class Main {
     static String userEmail = "";
     public static void main(String[] args) throws FileNotFoundException {
         SignUp signup = new SignUp();
-        // File file = new File("src\\userDetails.csv");
+        // File file = new File("src\\storage\\userDetails.csv");
         
         
         String choice = loginOrSignIn();

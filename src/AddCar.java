@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class AddCar {
     
     public static void addCar(String userEmail) throws FileNotFoundException{
-        File file = new File("src\\cars.csv");
+        File file = new File("src\\storage\\cars.csv");
         Scanner userInput = new Scanner(System.in);
         Scanner scan = new Scanner(file);
         getCarDetails(userEmail, userInput);

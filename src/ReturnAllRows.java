@@ -12,7 +12,7 @@ public class ReturnAllRows {
      * This method returns all rows where the match is found at the specified index.
      * 
      * Example usage: match 'Customer' in the 3rd column of the specified file
-     *  String[] results = returnAllRows("Customer", 2, "src\\userDetails.csv");
+     *  String[] results = returnAllRows("Customer", 2, "src\\storage\\userDetails.csv");
      */
     public static List<String[]> returnAllRows(String match, int index, String filePath) throws FileNotFoundException {
 
@@ -50,7 +50,7 @@ public class ReturnAllRows {
 
    
             // Example usage: match 'Customer' in the 3rd column of the specified file
-            // List<String[]> results = returnAllRows("Customer", 2, "src\\userDetails.csv");
+            // List<String[]> results = returnAllRows("Customer", 2, "src\\storage\\userDetails.csv");
 
             
     

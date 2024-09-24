@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Login {
 
     public static void login(String userInfo) throws FileNotFoundException{
-        File file = new File("src\\userDetails.csv");
+        File file = new File("src\\storage\\userDetails.csv");
 
         Scanner scan = new Scanner(file);
         // split the line every where the ',' is
