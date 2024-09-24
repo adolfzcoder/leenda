@@ -8,10 +8,13 @@ public class Dashboard {
         SplitByIndex splitByIndex = new SplitByIndex();
 
         AddCar addCar = new AddCar();
-        SelectUserDetails selectUserDetails = new SelectUserDetails();
         ViewAvailableCars viewAvailableCars = new ViewAvailableCars();
         ViewCurrentlyBookedCars viewCurrentlyBookedCars = new ViewCurrentlyBookedCars();
-        String userDetails =  selectUserDetails.findUserByEmail(userEmail);
+  /*
+   * findingg the whole line for a user details
+   */
+        //SelectUserDetails selectUserDetails = new SelectUserDetails();
+        // String userDetails =  selectUserDetails.findUserByEmail(userEmail);
 
 
         String userType = splitByIndex.splitByIndex(userEmail, 3);

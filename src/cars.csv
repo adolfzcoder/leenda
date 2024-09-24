@@ -1,1 +1,1 @@
-userEmail,carName,carYear,carType,dailyRate,status
+userEmail,carName,carYear,carType,dailyRate,status (booked, available)
