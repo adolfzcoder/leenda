@@ -18,7 +18,7 @@ public class SelectUserDetails {
 
     
     public static String findUserByEmail(String userEmail) throws FileNotFoundException{
-        File file = new File("src\\userDetails.csv");
+        File file = new File("src\\storage\\userDetails.csv");
 
         try (Scanner scan = new Scanner(file)) {
             // split the line every where the ',' is
