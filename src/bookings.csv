@@ -1,1 +1,3 @@
-userEmail,startDate,endDate,totalPrice,carName,daysRenting
+For bookingID, first look at the bookingID in the previous line, then increment for it
+userEmail,bookingID,startDate,endDate,totalPrice,carName,daysRenting
+

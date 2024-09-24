@@ -1,1 +1,2 @@
-userEmail,carName,carYear,carType,dailyRate,status (booked, available)
+For carID, first look at the carID in the previous line, then increment for it
+userEmail,carID,carName,carYear,carType,dailyRate,status (booked, available),carImageUrl,VIN

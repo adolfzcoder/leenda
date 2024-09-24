@@ -1,3 +1,5 @@
+For userID, first look at the userID in the previous line, then increment for it
+userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID
 adolfaudhas@gmail.com,123,08123,Car owner
 1233,123,123,Customer
 carowner@gmail.com,123,0816166875,Car owner
