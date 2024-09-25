@@ -103,7 +103,10 @@ public class StorageFunctions {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] bookingDetails = line.split(",");
-
+            for(int i=0; i < bookingDetails.length; i ++){
+                System.out.println(bookingDetails[i] + " index: " + i);
+            }
+            System.out.println();
             // Assuming the status is at the 8th index (status column)
             String status = bookingDetails[7].trim();
 

@@ -38,7 +38,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         /* Dynamic data */
         /* User data */
         try {
-            String userDetailsFilePath = "src/storage/userDetails.csv";
+            String userDetailsFilePath = "src\\storage\\userDetails.csv";
             int totalUserRecords = StorageFunctions.countRecords(userDetailsFilePath);
             int inactiveUsers = StorageFunctions.countInactiveUsers(userDetailsFilePath);
             lblTotalUsers.setText(String.valueOf(totalUserRecords));
@@ -48,7 +48,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
         /* Car data */
         try {
-            String carsFilePath = "src/storage/cars.csv";
+            String carsFilePath = "src\\storage\\cars.csv";
             int totalCarRecords = StorageFunctions.countRecords(carsFilePath);
             int bookedCars = StorageFunctions.countBookedCars(carsFilePath);
             lblNumberOfCarsTotal.setText(String.valueOf(totalCarRecords));
@@ -58,7 +58,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
         /* Bookings data */
         try {
-            String bookingsFilePath = "src/storage/bookings.csv";
+            String bookingsFilePath = "src\\storage\\bookings.csv";
             int totalBookingRecords = StorageFunctions.countRecords(bookingsFilePath);
             int totalCompletedBookingRecords = StorageFunctions.countCompletedBookings(bookingsFilePath);
             int totalCancelledBookingRecords = StorageFunctions.countCancelledBookings(bookingsFilePath);
