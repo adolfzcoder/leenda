@@ -38,6 +38,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         /* Dynamic data */
         /* User data */
         try {
@@ -49,6 +50,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
+
         /* Car data */
         try {
             String carsFilePath = "src\\storage\\cars.csv";
@@ -59,6 +61,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
+        
         /* Bookings data */
         try {
             String bookingsFilePath = "src\\storage\\bookings.csv";
@@ -853,9 +856,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
                         .addComponent(lblEmailDynamic)
                         .addGap(55, 55, 55))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
-                        .addComponent(lblFirstNameDynamic)
-                        .addGap(68, 68, 68)))
+                    .addComponent(lblFirstNameDynamic))
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLastNameDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -987,6 +988,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem11Layout.setVerticalGroup(
             pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
                         .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1010,9 +1012,9 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(lblDriverLicense)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEditPersonalInformation)
-                .addGap(15, 15, 15))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
@@ -1101,41 +1103,80 @@ public class AdminDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInformationOnClick
-        //Variables declaration and assignment
-        String firstName = txtFirstName.getText();
-        String lastName = txtLastName.getName();
-        String email = txtEmail.getText();
-        String phoneNumber = txtPhoneNumber.getText();
-        
-        // Assuming you have a logged-in user object
-        //User loggedInUser = getLoggedInUser();  // Your method to get the logged-in user
+        // Regular expressions
+        String nameRegex = "^(?!.*\\s)(!?[A-Z][a-zA-Z]*)$";  // First letter uppercase, then letters or '!'
+        String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,4}$";  // Basic email validation
+        String phoneRegex = "^\\+\\d{1,4}\\d+$";  // Phone number starts with + followed by digits
 
-        // Check and update each field only if it's not empty
-        if (!firstName.equals("")) {
-            user.setFirstName(firstName);
-        }
-        if (!lastName.equals("")) {
-            user.setLastName(lastName);
-        }
-        if (!email.equals("")) {
-            user.setEmail(email);
-        }
-        if (!phoneNumber.equals("")) {
-            user.setPhoneNumber(phoneNumber);
-        }
-        if (!txtDriverLicense.getText().equals("")) {
-            user.setDriversLicense(txtDriverLicense.getText());
-        }
+        // Variables declaration and assignment (trim input to remove leading/trailing spaces)
+        String firstName = txtFirstName.getText().trim();
+        String lastName = txtLastName.getText().trim();  // Use getText(), not getName() for JTextField
+        String email = txtEmail.getText().trim();
+        String phoneNumber = txtPhoneNumber.getText().trim();
+        String driverLicense = txtDriverLicense.getText().trim();
 
-        // Now update the user in the CSV file
-        try {
-            StorageFunctions.updateUserRecord(user);
-            JOptionPane.showMessageDialog(null, "User updated successfully!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Error updating user data.");
-        }
+        // Check if at least one field is filled
+        if (firstName.equals("") && lastName.equals("") && email.equals("") && phoneNumber.equals("") && driverLicense.equals("")) {
+            JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Check if at least one field is filled
+            if (firstName.equals("") && lastName.equals("") && email.equals("") && phoneNumber.equals("")) {
+                JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Validation for each non-empty field
+                if (!firstName.equals("") && !firstName.matches(nameRegex)) {
+                    JOptionPane.showMessageDialog(this, "First name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.", "Invalid First Name", JOptionPane.ERROR_MESSAGE);
+                    return;  // Stop if validation fails
+                }
+                if (!lastName.equals("") && !lastName.matches(nameRegex)) {
+                    JOptionPane.showMessageDialog(this, "Last name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.", "Invalid Last Name", JOptionPane.ERROR_MESSAGE);
+                    return;  // Stop if validation fails
+                }
+                if (!email.equals("") && !email.matches(emailRegex)) {
+                    JOptionPane.showMessageDialog(this, "Please enter a valid email address.", "Invalid Email", JOptionPane.ERROR_MESSAGE);
+                    return;  // Stop if validation fails
+                }
+                if (!phoneNumber.equals("") && !phoneNumber.matches(phoneRegex)) {
+                    JOptionPane.showMessageDialog(this, "Phone number must start with +country code \nand contain only numbers.", "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
+                    return;  // Stop if validation fails
+                }
 
+                // Check and update each field only if it's not empty
+                if (!firstName.equals("")) {
+                    user.setFirstName(firstName);
+                }
+                if (!lastName.equals("")) {
+                    user.setLastName(lastName);
+                }
+                if (!email.equals("")) {
+                    user.setEmail(email);
+                }
+                if (!phoneNumber.equals("")) {
+                    user.setPhoneNumber(phoneNumber);
+                }
+                if (!driverLicense.equals("")) {
+                    user.setDriversLicense(driverLicense);
+                }
+
+                // Now update the user in the CSV file
+                try {
+                    StorageFunctions.updateUserRecord(user);
+                    JOptionPane.showMessageDialog(null, "User updated successfully!");
+                    //Update information in the screen
+                    lblFirstNameDynamic.setText("First name: " + user.getFirstName());
+                    lblLastNameDynamic.setText("Last name: " + user.getLastName());
+                    lblEmailDynamic.setText("Email: " + user.getEmail());
+                    lblPhoneNumberDynamic.setText("Phone number: " + user.getPhoneNumber());
+                    if(user.getDriversLicense().equals(""))  
+                        lblDriverLicenseDynamic.setText("Driver license: not found");
+                    else
+                        lblDriverLicenseDynamic.setText("Driver license: " + user.getDriversLicense());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error updating user data.");
+                }
+            }
+        }
     }//GEN-LAST:event_btnEditPersonalInformationOnClick
 
     private void lblCarListingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarListingMouseEntered

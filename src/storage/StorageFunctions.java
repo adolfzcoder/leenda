@@ -51,7 +51,7 @@ public class StorageFunctions {
             // Check if the line has enough columns before accessing
             if (userDetails.length > 8) { // Assuming the status is the 9th column (index 8)
                 String status = userDetails[8].trim(); // Adjust index if necessary
-                if (status.equalsIgnoreCase("inactive")) {
+                if (!status.equalsIgnoreCase("approved")) {
                     inactiveUsersCount++;
                 }
             } else {
@@ -175,7 +175,7 @@ public class StorageFunctions {
     }
 
     public static void updateUserRecord(User updatedUser) throws IOException {
-        File file = new File("src/storage/userDetails.csv");
+        File file = new File("src\\storage\\userDetails.csv");
         List<String> fileContent = new ArrayList<>();
 
         // Read the CSV file

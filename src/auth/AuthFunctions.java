@@ -43,14 +43,21 @@ public class AuthFunctions {
         boolean emailExists = false;
         
         while (scan.hasNextLine()) {
-            String line = scan.nextLine();
+            String line = scan.nextLine().trim();  // Trim leading and trailing spaces
+            
+            // Skip empty lines or lines with only spaces
+            if (line.isEmpty()) {
+                continue;  // Move to the next iteration
+            }
+            
+            // Split the line into credentials using the regex
             String[] credentials = line.split(regex);
             
-            // Ensure the line has the expected number of fields (9 fields)
-            /*if (credentials.length < 9) {
-                continue; // Skip lines that don't have the right number of fields
-            }*/
-    
+            // Ensure the line has the expected number of fields (e.g., 9 fields)
+            if (credentials.length < 9) {
+                continue;  // Skip lines that don't have enough fields
+            }
+        
             // Extract user details
             String emailFromFile = credentials[0];
             String passwordFromFile = credentials[1];
@@ -61,7 +68,7 @@ public class AuthFunctions {
             String driversLicenseFromFile = credentials[6];
             String userIDFromFile = credentials[7];
             String userStatusFromFile = credentials[8];
-    
+        
             // Check for matching email
             if (userEmail.equals(emailFromFile)) {
                 emailExists = true;
@@ -69,10 +76,10 @@ public class AuthFunctions {
                 if (userPassword.equals(passwordFromFile) && userType.equals(userTypeFromFile)) {
                     // Trim spaces from userStatusFromFile before comparison
                     String trimmedStatus = userStatusFromFile.trim();
-                    if(trimmedStatus.equals("approved")){
+                    if (trimmedStatus.equals("approved")) {
                         // Return a new User object if authentication is successful
                         return new User(emailFromFile, passwordFromFile, phoneNumberFromFile, userTypeFromFile, firstNameFromFile, lastNameFromFile, driversLicenseFromFile, userIDFromFile, userStatusFromFile);
-                    } else if(trimmedStatus.equals("pending")) {
+                    } else if (trimmedStatus.equals("pending")) {
                         JOptionPane.showMessageDialog(null, "The user was not approved yet", "Pending approval", JOptionPane.ERROR_MESSAGE);
                         return null;
                     } else {

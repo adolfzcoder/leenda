@@ -62,7 +62,6 @@ public class UserManagementPage extends javax.swing.JFrame {
         btnLogout = new javax.swing.JToggleButton();
         pnlSubHeader = new javax.swing.JPanel();
         lblDashboardHeader = new javax.swing.JLabel();
-        cboUserType = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsers = new javax.swing.JTable();
         pnlEditUserPersonalInformation = new javax.swing.JPanel();
@@ -205,11 +204,6 @@ public class UserManagementPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSubHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        cboUserType.setBackground(new java.awt.Color(237, 223, 205));
-        cboUserType.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cboUserType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--- Search users by their user type ---", "admin", "car_owner", "customer" }));
-        cboUserType.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         tblUsers.setBackground(new java.awt.Color(217, 186, 164));
         tblUsers.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -450,8 +444,7 @@ public class UserManagementPage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                        .addComponent(cboUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnPrintUserRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
@@ -465,9 +458,7 @@ public class UserManagementPage extends javax.swing.JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPrintUserRecords)
-                    .addComponent(cboUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnPrintUserRecords)
                 .addGap(13, 13, 13)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -618,7 +609,6 @@ public class UserManagementPage extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnEditUsersPersonalInformation;
     private javax.swing.JToggleButton btnLogout;
     private javax.swing.JToggleButton btnPrintUserRecords;
-    private javax.swing.JComboBox<String> cboUserType;
     private javax.swing.JComboBox<String> cboUserTypeEdit;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
