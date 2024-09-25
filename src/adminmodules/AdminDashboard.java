@@ -116,10 +116,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblPendingApproval = new javax.swing.JLabel();
         lblPendingApprovalsTotal = new javax.swing.JLabel();
         pnlDashoboardItem2 = new javax.swing.JPanel();
-        lblActiveRentals = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblDashboardHeader5 = new javax.swing.JLabel();
         lblActiveRentalsTotal = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         pnlDashoboardItem4 = new javax.swing.JPanel();
         lblCars = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -405,8 +405,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDashoboardItem2.setPreferredSize(new java.awt.Dimension(240, 83));
 
-        lblActiveRentals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars-admin.png"))); // NOI18N
-
         jPanel3.setBackground(new java.awt.Color(217, 186, 164));
 
         lblDashboardHeader5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -440,27 +438,29 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars-admin.png"))); // NOI18N
+
         javax.swing.GroupLayout pnlDashoboardItem2Layout = new javax.swing.GroupLayout(pnlDashoboardItem2);
         pnlDashoboardItem2.setLayout(pnlDashoboardItem2Layout);
         pnlDashoboardItem2Layout.setHorizontalGroup(
             pnlDashoboardItem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblActiveRentals)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlDashoboardItem2Layout.setVerticalGroup(
             pnlDashoboardItem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblActiveRentals)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlDashoboardItem4.setBackground(new java.awt.Color(217, 186, 164));
@@ -1207,6 +1207,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnEditPersonalInformation;
     private javax.swing.JToggleButton btnLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
@@ -1215,7 +1216,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel lblActiveRentals;
     private javax.swing.JLabel lblActiveRentalsTotal;
     private javax.swing.JLabel lblBookings;
     private javax.swing.JLabel lblCancelledBookings;
