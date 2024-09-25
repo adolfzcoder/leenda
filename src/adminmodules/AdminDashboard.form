@@ -557,7 +557,7 @@
                 <Component class="javax.swing.JLabel" name="lblActiveRentals">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/icons/active-cars.png"/>
+                      <Image iconType="3" name="/icons/active-cars-admin.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -1294,7 +1294,6 @@
                                   <EmptySpace min="68" pref="68" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblLastNameDynamic" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="lblUserTypeDynamic" alignment="1" min="-2" max="-2" attributes="0"/>

@@ -405,7 +405,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDashoboardItem2.setPreferredSize(new java.awt.Dimension(240, 83));
 
-        lblActiveRentals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars.png"))); // NOI18N
+        lblActiveRentals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars-admin.png"))); // NOI18N
 
         jPanel3.setBackground(new java.awt.Color(217, 186, 164));
 
@@ -854,7 +854,6 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
                         .addComponent(lblFirstNameDynamic)
                         .addGap(68, 68, 68)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLastNameDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
