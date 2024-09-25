@@ -46,10 +46,10 @@ public class AuthFunctions {
             String line = scan.nextLine();
             String[] credentials = line.split(regex);
             
-            // Ensure the line has the expected number of fields (8 fields)
-            if (credentials.length < 8) {
+            // Ensure the line has the expected number of fields (9 fields)
+            /*if (credentials.length < 9) {
                 continue; // Skip lines that don't have the right number of fields
-            }
+            }*/
     
             // Extract user details
             String emailFromFile = credentials[0];
@@ -60,20 +60,31 @@ public class AuthFunctions {
             String lastNameFromFile = credentials[5];
             String driversLicenseFromFile = credentials[6];
             String userIDFromFile = credentials[7];
+            String userStatusFromFile = credentials[8];
     
             // Check for matching email
             if (userEmail.equals(emailFromFile)) {
                 emailExists = true;
                 // Check for matching password and role
                 if (userPassword.equals(passwordFromFile) && userType.equals(userTypeFromFile)) {
-                    // Return a new User object if authentication is successful
-                    return new User(emailFromFile, passwordFromFile, phoneNumberFromFile, userTypeFromFile, firstNameFromFile, lastNameFromFile, driversLicenseFromFile, userIDFromFile);
+                    // Trim spaces from userStatusFromFile before comparison
+                    String trimmedStatus = userStatusFromFile.trim();
+                    if(trimmedStatus.equals("approved")){
+                        // Return a new User object if authentication is successful
+                        return new User(emailFromFile, passwordFromFile, phoneNumberFromFile, userTypeFromFile, firstNameFromFile, lastNameFromFile, driversLicenseFromFile, userIDFromFile, userStatusFromFile);
+                    } else if(trimmedStatus.equals("pending")) {
+                        JOptionPane.showMessageDialog(null, "The user was not approved yet", "Pending approval", JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "This user has the access declined", "Invalid user", JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
                 }
             }
         }
     
         if (!emailExists) {
-            JOptionPane.showMessageDialog(null, "Email does not exist", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email does not exist in the system", "Login Failed", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect password or user type", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }

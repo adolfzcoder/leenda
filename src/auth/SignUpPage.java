@@ -69,7 +69,7 @@ public class SignUpPage extends javax.swing.JFrame {
         cboRole.setBackground(new java.awt.Color(217, 186, 164));
         cboRole.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         cboRole.setForeground(new java.awt.Color(133, 62, 52));
-        cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Car owner", "Curstomer" }));
+        cboRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Car owner", "Customer" }));
         cboRole.setOpaque(true);
 
         lblFirstName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -299,6 +299,7 @@ public class SignUpPage extends javax.swing.JFrame {
         String password = new String(passwordChars).trim();
         char[] confirmPasswordChars = txtConfirmPassword.getPassword();
         String confirmPassword = new String(confirmPasswordChars).trim();
+        final String STATUS = "pending"; 
 
         // Validation
         if (!firstName.matches(nameRegex)) {
@@ -321,7 +322,7 @@ public class SignUpPage extends javax.swing.JFrame {
             String driverLicense = txtDriverLicense.getText().trim();  // Optional field
         
             // Create a new line for the CSV
-            String newUser = String.format("%s,%s,%s,%s,%s,%s,%s,%s", 
+            String newUser = String.format("%s,%s,%s,%s,%s,%s,%s,%s, %s", 
                                             email, 
                                             password, 
                                             phoneNumber, 
@@ -329,10 +330,10 @@ public class SignUpPage extends javax.swing.JFrame {
                                             firstName, 
                                             lastName, 
                                             driverLicense.isEmpty() ? "" : driverLicense, 
-                                            AuthFunctions.generateUserID());  // You can implement a method to generate a unique userID
+                                            AuthFunctions.generateUserID(), STATUS);  // You can implement a method to generate a unique userID
         
             // Append the new user to the CSV file
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\userDetails.csv", true))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\userDetails.csv", true))) {
                 bw.write(newUser);
                 bw.newLine();  // Add a newline after the user details
                 JOptionPane.showMessageDialog(this, "Sign-up successful!");

@@ -2,6 +2,9 @@ package adminmodules;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import auth.LoginPage;
+
 import javax.swing.JOptionPane;
 
 import models.User;
@@ -38,7 +41,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         /* Dynamic data */
         /* User data */
         try {
-            String userDetailsFilePath = "src/storage/userDetails.csv";
+            String userDetailsFilePath = "src\\storage\\userDetails.csv";
             int totalUserRecords = StorageFunctions.countRecords(userDetailsFilePath);
             int inactiveUsers = StorageFunctions.countInactiveUsers(userDetailsFilePath);
             lblTotalUsers.setText(String.valueOf(totalUserRecords));
@@ -48,7 +51,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
         /* Car data */
         try {
-            String carsFilePath = "src/storage/cars.csv";
+            String carsFilePath = "src\\storage\\cars.csv";
             int totalCarRecords = StorageFunctions.countRecords(carsFilePath);
             int bookedCars = StorageFunctions.countBookedCars(carsFilePath);
             lblNumberOfCarsTotal.setText(String.valueOf(totalCarRecords));
@@ -58,7 +61,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
         /* Bookings data */
         try {
-            String bookingsFilePath = "src/storage/bookings.csv";
+            String bookingsFilePath = "src\\storage\\bookings.csv";
             int totalBookingRecords = StorageFunctions.countRecords(bookingsFilePath);
             int totalCompletedBookingRecords = StorageFunctions.countCompletedBookings(bookingsFilePath);
             int totalCancelledBookingRecords = StorageFunctions.countCancelledBookings(bookingsFilePath);
@@ -116,10 +119,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblPendingApproval = new javax.swing.JLabel();
         lblPendingApprovalsTotal = new javax.swing.JLabel();
         pnlDashoboardItem2 = new javax.swing.JPanel();
-        lblActiveRentals = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblDashboardHeader5 = new javax.swing.JLabel();
         lblActiveRentalsTotal = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         pnlDashoboardItem4 = new javax.swing.JPanel();
         lblCars = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -228,8 +231,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLogoutOnClick(evt);
             }
         });
@@ -275,7 +278,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(lblUserManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
-                .addGap(17, 17, 17))
+                .addGap(16, 16, 16))
             .addComponent(pnlSubHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -405,8 +408,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlDashoboardItem2.setPreferredSize(new java.awt.Dimension(240, 83));
 
-        lblActiveRentals.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars.png"))); // NOI18N
-
         jPanel3.setBackground(new java.awt.Color(217, 186, 164));
 
         lblDashboardHeader5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -440,27 +441,29 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/active-cars-admin.png"))); // NOI18N
+
         javax.swing.GroupLayout pnlDashoboardItem2Layout = new javax.swing.GroupLayout(pnlDashoboardItem2);
         pnlDashoboardItem2.setLayout(pnlDashoboardItem2Layout);
         pnlDashoboardItem2Layout.setHorizontalGroup(
             pnlDashoboardItem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblActiveRentals)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlDashoboardItem2Layout.setVerticalGroup(
             pnlDashoboardItem2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblActiveRentals)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(pnlDashoboardItem2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlDashoboardItem4.setBackground(new java.awt.Color(217, 186, 164));
@@ -774,15 +777,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblRevenue))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(lblRevenueTotal)))
-                .addGap(23, 23, 23))
+                        .addGap(6, 6, 6)
+                        .addComponent(lblRevenueTotal))
+                    .addComponent(lblRevenue))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,7 +803,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(pnlDashoboardItem8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRevenueIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -854,7 +856,6 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
                         .addComponent(lblFirstNameDynamic)
                         .addGap(68, 68, 68)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblLastNameDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1099,10 +1100,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLogoutOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoutOnClick
-
     private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInformationOnClick
         //Variables declaration and assignment
         String firstName = txtFirstName.getText();
@@ -1170,6 +1167,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         new UserManagementPage(user);
     }//GEN-LAST:event_lblUserManagementOnClick
 
+    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
+        this.dispose();
+        new LoginPage();
+    }//GEN-LAST:event_btnLogoutOnClick
+
     /**
      * @param args the command line arguments
      */
@@ -1208,6 +1210,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnEditPersonalInformation;
     private javax.swing.JToggleButton btnLogout;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel3;
@@ -1216,7 +1219,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JLabel lblActiveRentals;
     private javax.swing.JLabel lblActiveRentalsTotal;
     private javax.swing.JLabel lblBookings;
     private javax.swing.JLabel lblCancelledBookings;

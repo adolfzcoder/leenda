@@ -9,9 +9,10 @@ public class User {
     private String lastName;
     private String driversLicense;
     private String userID;
+    private String userStatus;
 
     // Constructor
-    public User(String email, String password, String phoneNumber, String userType, String firstName, String lastName, String driversLicense, String userID) {
+    public User(String email, String password, String phoneNumber, String userType, String firstName, String lastName, String driversLicense, String userID, String userStatus) {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
@@ -20,6 +21,7 @@ public class User {
         this.lastName = lastName;
         this.driversLicense = driversLicense;
         this.userID = userID;
+        this.userStatus = userStatus;
     }
 
     // Getter methods
@@ -31,6 +33,7 @@ public class User {
     public String getLastName() { return lastName; }
     public String getDriversLicense() { return driversLicense; }
     public String getUserID() { return userID; }
+    public String getUserStatus() { return userStatus; }
     
     // Setter methods
     public void setEmail(String email) { this.email = email; }
@@ -41,4 +44,5 @@ public class User {
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setDriversLicense(String driversLicense) { this.driversLicense = driversLicense; }
     public void setUserID(String userID) { this.userID = userID; }
+    public void setUserStatus(String userStatus) { this.userStatus = userStatus; }
 }

@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import auth.LoginPage;
 import models.User;
 import validations.Validation;
 
@@ -141,8 +142,8 @@ public class UserManagementPage extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLogoutOnClick(evt);
             }
         });
@@ -508,10 +509,6 @@ public class UserManagementPage extends javax.swing.JFrame {
         Functions.changeColorOfTheLabelOfTheHeaderWhenExiting(lblBookings);
     }//GEN-LAST:event_lblBookingsMouseExited
 
-    private void btnLogoutOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoutOnClick
-
     private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
         this.dispose();
         new AdminDashboard(user);
@@ -575,6 +572,11 @@ public class UserManagementPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error printing table: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnPrintUserRecordsOnClick
+
+    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
+        this.dispose();
+        new LoginPage();
+    }//GEN-LAST:event_btnLogoutOnClick
 
     /**
      * @param args the command line arguments
