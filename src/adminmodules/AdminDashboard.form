@@ -1285,13 +1285,23 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblPhoneNumberDynamic" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblNameDynamic" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEmailDynamic" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblDriverLicenseDynamic" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblUserTypeDynamic" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="lblDriverLicenseDynamic" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="lblUserTypeDynamic" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblEmailDynamic" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="lblPhoneNumberDynamic" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblFirstNameDynamic" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="lblLastNameDynamic" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1299,27 +1309,32 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="lblNameDynamic" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblEmailDynamic" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="23" max="32767" attributes="0"/>
-                          <Component id="lblPhoneNumberDynamic" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblDriverLicenseDynamic" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="lblUserTypeDynamic" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblFirstNameDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblLastNameDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="51" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblPhoneNumberDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEmailDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblUserTypeDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDriverLicenseDynamic" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblNameDynamic">
+                <Component class="javax.swing.JLabel" name="lblFirstNameDynamic">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="14" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Name: Kondwani Kunkwenzu"/>
+                    <Property name="text" type="java.lang.String" value="First name: Kondwani"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblEmailDynamic">
@@ -1352,6 +1367,14 @@
                       <Font name="Century Gothic" size="14" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="User type: admin"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lblLastNameDynamic">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Century Gothic" size="14" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Last name: Kunkwenzu"/>
                   </Properties>
                 </Component>
               </SubComponents>

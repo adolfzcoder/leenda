@@ -70,10 +70,6 @@
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                          <Component id="progressBar" min="-2" pref="138" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lblLeenda" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -82,11 +78,21 @@
                           <Component id="locationIcon" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
-                          <Component id="lblLoading" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="progressBar" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                  <Component id="lblLoading" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="lblLocation" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="207" max="32767" attributes="0"/>
+                  <EmptySpace pref="211" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -96,12 +102,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblLeenda" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                  <Component id="locationIcon" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="lblLocation" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="progressBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="lblLoading" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="74" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="locationIcon" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
                   <Component id="lblVersion" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -109,11 +117,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="locationIcon">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/lendeefs/img/location.png"/>
-            </Property>
-          </Properties>
         </Component>
         <Component class="javax.swing.JProgressBar" name="progressBar">
           <Properties>
@@ -165,6 +168,13 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Loading..."/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblLocation">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons/location.png"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
