@@ -1,6 +1,4 @@
 userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID,status
-adolfaudhas@gmail.com,123,08123,Car owner,Kondwani,Kunkwenzu, 03897844,6,declined
-edn7@outlook.com,&123,+264815784920,Admin,Eurico,Dande, 03897844,7,approved
-edn7@gmail.com,&123,+264815784920,Car owner,Eurico,Dande, 03897844,8,pending
-jcena47@gmail.com,&Test123,+246817635642,Admin,John,Cena,,9, pending
-ben10@gmail.com,&Ben10Innit,+244994638264,Customer,Ben,Ten,,10, pending
+adolfaudhas@gmail.com,123,08123,Car owner,Kondwani,Kunkwenzu,,6,declined
+edn7@outlook.com,&123,+264815784920,Admin,Eurico,Dande,,7,approved
+edn7@gmail.com,&123,+264815784920,Car owner,Eurico,Dande,,8,pending
