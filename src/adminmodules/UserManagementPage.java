@@ -2,6 +2,7 @@ package adminmodules;
 
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
+import java.io.FileNotFoundException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import auth.LoginPage;
 import models.User;
 import validations.Validation;
+
+import static storage.StorageFunctions.populateTable;
 
 public class UserManagementPage extends javax.swing.JFrame {
     public User user; 
@@ -39,7 +42,15 @@ public class UserManagementPage extends javax.swing.JFrame {
         initComponents();
         
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);  
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        try {
+            // Call the method and pass the path to your CSV file
+            populateTable(tblUsers, "src\\storage\\userDetails.csv");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         this.setVisible(true);
     }
 
@@ -67,22 +78,24 @@ public class UserManagementPage extends javax.swing.JFrame {
         pnlEditUserPersonalInformation = new javax.swing.JPanel();
         lblUserID = new javax.swing.JLabel();
         txtUserID = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
-        lblName = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
         lblDriverLicense = new javax.swing.JLabel();
         txtDriverLicense = new javax.swing.JTextField();
         lblPhoneNumber = new javax.swing.JLabel();
         txtPhoneNumber = new javax.swing.JTextField();
         btnEditUsersPersonalInformation = new javax.swing.JToggleButton();
-        cboUserTypeEdit = new javax.swing.JComboBox<>();
+        lblFirstName = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        lblIfYouWantToDeleteTheUsersPersonalDetails = new javax.swing.JLabel();
         txtUserIDToDelete = new javax.swing.JTextField();
         btnDeletePersonalInformation = new javax.swing.JToggleButton();
         lblUserIDToDelete = new javax.swing.JLabel();
+        cboUserStatus = new javax.swing.JComboBox<>();
+        lblStatus = new javax.swing.JLabel();
+        btnChangeUserStatus = new javax.swing.JToggleButton();
         btnPrintUserRecords = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,8 +199,8 @@ public class UserManagementPage extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addComponent(lblUserManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addGap(16, 16, 16))
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addComponent(pnlSubHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -209,29 +222,28 @@ public class UserManagementPage extends javax.swing.JFrame {
         tblUsers.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Kondwani Kunkwenzu", "kk30@gmail.com", "+264813450987", "08658773MA767", "admin"},
-                {"2", "Ben 10", "ben10@outlook.com", "+264857747284", "0948758875ZI909", "onwer"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Email", "Phone number", "Driver license", "User type"
+                "ID", "First name", "Last Name", "Email", "Phone number", "Driver license", "User type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -248,6 +260,7 @@ public class UserManagementPage extends javax.swing.JFrame {
             tblUsers.getColumnModel().getColumn(3).setResizable(false);
             tblUsers.getColumnModel().getColumn(4).setResizable(false);
             tblUsers.getColumnModel().getColumn(5).setResizable(false);
+            tblUsers.getColumnModel().getColumn(6).setResizable(false);
         }
 
         pnlEditUserPersonalInformation.setBackground(new java.awt.Color(217, 186, 164));
@@ -258,9 +271,6 @@ public class UserManagementPage extends javax.swing.JFrame {
         txtUserID.setBackground(new java.awt.Color(237, 223, 205));
         txtUserID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jLabel3.setText("Role");
-
         lblEmail.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblEmail.setText("Email");
 
@@ -270,8 +280,8 @@ public class UserManagementPage extends javax.swing.JFrame {
         txtName.setBackground(new java.awt.Color(237, 223, 205));
         txtName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        lblName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblName.setText("Name");
+        lblLastName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblLastName.setText("Last name");
 
         lblDriverLicense.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDriverLicense.setText("Driver license");
@@ -296,10 +306,11 @@ public class UserManagementPage extends javax.swing.JFrame {
             }
         });
 
-        cboUserTypeEdit.setBackground(new java.awt.Color(237, 223, 205));
-        cboUserTypeEdit.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cboUserTypeEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "car_owner", "customer" }));
-        cboUserTypeEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFirstName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblFirstName.setText("First name");
+
+        txtFirstName.setBackground(new java.awt.Color(237, 223, 205));
+        txtFirstName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout pnlEditUserPersonalInformationLayout = new javax.swing.GroupLayout(pnlEditUserPersonalInformation);
         pnlEditUserPersonalInformation.setLayout(pnlEditUserPersonalInformationLayout);
@@ -313,16 +324,13 @@ public class UserManagementPage extends javax.swing.JFrame {
                             .addComponent(lblUserID)
                             .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(173, 173, 173))
-                            .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                .addComponent(cboUserTypeEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)))
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFirstName))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName)))
+                            .addComponent(lblLastName)))
                     .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
                         .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEmail)
@@ -336,27 +344,27 @@ public class UserManagementPage extends javax.swing.JFrame {
                             .addComponent(lblDriverLicense)
                             .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(btnEditUsersPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         pnlEditUserPersonalInformationLayout.setVerticalGroup(
             pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                            .addComponent(lblUserID)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                            .addComponent(lblLastName)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                        .addComponent(lblUserID)
+                        .addComponent(lblFirstName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(31, 31, 31))
-                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                        .addComponent(lblName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cboUserTypeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
                         .addComponent(lblEmail)
@@ -372,21 +380,18 @@ public class UserManagementPage extends javax.swing.JFrame {
                         .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(btnEditUsersPersonalInformation)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel1.setBackground(new java.awt.Color(217, 186, 164));
-
-        lblIfYouWantToDeleteTheUsersPersonalDetails.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblIfYouWantToDeleteTheUsersPersonalDetails.setForeground(new java.awt.Color(255, 51, 51));
-        lblIfYouWantToDeleteTheUsersPersonalDetails.setText("If you want to delete the user's personal details:");
 
         txtUserIDToDelete.setBackground(new java.awt.Color(237, 223, 205));
         txtUserIDToDelete.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnDeletePersonalInformation.setBackground(new java.awt.Color(237, 223, 205));
         btnDeletePersonalInformation.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        btnDeletePersonalInformation.setText("Delete personal information");
+        btnDeletePersonalInformation.setForeground(new java.awt.Color(255, 51, 51));
+        btnDeletePersonalInformation.setText("Delete user personal information");
         btnDeletePersonalInformation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeletePersonalInformation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -397,6 +402,25 @@ public class UserManagementPage extends javax.swing.JFrame {
         lblUserIDToDelete.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblUserIDToDelete.setText("User ID");
 
+        cboUserStatus.setBackground(new java.awt.Color(237, 223, 205));
+        cboUserStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cboUserStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "approved", "pending", "declined" }));
+        cboUserStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblStatus.setText("Status");
+
+        btnChangeUserStatus.setBackground(new java.awt.Color(237, 223, 205));
+        btnChangeUserStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnChangeUserStatus.setForeground(new java.awt.Color(133, 62, 52));
+        btnChangeUserStatus.setText("Change user status");
+        btnChangeUserStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChangeUserStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeUserStatusOnClick(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -404,25 +428,36 @@ public class UserManagementPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChangeUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeletePersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblUserIDToDelete, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(lblIfYouWantToDeleteTheUsersPersonalDetails)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUserIDToDelete)
+                            .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus)
+                            .addComponent(cboUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(lblIfYouWantToDeleteTheUsersPersonalDetails)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(lblUserIDToDelete)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUserIDToDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addGap(31, 31, 31))
+                    .addComponent(cboUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnChangeUserStatus)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeletePersonalInformation)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         btnPrintUserRecords.setBackground(new java.awt.Color(237, 223, 205));
@@ -478,7 +513,9 @@ public class UserManagementPage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -569,6 +606,10 @@ public class UserManagementPage extends javax.swing.JFrame {
         new LoginPage();
     }//GEN-LAST:event_btnLogoutOnClick
 
+    private void btnChangeUserStatusOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeUserStatusOnClick
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangeUserStatusOnClick
+
     /**
      * @param args the command line arguments
      */
@@ -605,12 +646,12 @@ public class UserManagementPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnChangeUserStatus;
     private javax.swing.JToggleButton btnDeletePersonalInformation;
     private javax.swing.JToggleButton btnEditUsersPersonalInformation;
     private javax.swing.JToggleButton btnLogout;
     private javax.swing.JToggleButton btnPrintUserRecords;
-    private javax.swing.JComboBox<String> cboUserTypeEdit;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> cboUserStatus;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBookings;
@@ -619,10 +660,11 @@ public class UserManagementPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblDashboardHeader;
     private javax.swing.JLabel lblDriverLicense;
     private javax.swing.JLabel lblEmail;
-    private javax.swing.JLabel lblIfYouWantToDeleteTheUsersPersonalDetails;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblLeenda;
-    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblUserID;
     private javax.swing.JLabel lblUserIDToDelete;
     private javax.swing.JLabel lblUserManagement;
@@ -633,6 +675,7 @@ public class UserManagementPage extends javax.swing.JFrame {
     private javax.swing.JTable tblUsers;
     private javax.swing.JTextField txtDriverLicense;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtUserID;
