@@ -1,5 +1,7 @@
 package auth;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -75,6 +77,9 @@ public class LoginPage extends javax.swing.JFrame {
                 try {
                     btnLoginOnClick(evt);
                 } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (UnsupportedLookAndFeelException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -183,7 +188,7 @@ public class LoginPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginOnClick(java.awt.event.ActionEvent evt) throws FileNotFoundException {//GEN-FIRST:event_btnLoginOnClick
+    private void btnLoginOnClick(java.awt.event.ActionEvent evt) throws FileNotFoundException, UnsupportedLookAndFeelException {//GEN-FIRST:event_btnLoginOnClick
         String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,4}$";  // Basic email validation
         
         String role = cboRole.getItemAt(cboRole.getSelectedIndex());
