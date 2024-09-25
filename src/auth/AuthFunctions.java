@@ -1,8 +1,7 @@
 package auth;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
-import java.io.File;
 
 import adminmodules.AdminDashboard;
 import models.User;
@@ -74,5 +73,45 @@ public class AuthFunctions {
         // Return null if authentication fails
         return null;
     }    
-    
+
+    static int generateUserID() {
+        int userID = 0;
+        String filePath = "src/storage/userDetails.csv"; // Ensure this path is correct
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isFirstLine = true;  // To identify the header line
+            while ((line = br.readLine()) != null) {
+                // Skip the header line
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;  // Skip this iteration for the header
+                }
+
+                String[] details = line.split(",");
+                // Check if the last column (userID) is available
+                if (details.length > 7) {  // Ensure there are enough columns
+                    String userIdStr = details[7].trim();  // Assuming the userID is in the 8th column (index 7)
+                    if (!userIdStr.isEmpty()) {  // Only parse if it's not empty
+                        try {
+                            int id = Integer.parseInt(userIdStr);
+                            if (id > userID) {
+                                userID = id;  // Keep track of the highest ID
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Error parsing user ID: " + userIdStr);
+                        }
+                    }
+                } else {
+                    System.out.println("Row does not have enough fields: " + line);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+
+        return userID + 1;  // Return the next available ID
+    }
 }

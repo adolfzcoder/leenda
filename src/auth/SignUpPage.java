@@ -1,6 +1,9 @@
 package auth;
 
 import javax.swing.JOptionPane;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  *
@@ -312,10 +315,35 @@ public class SignUpPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Passwords do not match.", "Password Mismatch", JOptionPane.ERROR_MESSAGE);
         } else {
             // All validations passed
-            JOptionPane.showMessageDialog(this, "Sign-up successful!");
-            this.dispose();
-            new LoginPage();
-        }
+        
+            // Get selected user role from the combo box (e.g., Car owner, Customer, Admin)
+            String userRole = cboRole.getSelectedItem().toString();
+            String driverLicense = txtDriverLicense.getText().trim();  // Optional field
+        
+            // Create a new line for the CSV
+            String newUser = String.format("%s,%s,%s,%s,%s,%s,%s,%s", 
+                                            email, 
+                                            password, 
+                                            phoneNumber, 
+                                            userRole, 
+                                            firstName, 
+                                            lastName, 
+                                            driverLicense.isEmpty() ? "" : driverLicense, 
+                                            AuthFunctions.generateUserID());  // You can implement a method to generate a unique userID
+        
+            // Append the new user to the CSV file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\userDetails.csv", true))) {
+                bw.write(newUser);
+                bw.newLine();  // Add a newline after the user details
+                JOptionPane.showMessageDialog(this, "Sign-up successful!");
+        
+                // Close the sign-up form and open the login page
+                this.dispose();
+                new LoginPage();
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing to file: " + e.getMessage(), "File Write Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }        
 
     }//GEN-LAST:event_btnSignUpOnClick
 

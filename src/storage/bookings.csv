@@ -1,4 +1,3 @@
-For bookingID, first look at the bookingID in the previous line, then increment for it, status
 userEmail,bookingID,startDate,endDate,totalPrice,carName,daysRenting, status
 edn7@outlook.com, 1, 2024-09-25, 2024-09-30, 3000, Lightning McQueen, 5, pending
 edn7@outlook.com, 2, 2024-09-25, 2024-09-30, 4500, Big boy, 5, cancelled

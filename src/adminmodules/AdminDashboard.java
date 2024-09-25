@@ -2,9 +2,13 @@ package adminmodules;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JOptionPane;
 
 import models.User;
-import validations.Validation;
+import storage.StorageFunctions;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class AdminDashboard extends javax.swing.JFrame {
     public User user;
@@ -32,6 +36,41 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         /* Dynamic data */
+        /* User data */
+        try {
+            String userDetailsFilePath = "src/storage/userDetails.csv";
+            int totalUserRecords = StorageFunctions.countRecords(userDetailsFilePath);
+            int inactiveUsers = StorageFunctions.countInactiveUsers(userDetailsFilePath);
+            lblTotalUsers.setText(String.valueOf(totalUserRecords));
+            lblPendingApprovalsTotal.setText(String.valueOf(inactiveUsers));
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        /* Car data */
+        try {
+            String carsFilePath = "src/storage/cars.csv";
+            int totalCarRecords = StorageFunctions.countRecords(carsFilePath);
+            int bookedCars = StorageFunctions.countBookedCars(carsFilePath);
+            lblNumberOfCarsTotal.setText(String.valueOf(totalCarRecords));
+            lblActiveRentalsTotal.setText(String.valueOf(bookedCars));
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        /* Bookings data */
+        try {
+            String bookingsFilePath = "src/storage/bookings.csv";
+            int totalBookingRecords = StorageFunctions.countRecords(bookingsFilePath);
+            int totalCompletedBookingRecords = StorageFunctions.countCompletedBookings(bookingsFilePath);
+            int totalCancelledBookingRecords = StorageFunctions.countCancelledBookings(bookingsFilePath);
+            double revenue = StorageFunctions.calculateTotalRevenue(bookingsFilePath);
+            lblNumberOfBookingsTotal.setText(String.valueOf(totalBookingRecords));
+            lblCompletedBookingsTotal.setText(String.valueOf(totalCompletedBookingRecords));
+            lblCancelledBookingsTotal.setText(String.valueOf(totalCancelledBookingRecords));
+            lblRevenueTotal.setText(String.valueOf("N$ "+ revenue));
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
         lblFirstNameDynamic.setText("First name: " + user.getFirstName());
         lblLastNameDynamic.setText("Last name: " + user.getLastName());
         lblEmailDynamic.setText("Email: " + user.getEmail());
@@ -121,14 +160,16 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblCurrentDate = new javax.swing.JLabel();
         pnlDashoboardItem11 = new javax.swing.JPanel();
         btnEditPersonalInformation = new javax.swing.JToggleButton();
-        lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        lblFirstName = new javax.swing.JLabel();
+        txtFirstName = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblPhoneNumber = new javax.swing.JLabel();
         txtPhoneNumber = new javax.swing.JTextField();
         lblDriverLicense = new javax.swing.JLabel();
         txtDriverLicense = new javax.swing.JTextField();
+        lblLastName = new javax.swing.JLabel();
+        txtLastName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -804,34 +845,34 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem9Layout.setHorizontalGroup(
             pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem9Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlDashoboardItem9Layout.createSequentialGroup()
-                        .addComponent(lblDriverLicenseDynamic)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblUserTypeDynamic))
+                    .addComponent(lblDriverLicenseDynamic)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
                         .addComponent(lblEmailDynamic)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPhoneNumberDynamic))
+                        .addGap(55, 55, 55))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDashoboardItem9Layout.createSequentialGroup()
                         .addComponent(lblFirstNameDynamic)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblLastNameDynamic)))
+                        .addGap(68, 68, 68)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLastNameDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblPhoneNumberDynamic, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(34, 34, 34))
         );
         pnlDashoboardItem9Layout.setVerticalGroup(
             pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem9Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(20, 20, 20)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFirstNameDynamic)
                     .addComponent(lblLastNameDynamic))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPhoneNumberDynamic)
                     .addComponent(lblEmailDynamic))
-                .addGap(48, 48, 48)
+                .addGap(56, 56, 56)
                 .addGroup(pnlDashoboardItem9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUserTypeDynamic)
                     .addComponent(lblDriverLicenseDynamic))
@@ -865,7 +906,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCurrentTime, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                    .addComponent(lblCurrentDate, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                    .addComponent(lblCurrentDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -874,7 +915,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         pnlDashoboardItem11.setPreferredSize(new java.awt.Dimension(240, 83));
 
         btnEditPersonalInformation.setBackground(new java.awt.Color(133, 62, 52));
-        btnEditPersonalInformation.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnEditPersonalInformation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEditPersonalInformation.setForeground(new java.awt.Color(237, 223, 205));
         btnEditPersonalInformation.setText("Edit personal information");
         btnEditPersonalInformation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -884,11 +925,11 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
-        lblName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblName.setText("Name");
+        lblFirstName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblFirstName.setText("First name");
 
-        txtName.setBackground(new java.awt.Color(237, 223, 205));
-        txtName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtFirstName.setBackground(new java.awt.Color(237, 223, 205));
+        txtFirstName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
         lblEmail.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblEmail.setText("Email");
@@ -908,54 +949,69 @@ public class AdminDashboard extends javax.swing.JFrame {
         txtDriverLicense.setBackground(new java.awt.Color(237, 223, 205));
         txtDriverLicense.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
 
+        lblLastName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblLastName.setText("Last name");
+
+        txtLastName.setBackground(new java.awt.Color(237, 223, 205));
+        txtLastName.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout pnlDashoboardItem11Layout = new javax.swing.GroupLayout(pnlDashoboardItem11);
         pnlDashoboardItem11.setLayout(pnlDashoboardItem11Layout);
         pnlDashoboardItem11Layout.setHorizontalGroup(
             pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
                         .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPhoneNumber)
-                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblFirstName)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLastName)
+                            .addComponent(txtLastName)))
+                    .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
+                        .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEmail)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDriverLicense)
-                            .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPhoneNumber)
+                            .addComponent(txtPhoneNumber)))
+                    .addComponent(lblDriverLicense)
+                    .addComponent(txtDriverLicense)
+                    .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlDashoboardItem11Layout.setVerticalGroup(
             pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
                 .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
-                        .addComponent(lblName)
+                        .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
+                                .addComponent(lblFirstName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
+                                .addComponent(lblLastName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblPhoneNumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
                         .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlDashoboardItem11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
-                        .addComponent(lblPhoneNumber)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlDashoboardItem11Layout.createSequentialGroup()
-                        .addComponent(lblDriverLicense)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(lblDriverLicense)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(btnEditPersonalInformation)
-                .addGap(18, 18, 18))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout pnlDashboardLayout = new javax.swing.GroupLayout(pnlDashboard);
@@ -1006,12 +1062,12 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addComponent(pnlDashoboardItem7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlDashoboardItem8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlDashoboardItem9, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlDashoboardItem11, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlDashoboardItem11, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+                    .addComponent(pnlDashoboardItem9, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(pnlFooter, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
@@ -1026,8 +1082,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1050,18 +1105,40 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInformationOnClick
         //Variables declaration and assignment
-        String name = txtName.getText();
+        String firstName = txtFirstName.getText();
+        String lastName = txtLastName.getName();
         String email = txtEmail.getText();
         String phoneNumber = txtPhoneNumber.getText();
         
-        // Check if the first field (name) is empty
-        if (!Validation.checkIfTheTextFieldIsEmpty(name, "name")) {
-            // If the first field is not empty, check the second field (email)
-            if (!Validation.checkIfTheTextFieldIsEmpty(email, "email")) {
-                // If both first and second fields are not empty, check the third field (phone number)
-                Validation.checkIfTheTextFieldIsEmpty(phoneNumber, "phone number");
-            }
+        // Assuming you have a logged-in user object
+        //User loggedInUser = getLoggedInUser();  // Your method to get the logged-in user
+
+        // Check and update each field only if it's not empty
+        if (!firstName.equals("")) {
+            user.setFirstName(firstName);
         }
+        if (!lastName.equals("")) {
+            user.setLastName(lastName);
+        }
+        if (!email.equals("")) {
+            user.setEmail(email);
+        }
+        if (!phoneNumber.equals("")) {
+            user.setPhoneNumber(phoneNumber);
+        }
+        if (!txtDriverLicense.getText().equals("")) {
+            user.setDriversLicense(txtDriverLicense.getText());
+        }
+
+        // Now update the user in the CSV file
+        try {
+            StorageFunctions.updateUserRecord(user);
+            JOptionPane.showMessageDialog(null, "User updated successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error updating user data.");
+        }
+
     }//GEN-LAST:event_btnEditPersonalInformationOnClick
 
     private void lblCarListingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarListingMouseEntered
@@ -1162,10 +1239,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel lblDriverLicenseDynamic;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEmailDynamic;
+    private javax.swing.JLabel lblFirstName;
     private javax.swing.JLabel lblFirstNameDynamic;
+    private javax.swing.JLabel lblLastName;
     private javax.swing.JLabel lblLastNameDynamic;
     private javax.swing.JLabel lblLeenda;
-    private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNumberOfBookings;
     private javax.swing.JLabel lblNumberOfBookingsIcon;
     private javax.swing.JLabel lblNumberOfBookingsTotal;
@@ -1200,7 +1278,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSubHeader;
     private javax.swing.JTextField txtDriverLicense;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }
