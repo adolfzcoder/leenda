@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import models.User;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 public class StorageFunctions {
     // Function to count the number of records in the CSV file
     public static int countRecords(String filePath) throws FileNotFoundException {
@@ -51,7 +54,7 @@ public class StorageFunctions {
             // Check if the line has enough columns before accessing
             if (userDetails.length > 8) { // Assuming the status is the 9th column (index 8)
                 String status = userDetails[8].trim(); // Adjust index if necessary
-                if (status.equalsIgnoreCase("inactive")) {
+                if (!status.equalsIgnoreCase("approved")) {
                     inactiveUsersCount++;
                 }
             } else {
@@ -175,7 +178,7 @@ public class StorageFunctions {
     }
 
     public static void updateUserRecord(User updatedUser) throws IOException {
-        File file = new File("src/storage/userDetails.csv");
+        File file = new File("src\\storage\\userDetails.csv");
         List<String> fileContent = new ArrayList<>();
 
         // Read the CSV file
@@ -206,4 +209,115 @@ public class StorageFunctions {
             }
         }
     }
+
+    public static void populateTable(JTable table, String filePath) throws FileNotFoundException {
+        // Define the column names based on your table headers
+        String[] columnNames = {"ID", "First Name", "Last Name", "Email", "Phone Number", "Driver License", "User Type"};
+
+        // Create a table model with the column names
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Open the CSV file
+        File file = new File(filePath);
+        Scanner scan = new Scanner(file);
+        
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        // Read each line and add rows to the table, excluding the password column
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] userDetails = line.split(",");
+            
+            // Only add the relevant columns in the specified order
+            String[] rowData = {
+                userDetails[7], // user ID
+                userDetails[4], // first name
+                userDetails[5], // last name
+                userDetails[0], // email
+                userDetails[2], // phone number
+                userDetails[6], // driver's license
+                userDetails[3]  // user type
+            };
+
+            // Add the row to the table model
+            model.addRow(rowData);
+        }
+
+        scan.close();
+        
+        // Set the model to the JTable
+        table.setModel(model);
+    }
+
+    public static void updateUser(String userIdToEdit, String newFirstName, String newLastName, 
+                                   String newPhoneNumber, String newEmail, String loggedInUserId) throws IOException {
+        File file = new File("src\\storage\\userDetails.csv");
+        List<String> lines = new ArrayList<>();
+        boolean emailExists = false;
+        boolean isLoggedInUser = false;
+
+        // Read the file and check for the constraints
+        try (Scanner scan = new Scanner(file)) {
+            // Skip the header
+            if (scan.hasNextLine()) {
+                lines.add(scan.nextLine()); // Keep the header
+            }
+
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                String[] userDetails = line.split(",");
+
+                // Check for existing email
+                if (newEmail.equals(userDetails[0])) {
+                    emailExists = true;
+                }
+                
+                // Check if we are editing the logged-in user's record
+                if (userIdToEdit.equals(loggedInUserId)) {
+                    isLoggedInUser = true;
+                }
+
+                // Update the user details if userID matches the one to edit
+                if (userDetails[6].equals(userIdToEdit)) {
+                    line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
+                            userDetails[0],  // Email
+                            userDetails[1],  // Password
+                            newPhoneNumber,   // New phone number
+                            userDetails[3],  // User type
+                            newFirstName,     // New first name
+                            newLastName,      // New last name
+                            userDetails[6],   // Driver's license
+                            userIdToEdit,     // ID remains the same
+                            userDetails[8]);  // Status
+                }
+
+                lines.add(line);
+            }
+        }
+
+        // Check constraints
+        if (isLoggedInUser) {
+            JOptionPane.showMessageDialog(null, "Cannot edit your own information.", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (emailExists) {
+            JOptionPane.showMessageDialog(null, "Email already exists in the database.", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Write the updated data back to the CSV file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+            JOptionPane.showMessageDialog(null, "User information updated successfully!", "Update Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage(), "File Write Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
+
