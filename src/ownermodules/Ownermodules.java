@@ -17,7 +17,7 @@ public class Ownermodules {
      */
     public static void main(String[] args) throws UnsupportedLookAndFeelException {
         // TODO code application logic here
-        new OwnerDashboard();
+        /// new OwnerDashboard();
     }
     
 }

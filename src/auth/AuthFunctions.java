@@ -7,9 +7,12 @@ import adminmodules.AdminDashboard;
 import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import ownermodules.OwnerDashboard;
 
 public class AuthFunctions {
-    public static void login(String userRole, String userEmail, String userPassword, JFrame frame) throws FileNotFoundException {
+    public static void login(String userRole, String userEmail, String userPassword, JFrame frame) throws FileNotFoundException, UnsupportedLookAndFeelException {
         File file = new File("src\\storage\\userDetails.csv");
         Scanner scan = new Scanner(file);
     
@@ -24,6 +27,11 @@ public class AuthFunctions {
             if (loggedInUser.getUserType().equals("Admin")) {
                 frame.dispose();
                 new AdminDashboard(loggedInUser);  // Proceed to the Admin Dashboard
+            }
+
+            if (loggedInUser.getUserType().equals("Car owner")) {
+                frame.dispose();
+                new OwnerDashboard(loggedInUser);
             }
         } 
         // If login fails, the error messages are already handled inside userAuthentication
