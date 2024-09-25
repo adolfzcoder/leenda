@@ -67,14 +67,24 @@ public class AuthFunctions {
                 emailExists = true;
                 // Check for matching password and role
                 if (userPassword.equals(passwordFromFile) && userType.equals(userTypeFromFile)) {
-                    // Return a new User object if authentication is successful
-                    return new User(emailFromFile, passwordFromFile, phoneNumberFromFile, userTypeFromFile, firstNameFromFile, lastNameFromFile, driversLicenseFromFile, userIDFromFile, userStatusFromFile);
+                    // Trim spaces from userStatusFromFile before comparison
+                    String trimmedStatus = userStatusFromFile.trim();
+                    if(trimmedStatus.equals("approved")){
+                        // Return a new User object if authentication is successful
+                        return new User(emailFromFile, passwordFromFile, phoneNumberFromFile, userTypeFromFile, firstNameFromFile, lastNameFromFile, driversLicenseFromFile, userIDFromFile, userStatusFromFile);
+                    } else if(trimmedStatus.equals("pending")) {
+                        JOptionPane.showMessageDialog(null, "The user was not approved yet", "Pending approval", JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "This user has the access declined", "Invalid user", JOptionPane.ERROR_MESSAGE);
+                        return null;
+                    }
                 }
             }
         }
     
         if (!emailExists) {
-            JOptionPane.showMessageDialog(null, "Email does not exist", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email does not exist in the system", "Login Failed", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect password or user type", "Login Failed", JOptionPane.ERROR_MESSAGE);
         }
