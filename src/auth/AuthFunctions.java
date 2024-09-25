@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 import adminmodules.AdminDashboard;
 import models.User;
+import ownermodules.OwnerDashboard;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import ownermodules.OwnerDashboard;
 
 public class AuthFunctions {
     public static void login(String userRole, String userEmail, String userPassword, JFrame frame) throws FileNotFoundException, UnsupportedLookAndFeelException {

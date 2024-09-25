@@ -175,7 +175,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
-                                                                            //
+
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(133, 62, 52));
         jLabel11.setText("Adolf David");
