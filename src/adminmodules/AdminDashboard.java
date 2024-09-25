@@ -2,6 +2,9 @@ package adminmodules;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import auth.LoginPage;
+
 import javax.swing.JOptionPane;
 
 import models.User;
@@ -228,8 +231,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLogoutOnClick(evt);
             }
         });
@@ -275,7 +278,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(lblUserManagement)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
-                .addGap(17, 17, 17))
+                .addGap(16, 16, 16))
             .addComponent(pnlSubHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlHeaderLayout.setVerticalGroup(
@@ -774,15 +777,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblRevenue))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(lblRevenueTotal)))
-                .addGap(23, 23, 23))
+                        .addGap(6, 6, 6)
+                        .addComponent(lblRevenueTotal))
+                    .addComponent(lblRevenue))
+                .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,7 +803,7 @@ public class AdminDashboard extends javax.swing.JFrame {
             .addGroup(pnlDashoboardItem8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRevenueIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -1098,10 +1100,6 @@ public class AdminDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLogoutOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLogoutOnClick
-
     private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalInformationOnClick
         //Variables declaration and assignment
         String firstName = txtFirstName.getText();
@@ -1168,6 +1166,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         this.dispose();
         new UserManagementPage(user);
     }//GEN-LAST:event_lblUserManagementOnClick
+
+    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutOnClick
+        this.dispose();
+        new LoginPage();
+    }//GEN-LAST:event_btnLogoutOnClick
 
     /**
      * @param args the command line arguments
