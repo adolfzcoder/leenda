@@ -1,21 +1,17 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import auth.SplashScreen;
 
 public class Main {
     static Scanner scan = new Scanner(System.in);
-    Login login = new Login();
     static String userEmail = "";
     public static void main(String[] args) throws FileNotFoundException {
-        SignUp signup = new SignUp();
+        new SplashScreen();
+        
+        /*SignUp signup = new SignUp();
         // File file = new File("src\\storage\\userDetails.csv");
         
-        
-        String choice = loginOrSignIn();
-
-        if (choice.equals("l")){
-            Login.login(getUserEmailAndPassword());
-
-        }else if(choice.equals("s")){
+   if(choice.equals("s")){
             // get user credentials
 
             String userInfo = getUserCredentials();
@@ -23,22 +19,7 @@ public class Main {
             signup.writeToEmailPasswordFile(userInfo);
         }else {
             System.out.println("Incorrect Character, please try again. l or s");
-        }
-        
-
-       
-        
-        
-    }
-    private static String getUserEmailAndPassword() {
-        System.out.println("Enter your email: ");
-        String email = scan.nextLine();
-        email = email.toLowerCase();
-        userEmail = email;
-        System.out.println("Enter your password: ");
-        String password = scan.nextLine();
-        
-        return email+","+ password;
+        }*/
     }
   
     public static String getUserCredentials(){
@@ -63,15 +44,5 @@ public class Main {
             userType = "Customer";
         }
         return email+","+ password+","+phoneNumber+","+userType;
-
-
-    }
-
-    public static String loginOrSignIn(){
-        System.out.println("login or sign up: (l/s)");
-
-        String choice = scan.nextLine();
-
-        return choice.toLowerCase();
     }
 }

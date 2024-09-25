@@ -1,7 +1,4 @@
-For userID, first look at the userID in the previous line, then increment for it
-userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID
-adolfaudhas@gmail.com,123,08123,Car owner
-1233,123,123,Customer
-carowner@gmail.com,123,0816166875,Car owner
-kondwani!@gmail.com,123,123,Customer
-edn7@outlook.com,&123,+264815784920,Car owner
+userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID,status
+adolfaudhas@gmail.com,123,08123,Car owner,Kondwani,Kunkwenzu,,6,inactive
+edn7@outlook.com,&123,+264815784920,Admin,Eurico,Dande,,7,active
+edn7@gmail.com,&123,+264815784920,Car owner,Eurico,Dande,,8,active

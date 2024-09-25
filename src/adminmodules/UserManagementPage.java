@@ -2,7 +2,6 @@ package adminmodules;
 
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
-import java.io.FileNotFoundException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,11 +14,11 @@ import models.User;
 import validations.Validation;
 
 public class UserManagementPage extends javax.swing.JFrame {
-
+    public User user; 
     /**
      * Creates new form UserManagementPage
      */
-    public UserManagementPage() {
+    public UserManagementPage(User user) {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -34,7 +33,8 @@ public class UserManagementPage extends javax.swing.JFrame {
         
         this.setTitle("User management");
         this.setResizable(false);
-        
+
+        this.user = user;
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -158,7 +158,7 @@ public class UserManagementPage extends javax.swing.JFrame {
         pnlSubHeaderLayout.setHorizontalGroup(
             pnlSubHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSubHeaderLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(425, 425, 425)
                 .addComponent(lblDashboardHeader)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -409,18 +409,19 @@ public class UserManagementPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIfYouWantToDeleteTheUsersPersonalDetails)
                     .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDeletePersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblUserIDToDelete))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblUserIDToDelete, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblIfYouWantToDeleteTheUsersPersonalDetails)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(lblIfYouWantToDeleteTheUsersPersonalDetails)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(lblUserIDToDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUserIDToDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -513,12 +514,7 @@ public class UserManagementPage extends javax.swing.JFrame {
 
     private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
         this.dispose();
-        try {
-            new AdminDashboard(User.getEmail());
-        } catch (FileNotFoundException e) {
-            // Avoid not finding a file
-            e.printStackTrace();
-        }
+        new AdminDashboard(user);
     }//GEN-LAST:event_lblDashboardMouseClicked
 
     private void lblDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseEntered
@@ -610,7 +606,7 @@ public class UserManagementPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserManagementPage().setVisible(true);
+                new UserManagementPage(null).setVisible(true);
             }
         });
     }
