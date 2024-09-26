@@ -4,10 +4,14 @@
  */
 package ownermodules;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import models.User;
+import storage.StorageFunctions;
 
 /**
  *
@@ -18,7 +22,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
     /**
      * Creates new form OwnerDashboard
      */
-    public OwnerDashboard(User loggedInUser) throws UnsupportedLookAndFeelException {
+    public OwnerDashboard(User user) throws UnsupportedLookAndFeelException {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -30,8 +34,29 @@ public class OwnerDashboard extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
-        this.user = loggedInUser;
+        this.user = user;
         initComponents();
+
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        /* Dynamic data */
+        /* User data */
+        try {
+
+            String carDetailsPath = "src\\storage\\cars.csv";
+
+            int fleetNumber = StorageFunctions.countBookedCarsForCarOwner(carDetailsPath, user.getEmail());
+
+            int activeRentals = StorageFunctions.countActiveRentals(carDetailsPath, user.getEmail()); 
+
+            double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(carDetailsPath, user.getEmail()); 
+           
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+        
+
         this.setVisible(true);
     }
 
@@ -611,7 +636,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new OwnerDashboard().setVisible(true);
+                    new OwnerDashboard(null).setVisible(true);
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(OwnerDashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
