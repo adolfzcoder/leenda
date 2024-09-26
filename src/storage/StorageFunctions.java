@@ -153,6 +153,9 @@ public class StorageFunctions {
         return completedBookingsCount;
     }
 
+    /*
+     * This method allows to count the number of active rentals from the passed in filePath, and it returns only the values for the currently logged in user (the car owner(s))
+     */
     public static int countActiveRentals(String carDetailsPath, String email) throws FileNotFoundException {
 
         var file = new File(carDetailsPath);
