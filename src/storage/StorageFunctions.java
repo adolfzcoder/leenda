@@ -92,7 +92,9 @@ public class StorageFunctions {
         return availableCarsCount;
     }
 
-
+    /*
+     * This method returns the number of currently booked cars. The user email for the car owner is passed in as a parameter and it is used to go into the csv file then extract all the data associated with that booking and the car owner
+     */
     public static int countBookedCarsForCarOwner(String filePath, String userEmail) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
