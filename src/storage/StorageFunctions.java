@@ -92,12 +92,76 @@ public class StorageFunctions {
         return availableCarsCount;
     }
 
+    /*
+     * This method returns the number of currently booked cars. The user email for the car owner is passed in as a parameter and it is used to go into the csv file then extract all the data associated with that booking and the car owner
+     */
+    public static int countBookedCarsForCarOwner(String filePath, String userEmail) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner scan = new Scanner(file);
+        int availableCarsCount = 0;
+
+        // Skip the first line (header)
+        // first line has structure of  the file
+
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            
+            // Assuming the status is at the 7th index (status column)
+            String status = carDetails[6].trim();
+            String email = carDetails[0];
+
+            if (status.equalsIgnoreCase("booked") && email.equalsIgnoreCase(userEmail)) {
+                availableCarsCount++;
+            }
+        }
+
+        scan.close();
+        return availableCarsCount;
+    }
+    public static int countCars(String email) throws FileNotFoundException {
+        // TODO Auto-generated method stub
+        String carDetailsPath = "src\\storage\\cars.csv"; 
+        File file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        int carCount = 0;
+        
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            // for(int i=0; i < bookingDetails.length; i ++){
+            //     System.out.println(bookingDetails[i] + " index: " + i);
+            // }
+            // System.out.println();
+            // Assuming the status is at the 8th index (status column)
+            String status = carDetails[6].trim();
+            String carOwnerEmail = carDetails[9];
+
+            if (status.equalsIgnoreCase("completed") && email.equalsIgnoreCase(carOwnerEmail)) {
+                carCount++;
+            }
+        }
+
+        scan.close();
+        return carCount;
+    }
+
     // Function to count completed bookings
     public static int countCompletedBookings(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
         int completedBookingsCount = 0;
-
+        
         // Skip the first line (header)
         if (scan.hasNextLine()) {
             scan.nextLine();
@@ -122,6 +186,40 @@ public class StorageFunctions {
         return completedBookingsCount;
     }
 
+    /*
+     * This method allows to count the number of active rentals from the passed in filePath, and it returns only the values for the currently logged in user (the car owner(s))
+     */
+    public static int countActiveRentals(String carDetailsPath, String email) throws FileNotFoundException {
+
+        var file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        int availableCarsCount = 0;
+
+        // Skip the first line (header)
+        // first line has structure of  the file
+
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            
+            // Assuming the status is at the 7th index (status column)
+            String status = carDetails[6].trim();
+            String emailFromFile = carDetails[0];
+
+            if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(email)) {
+                availableCarsCount++;
+            }
+        }
+
+        scan.close();
+        return availableCarsCount;
+
+    }
     // Function to count cancelled bookings
     public static int countCancelledBookings(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
@@ -170,12 +268,47 @@ public class StorageFunctions {
             if (status.equalsIgnoreCase("completed")) {
                 double totalPrice = Double.parseDouble(bookingDetails[4].trim());
                 totalRevenue += totalPrice;
+                
             }
+            // the admin (the company) gets 15% of all the revenue
+            // totalRevenue = totalRevenue * 0.15;
         }
 
         scan.close();
         return totalRevenue;
     }
+
+    public static double calculateOwnerRevenue(String carDetailsPath, String email) throws FileNotFoundException {
+        File file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        double totalRevenue = 0;
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+
+            // Assuming the total price is at the 5th index (totalPrice column)
+            // and the status is at the 8th index
+            String status = bookingDetails[7].trim();
+            String emailFromFile = bookingDetails[0].trim();
+            if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(email)) {
+                double totalPrice = Double.parseDouble(bookingDetails[4].trim());
+                totalRevenue += totalPrice;
+                
+            }
+            // the admin (the company) gets 15% of all the revenue
+            // totalRevenue = totalRevenue * 0.15;
+        }
+
+        scan.close();
+        return totalRevenue;
+    }
+
 
     public static void updateUserRecord(User updatedUser) throws IOException {
         File file = new File("src\\storage\\userDetails.csv");
@@ -319,5 +452,9 @@ public class StorageFunctions {
             JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage(), "File Write Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
+	
+
 }
 

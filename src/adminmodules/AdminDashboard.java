@@ -80,6 +80,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblFirstNameDynamic.setText("First name: " + user.getFirstName());
         lblLastNameDynamic.setText("Last name: " + user.getLastName());
         lblEmailDynamic.setText("Email: " + user.getEmail());
+
         lblPhoneNumberDynamic.setText("Phone number: " + user.getPhoneNumber());
         if(user.getDriversLicense().equals(""))  
             lblDriverLicenseDynamic.setText("Driver license: not found");

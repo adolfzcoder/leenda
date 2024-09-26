@@ -36,9 +36,9 @@ public class AddCar extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblUserTypeDynamic = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblFirstNameDynamic = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -46,17 +46,17 @@ public class AddCar extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblActiveRentals = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblTotalFleetNumber = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        lblRevenue = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -85,9 +85,9 @@ public class AddCar extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel20 = new javax.swing.JPanel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
+        lblUserTypeDynamic7 = new javax.swing.JLabel();
+        lblUserTypeDynamic8 = new javax.swing.JLabel();
+        lblUserTypeDynamic9 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
@@ -169,16 +169,16 @@ public class AddCar extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(217, 186, 164));
         jPanel5.setForeground(new java.awt.Color(217, 186, 164));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel4.setText("Car Owner");
-        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblUserTypeDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblUserTypeDynamic.setForeground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic.setText("Car Owner");
+        lblUserTypeDynamic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
-                                                                            //
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel11.setText("Adolf David");
+
+        lblFirstNameDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblFirstNameDynamic.setForeground(new java.awt.Color(133, 62, 52));
+        lblFirstNameDynamic.setText("Adolf David");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -188,9 +188,9 @@ public class AddCar extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFirstNameDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 460, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -198,8 +198,8 @@ public class AddCar extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFirstNameDynamic)
+                    .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -267,9 +267,9 @@ public class AddCar extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(133, 62, 52));
         jLabel6.setText("Active Rentals");
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel9.setText("5");
+        lblActiveRentals.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblActiveRentals.setForeground(new java.awt.Color(133, 62, 52));
+        lblActiveRentals.setText("5");
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cars-85.png"))); // NOI18N
 
@@ -284,7 +284,7 @@ public class AddCar extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel16)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblActiveRentals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -297,7 +297,7 @@ public class AddCar extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblActiveRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16)))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -310,9 +310,9 @@ public class AddCar extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(133, 62, 52));
         jLabel12.setText("Total Fleet Number");
 
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel14.setText("4");
+        lblTotalFleetNumber.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblTotalFleetNumber.setForeground(new java.awt.Color(133, 62, 52));
+        lblTotalFleetNumber.setText("4");
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/garadge-icon.png"))); // NOI18N
 
@@ -342,7 +342,7 @@ public class AddCar extends javax.swing.JFrame {
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblTotalFleetNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel12))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
@@ -360,7 +360,7 @@ public class AddCar extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTotalFleetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -373,9 +373,9 @@ public class AddCar extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(133, 62, 52));
         jLabel17.setText("Revenue");
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel18.setText("NAD 69420");
+        lblRevenue.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblRevenue.setForeground(new java.awt.Color(133, 62, 52));
+        lblRevenue.setText("NAD 69420");
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-payment-history-88.png"))); // NOI18N
 
@@ -391,7 +391,7 @@ public class AddCar extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(lblRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -402,7 +402,7 @@ public class AddCar extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel15)))
@@ -686,15 +686,15 @@ public class AddCar extends javax.swing.JFrame {
 
         jPanel20.setBackground(new java.awt.Color(217, 186, 164));
 
-        jLabel48.setBackground(new java.awt.Color(217, 186, 164));
-        jLabel48.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel48.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel48.setText("Add Car");
+        lblUserTypeDynamic8.setBackground(new java.awt.Color(217, 186, 164));
+        lblUserTypeDynamic8.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblUserTypeDynamic8.setForeground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic8.setText("Add Car");
 
-        jLabel49.setBackground(new java.awt.Color(133, 62, 52));
-        jLabel49.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel49.setText("Car Name");
+        lblUserTypeDynamic9.setBackground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic9.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblUserTypeDynamic9.setForeground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic9.setText("Car Name");
 
         jLabel50.setBackground(new java.awt.Color(133, 62, 52));
         jLabel50.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -748,13 +748,22 @@ public class AddCar extends javax.swing.JFrame {
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGap(433, 433, 433)
+                        .addComponent(lblUserTypeDynamic8))
+                    .addGroup(jPanel20Layout.createSequentialGroup()
+                        .addGap(263, 263, 263)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
                 .addGap(199, 199, 199)
-                .addComponent(jLabel47)
+                .addComponent(lblUserTypeDynamic7)
                 .addGap(25, 25, 25)
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel49)
+                    .addComponent(lblUserTypeDynamic9)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel53))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -771,15 +780,6 @@ public class AddCar extends javax.swing.JFrame {
                                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addContainerGap()))))
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addGap(433, 433, 433)
-                        .addComponent(jLabel48))
-                    .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel20Layout.createSequentialGroup()
                     .addGap(234, 234, 234)
@@ -791,14 +791,14 @@ public class AddCar extends javax.swing.JFrame {
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel20Layout.createSequentialGroup()
-                        .addComponent(jLabel48)
+                        .addComponent(lblUserTypeDynamic8)
                         .addGap(43, 43, 43)
-                        .addComponent(jLabel47))
+                        .addComponent(lblUserTypeDynamic7))
                     .addGroup(jPanel20Layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel50)
-                            .addComponent(jLabel49))
+                            .addComponent(lblUserTypeDynamic9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -818,9 +818,9 @@ public class AddCar extends javax.swing.JFrame {
                 .addComponent(jLabel51)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
+                .addGap(68, 68, 68)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGap(56, 56, 56))
             .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
                     .addContainerGap(194, Short.MAX_VALUE)
@@ -926,14 +926,14 @@ public class AddCar extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel lblFirstNameDynamic;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel lblTotalFleetNumber;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel lblRevenue;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -953,10 +953,10 @@ public class AddCar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
+    private javax.swing.JLabel lblUserTypeDynamic;
+    private javax.swing.JLabel lblUserTypeDynamic7;
+    private javax.swing.JLabel lblUserTypeDynamic8;
+    private javax.swing.JLabel lblUserTypeDynamic9;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -966,7 +966,7 @@ public class AddCar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblActiveRentals;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;

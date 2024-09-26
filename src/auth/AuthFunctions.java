@@ -33,6 +33,9 @@ public class AuthFunctions {
                 frame.dispose();
                 new OwnerDashboard(loggedInUser);
             }
+            if (loggedInUser.getUserType().equals("Customer")){
+                
+            }
         } 
         // If login fails, the error messages are already handled inside userAuthentication
     }

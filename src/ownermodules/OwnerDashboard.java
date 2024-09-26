@@ -4,12 +4,14 @@
  */
 package ownermodules;
 
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import models.User;
+import storage.StorageFunctions;
 
 /**
  *
@@ -17,10 +19,14 @@ import models.User;
  */
 public class OwnerDashboard extends javax.swing.JFrame {
     public User user;
+    // public int fleetNumber;
+    // public int activeRentals;
+    // public int totalCarOwnerRevenue;
+
     /**
      * Creates new form OwnerDashboard
      */
-    public OwnerDashboard(User loggedInUser) throws UnsupportedLookAndFeelException {
+    public OwnerDashboard(User user) throws UnsupportedLookAndFeelException {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -32,8 +38,41 @@ public class OwnerDashboard extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
+        this.user = user;
         initComponents();
-        this.user = loggedInUser;
+
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        /* Dynamic data */
+        /* User data */
+        try {
+
+            String carDetailsPath = "src\\storage\\cars.csv";
+
+            int fleetNumber = StorageFunctions.countCars(user.getEmail());
+            lblTotalFleetNumber.setText(""+ fleetNumber); // display number of vehicles in the fleet
+
+            
+            int activeRentals = StorageFunctions.countActiveRentals(carDetailsPath, user.getEmail()); 
+
+            lblActiveRentals.setText(""+ activeRentals); // display current 'active' rentals
+
+
+            double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(carDetailsPath, user.getEmail()); 
+            lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
+
+            
+           
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
+        lblFirstNameDynamic.setText(user.getFirstName() + " " + user.getLastName());
+
+        lblUserTypeDynamic.setText(user.getUserType()); // display user type
+
+
         this.setVisible(true);
     }
 
@@ -57,9 +96,9 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lblUserTypeDynamic = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblFirstNameDynamic = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -67,17 +106,17 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblActiveRentals = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lblTotalFleetNumber = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        lblRevenue = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
@@ -166,17 +205,15 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(217, 186, 164));
         jPanel5.setForeground(new java.awt.Color(217, 186, 164));
 
-        jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel4.setText("Car Owner");
-        jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lblUserTypeDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblUserTypeDynamic.setForeground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-user-88 (2).png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(133, 62, 52));
-        String firstName = this.user.getFirstName();
-        jLabel11.setText(firstName);
+        lblFirstNameDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblFirstNameDynamic.setForeground(new java.awt.Color(133, 62, 52));
+        
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -186,9 +223,9 @@ public class OwnerDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFirstNameDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 460, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -196,8 +233,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFirstNameDynamic)
+                    .addComponent(lblUserTypeDynamic, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
             .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
@@ -264,12 +301,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(133, 62, 52));
         jLabel6.setText("Active Rentals");
+        // will be the dynamic active rentals depending on the user email
+        lblActiveRentals.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblActiveRentals.setForeground(new java.awt.Color(133, 62, 52));
 
-        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel9.setText("5");
-
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-cars-85.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cars-85.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -282,7 +318,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel16)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblActiveRentals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -295,7 +331,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblActiveRentals, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel16)))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -308,11 +344,10 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(133, 62, 52));
         jLabel12.setText("Total Fleet Number");
 
-        jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel14.setText("4");
+        lblTotalFleetNumber.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblTotalFleetNumber.setForeground(new java.awt.Color(133, 62, 52));
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\garadge-icon.png"))); // NOI18N
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/garadge-icon.png"))); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(217, 186, 164));
 
@@ -340,7 +375,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblTotalFleetNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel12))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
@@ -358,7 +393,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblTotalFleetNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -371,11 +406,10 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(133, 62, 52));
         jLabel17.setText("Revenue");
 
-        jLabel18.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel18.setText("NAD 69420");
+        lblRevenue.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblRevenue.setForeground(new java.awt.Color(133, 62, 52));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-payment-history-88.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-payment-history-88.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -389,7 +423,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(lblRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -400,7 +434,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel15)))
@@ -628,14 +662,14 @@ public class OwnerDashboard extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel lblFirstNameDynamic;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel lblTotalFleetNumber;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel lblRevenue;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -646,12 +680,12 @@ public class OwnerDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblUserTypeDynamic;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblActiveRentals;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
