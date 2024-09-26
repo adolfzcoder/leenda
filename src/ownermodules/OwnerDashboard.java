@@ -9,8 +9,6 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import models.User;
-
 /**
  *
  * @author adolf
@@ -32,8 +30,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
-        initComponents();
         this.user = loggedInUser;
+        initComponents();
         this.setVisible(true);
     }
 
@@ -171,12 +169,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel4.setText("Car Owner");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-user-88 (2).png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(133, 62, 52));
-        String firstName = this.user.getFirstName();
-        jLabel11.setText(firstName);
+        jLabel11.setText("Adolf David");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -269,7 +266,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(133, 62, 52));
         jLabel9.setText("5");
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-cars-85.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cars-85.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -312,7 +309,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(133, 62, 52));
         jLabel14.setText("4");
 
-        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\garadge-icon.png"))); // NOI18N
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/garadge-icon.png"))); // NOI18N
 
         jPanel4.setBackground(new java.awt.Color(217, 186, 164));
 
@@ -375,7 +372,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(133, 62, 52));
         jLabel18.setText("NAD 69420");
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("src\\icons\\icons8-payment-history-88.png"))); // NOI18N
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-payment-history-88.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -614,7 +611,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new OwnerDashboard(null).setVisible(true);
+                    new OwnerDashboard().setVisible(true);
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(OwnerDashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
