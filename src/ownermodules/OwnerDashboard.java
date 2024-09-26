@@ -19,9 +19,9 @@ import storage.StorageFunctions;
  */
 public class OwnerDashboard extends javax.swing.JFrame {
     public User user;
-    public int fleetNumber;
-    public int activeRentals;
-    public int totalCarOwnerRevenue;
+    // public int fleetNumber;
+    // public int activeRentals;
+    // public int totalCarOwnerRevenue;
 
     /**
      * Creates new form OwnerDashboard
@@ -50,11 +50,19 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
             String carDetailsPath = "src\\storage\\cars.csv";
 
-            int fleetNumber = StorageFunctions.countBookedCarsForCarOwner(carDetailsPath, user.getEmail());
+            int fleetNumber = StorageFunctions.countCars(user.getEmail());
+            lblTotalFleetNumber.setText(""+ fleetNumber); // display number of vehicles in the fleet
 
+            
             int activeRentals = StorageFunctions.countActiveRentals(carDetailsPath, user.getEmail()); 
 
+            lblActiveRentals.setText(""+ activeRentals); // display current 'active' rentals
+
+
             double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(carDetailsPath, user.getEmail()); 
+            lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
+
+            
            
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
@@ -63,9 +71,6 @@ public class OwnerDashboard extends javax.swing.JFrame {
         lblFirstNameDynamic.setText(user.getFirstName() + " " + user.getLastName());
 
         lblUserTypeDynamic.setText(user.getUserType()); // display user type
-        lblActiveRentals.setText(""+ activeRentals); // display current 'active' rentals
-        lblTotalFleetNumber.setText(""+ fleetNumber); // display number of vehicles in the fleet
-        lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
 
 
         this.setVisible(true);

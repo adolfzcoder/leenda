@@ -124,6 +124,37 @@ public class StorageFunctions {
         scan.close();
         return availableCarsCount;
     }
+    public static int countCars(String email) throws FileNotFoundException {
+        // TODO Auto-generated method stub
+        String carDetailsPath = "src\\storage\\cars.csv"; 
+        File file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        int carCount = 0;
+        
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            // for(int i=0; i < bookingDetails.length; i ++){
+            //     System.out.println(bookingDetails[i] + " index: " + i);
+            // }
+            // System.out.println();
+            // Assuming the status is at the 8th index (status column)
+            String status = carDetails[6].trim();
+            String carOwnerEmail = carDetails[9];
+
+            if (status.equalsIgnoreCase("completed") && email.equalsIgnoreCase(carOwnerEmail)) {
+                carCount++;
+            }
+        }
+
+        scan.close();
+        return carCount;
+    }
 
     // Function to count completed bookings
     public static int countCompletedBookings(String filePath) throws FileNotFoundException {
@@ -421,6 +452,7 @@ public class StorageFunctions {
             JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage(), "File Write Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 	
 
