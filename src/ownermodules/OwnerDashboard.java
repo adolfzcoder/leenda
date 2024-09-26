@@ -55,8 +55,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
-        
 
+        lblFirstNameDynamic.setText("First name: " + user.getFirstName());
+        lblLastNameDynamic.setText("Last name: " + user.getLastName());
+
+        
         this.setVisible(true);
     }
 
