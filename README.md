@@ -42,5 +42,24 @@ dailyRate:index=4
 
 status:index=5
 
-#
+# bookings.csv
+
+userEmail:index=0
+
+bookingID:index=1
+
+startDate:index=2
+
+endDate:index=3
+
+totalPrice:index=4
+
+carName:index=5
+
+daysRenting:index=6
+
+status:index=7
+
+carOwnerEmail:index=8
+
 
