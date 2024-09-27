@@ -19,11 +19,24 @@ user type:index=3
 
 userEmail:index=0
 
-carName:index=1
+carID:index=1
 
-carYear:index=2
+carName:index=2
 
-carType:index=3
+carYear:index=3
+
+carType:index=4
+
+dailyRate:index=5
+
+status (booked available):index=6
+
+carImageUrl:index=7
+
+VIN:index=8
+
+carOwnerEmail:index=9
+
 
 dailyRate:index=4
 
