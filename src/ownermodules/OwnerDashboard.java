@@ -5,11 +5,16 @@
 package ownermodules;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import auth.AuthFunctions;
+import auth.LoginPage;
 import models.User;
 import storage.StorageFunctions;
 
@@ -62,7 +67,6 @@ public class OwnerDashboard extends javax.swing.JFrame {
             double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(user.getEmail()); 
             lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
 
-            
            
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
@@ -129,7 +133,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnEditPersonalInformation = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -149,10 +153,15 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(133, 62, 52));
         jLabel2.setText("Dashboard");
 
-        jButton1.setBackground(new java.awt.Color(242, 242, 242));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(133, 62, 52));
-        jButton1.setText("Log out");
+        jButton1.setBackground(new java.awt.Color(237, 223, 205));
+        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jButton1.setText("Log Out");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogoutOnClick(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(133, 62, 52));
@@ -468,22 +477,29 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(133, 62, 52));
         jLabel26.setText("Driver License");
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("");
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setText("");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("jTextField3");
+        jTextField3.setText("");
 
-        jTextField4.setText("jTextField4");
+        jTextField4.setText("");
 
-        jButton2.setBackground(new java.awt.Color(133, 62, 52));
-        jButton2.setText("jButton2");
-
+        btnEditPersonalInformation.setBackground(new java.awt.Color(133, 62, 52));
+        btnEditPersonalInformation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnEditPersonalInformation.setForeground(new java.awt.Color(237, 223, 205));
+        btnEditPersonalInformation.setText("Edit personal information");
+        btnEditPersonalInformation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditPersonalInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditPersonalInformationOnClick(evt);
+            }
+        });
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -511,7 +527,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                             .addComponent(jTextField4)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -539,7 +555,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(jButton2)
+                .addComponent(btnEditPersonalInformation)
                 .addGap(50, 50, 50))
         );
 
@@ -612,7 +628,102 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
+            this.dispose();
+            new LoginPage();
+    }
 
+
+
+
+        private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditPersonalInformationOnClick
+        // Regular expressions
+        String nameRegex = "^(?!.*\\s)(!?[A-Z][a-zA-Z]*)$"; // First letter uppercase, then letters or '!'
+        String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,4}$"; // Basic email validation
+        String phoneRegex = "^\\+\\d{1,4}\\d+$"; // Phone number starts with + followed by digits
+
+        // Variables declaration and assignment (trim input to remove leading/trailing
+        // spaces)
+        String firstName = jTextField1.getText().trim();
+        //String lastName = txtLastName.getText().trim(); // Use getText(), not getName() for JTextField
+        String email = jTextField2.getText().trim();
+        String phoneNumber = jTextField3.getText().trim();
+        String driverLicense = jTextField4.getText().trim();
+
+        // Check if at least one field is filled
+        if (firstName.equals("") && email.equals("") && phoneNumber.equals("")
+                && driverLicense.equals("")) {
+            JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Check if at least one field is filled
+            if (firstName.equals("") && email.equals("") && phoneNumber.equals("")) {
+                JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Validation for each non-empty field
+                // if (!firstName.equals("") && !firstName.matches(nameRegex)) {
+                //     JOptionPane.showMessageDialog(this,
+                //             "First name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.",
+                //             "Invalid First Name", JOptionPane.ERROR_MESSAGE);
+                //     return; // Stop if validation fails
+                // }
+                // if (!lastName.equals("") && !lastName.matches(nameRegex)) {
+                //     JOptionPane.showMessageDialog(this,
+                //             "Last name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.",
+                //             "Invalid Last Name", JOptionPane.ERROR_MESSAGE);
+                //     return; // Stop if validation fails
+                // }
+                if (!email.equals("") && !email.matches(emailRegex)) {
+                    JOptionPane.showMessageDialog(this, "Please enter a valid email address.", "Invalid Email",
+                            JOptionPane.ERROR_MESSAGE);
+                    return; // Stop if validation fails
+                }
+                if (!phoneNumber.equals("") && !phoneNumber.matches(phoneRegex)) {
+                    JOptionPane.showMessageDialog(this,
+                            "Phone number must start with +country code \nand contain only numbers.",
+                            "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
+                    return; // Stop if validation fails
+                }
+
+                if (AuthFunctions.doesEmailExist(email)) {
+                    JOptionPane.showMessageDialog(this, "Email is already in use. Please choose another one.",
+                            "Email Exists", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Check and update each field only if it's not empty
+                    if (!firstName.equals("")) {
+                        user.setFirstName(firstName);
+                        String[] nameParts = firstName.split(" ");
+                        // Get first name (index 0) and last name (index 1)
+                        
+                        String lastName = nameParts[1];
+                        user.setLastName(lastName);
+                    }
+                    
+                    if (!email.equals("")) {
+                        user.setEmail(email);
+                    }
+                    if (!phoneNumber.equals("")) {
+                        user.setPhoneNumber(phoneNumber);
+                    }
+                    if (!driverLicense.equals("")) {
+                        user.setDriversLicense(driverLicense);
+                    }
+
+                    // Now update the user in the CSV file
+                    try {
+                        StorageFunctions.updateUserRecord(user);
+                        JOptionPane.showMessageDialog(null, "User updated successfully!");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error updating user data.");
+                    }
+                }
+            }
+        }
+    }// GEN-LAST:event_btnEditPersonalInformationOnClick
+
+    
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -656,9 +767,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         });
     }
 
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEditPersonalInformation;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

@@ -69,7 +69,7 @@ public class AddCar extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnEditPersonalInformation = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
@@ -449,8 +449,8 @@ public class AddCar extends javax.swing.JFrame {
 
         jTextField4.setText("jTextField4");
 
-        jButton2.setBackground(new java.awt.Color(133, 62, 52));
-        jButton2.setText("jButton2");
+        btnEditPersonalInformation.setBackground(new java.awt.Color(133, 62, 52));
+        btnEditPersonalInformation.setText("btnEditPersonalInformation");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -479,7 +479,7 @@ public class AddCar extends javax.swing.JFrame {
                             .addComponent(jTextField4)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -507,7 +507,7 @@ public class AddCar extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(jButton2)
+                .addComponent(btnEditPersonalInformation)
                 .addGap(50, 50, 50))
         );
 
@@ -729,7 +729,7 @@ public class AddCar extends javax.swing.JFrame {
         jTextField8.setText("jTextField4");
 
         jButton4.setBackground(new java.awt.Color(133, 62, 52));
-        jButton4.setText("jButton2");
+        jButton4.setText("btnEditPersonalInformation");
 
         jLabel53.setBackground(new java.awt.Color(133, 62, 52));
         jLabel53.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -921,7 +921,7 @@ public class AddCar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnEditPersonalInformation;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
