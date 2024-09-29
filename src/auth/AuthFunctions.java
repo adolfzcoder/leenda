@@ -6,12 +6,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import adminmodules.AdminDashboard;
+
 import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import ownermodules.OwnerDashboard;
+import leendauserdashboard.CustomerDashboard;
 
 public class AuthFunctions {
     public static void login(String userEmail, String userPassword, JFrame frame)
@@ -38,7 +40,7 @@ public class AuthFunctions {
                 new OwnerDashboard(loggedInUser);
             }
             if (loggedInUser.getUserType().equals("Customer")) {
-
+                new CustomerDashboard(loggedInUser);
             }
         }
         // If login fails, the error messages are already handled inside
