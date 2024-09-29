@@ -17,10 +17,10 @@ public class StorageFunctions {
         Scanner scan = new Scanner(file);
 
         int recordCount = 0;
-        
+
         // Skip the first line if it's a header
         if (scan.hasNextLine()) {
-            scan.nextLine();  // Skip the header line
+            scan.nextLine(); // Skip the header line
         }
 
         // Loop through the file and count each record
@@ -31,7 +31,7 @@ public class StorageFunctions {
                 recordCount++;
             }
         }
-        
+
         scan.close();
         return recordCount;
     }
@@ -41,16 +41,16 @@ public class StorageFunctions {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
         int inactiveUsersCount = 0;
-    
+
         // Skip the first line (header)
         if (scan.hasNextLine()) {
             scan.nextLine();
         }
-    
+
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] userDetails = line.split(",");
-    
+
             // Check if the line has enough columns before accessing
             if (userDetails.length > 8) { // Assuming the status is the 9th column (index 8)
                 String status = userDetails[8].trim(); // Adjust index if necessary
@@ -64,7 +64,6 @@ public class StorageFunctions {
         scan.close();
         return inactiveUsersCount;
     }
-    
 
     public static int countBookedCars(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
@@ -79,7 +78,7 @@ public class StorageFunctions {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] carDetails = line.split(",");
-            
+
             // Assuming the status is at the 7th index (status column)
             String status = carDetails[6].trim();
 
@@ -93,7 +92,9 @@ public class StorageFunctions {
     }
 
     /*
-     * This method returns the number of currently booked cars. The user email for the car owner is passed in as a parameter and it is used to go into the csv file then extract all the data associated with that booking and the car owner
+     * This method returns the number of currently booked cars. The user email for
+     * the car owner is passed in as a parameter and it is used to go into the csv
+     * file then extract all the data associated with that booking and the car owner
      */
     public static int countBookedCarsForCarOwner(String filePath, String userEmail) throws FileNotFoundException {
         File file = new File(filePath);
@@ -101,17 +102,16 @@ public class StorageFunctions {
         int availableCarsCount = 0;
 
         // Skip the first line (header)
-        // first line has structure of  the file
+        // first line has structure of the file
 
         if (scan.hasNextLine()) {
             scan.nextLine();
         }
 
-
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] carDetails = line.split(",");
-            
+
             // Assuming the status is at the 7th index (status column)
             String status = carDetails[6].trim();
             String email = carDetails[0];
@@ -124,13 +124,14 @@ public class StorageFunctions {
         scan.close();
         return availableCarsCount;
     }
+
     public static int countCars(String email) throws FileNotFoundException {
         // TODO Auto-generated method stub
-        String carDetailsPath = "src\\storage\\cars.csv"; 
+        String carDetailsPath = "src\\storage\\cars.csv";
         File file = new File(carDetailsPath);
         Scanner scan = new Scanner(file);
         int carCount = 0;
-        
+
         // Skip the first line (header)
         if (scan.hasNextLine()) {
             scan.nextLine();
@@ -140,7 +141,7 @@ public class StorageFunctions {
             String line = scan.nextLine();
             String[] carDetails = line.split(",");
             // for(int i=0; i < bookingDetails.length; i ++){
-            //     System.out.println(bookingDetails[i] + " index: " + i);
+            // System.out.println(bookingDetails[i] + " index: " + i);
             // }
             // System.out.println();
             // Assuming the status is at the 8th index (status column)
@@ -161,7 +162,7 @@ public class StorageFunctions {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
         int completedBookingsCount = 0;
-        
+
         // Skip the first line (header)
         if (scan.hasNextLine()) {
             scan.nextLine();
@@ -170,7 +171,7 @@ public class StorageFunctions {
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] bookingDetails = line.split(",");
-            for(int i=0; i < bookingDetails.length; i ++){
+            for (int i = 0; i < bookingDetails.length; i++) {
                 System.out.println(bookingDetails[i] + " index: " + i);
             }
             System.out.println();
@@ -187,7 +188,9 @@ public class StorageFunctions {
     }
 
     /*
-     * This method allows to count the number of active rentals from the passed in filePath, and it returns only the values for the currently logged in user (the car owner(s))
+     * This method allows to count the number of active rentals from the passed in
+     * filePath, and it returns only the values for the currently logged in user
+     * (the car owner(s))
      */
     public static int countActiveRentals(String carDetailsPath, String email) throws FileNotFoundException {
 
@@ -196,17 +199,16 @@ public class StorageFunctions {
         int availableCarsCount = 0;
 
         // Skip the first line (header)
-        // first line has structure of  the file
+        // first line has structure of the file
 
         if (scan.hasNextLine()) {
             scan.nextLine();
         }
 
-
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] carDetails = line.split(",");
-            
+
             // Assuming the status is at the 7th index (status column)
             String status = carDetails[6].trim();
             String emailFromFile = carDetails[0];
@@ -220,6 +222,7 @@ public class StorageFunctions {
         return availableCarsCount;
 
     }
+
     // Function to count cancelled bookings
     public static int countCancelledBookings(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
@@ -268,7 +271,7 @@ public class StorageFunctions {
             if (status.equalsIgnoreCase("completed")) {
                 double totalPrice = Double.parseDouble(bookingDetails[4].trim());
                 totalRevenue += totalPrice;
-                
+
             }
             // the admin (the company) gets 15% of all the revenue
             // totalRevenue = totalRevenue * 0.15;
@@ -299,7 +302,7 @@ public class StorageFunctions {
             if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(email)) {
                 double totalPrice = Double.parseDouble(bookingDetails[4].trim());
                 totalRevenue += totalPrice;
-                
+
             }
             // the admin (the company) gets 15% of all the revenue
             // totalRevenue = totalRevenue * 0.15;
@@ -308,7 +311,6 @@ public class StorageFunctions {
         scan.close();
         return totalRevenue;
     }
-
 
     public static void updateUserRecord(User updatedUser) throws IOException {
         File file = new File("src\\storage\\userDetails.csv");
@@ -322,13 +324,13 @@ public class StorageFunctions {
                 if (fields.length > 0 && fields[0].equals(updatedUser.getEmail())) {
                     // Update the line with new user information
                     line = updatedUser.getEmail() + "," +
-                           updatedUser.getPassword() + "," +
-                           updatedUser.getPhoneNumber() + "," +
-                           updatedUser.getUserType() + "," +
-                           updatedUser.getFirstName() + "," +
-                           updatedUser.getLastName() + "," +
-                           updatedUser.getDriversLicense() + "," +
-                           updatedUser.getUserID();
+                            updatedUser.getPassword() + "," +
+                            updatedUser.getPhoneNumber() + "," +
+                            updatedUser.getUserType() + "," +
+                            updatedUser.getFirstName() + "," +
+                            updatedUser.getLastName() + "," +
+                            updatedUser.getDriversLicense() + "," +
+                            updatedUser.getUserID();
                 }
                 fileContent.add(line);
             }
@@ -345,48 +347,65 @@ public class StorageFunctions {
 
     public static void populateTable(JTable table, String filePath) throws FileNotFoundException {
         // Define the column names based on your table headers
-        String[] columnNames = {"ID", "First Name", "Last Name", "Email", "Phone Number", "Driver License", "User Type"};
+        String[] columnNames = { "ID", "First Name", "Last Name", "Email", "Phone Number", "Driver License",
+                "User Type", "Status" };
 
-        // Create a table model with the column names
+        // Create a new table model
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 
         // Open the CSV file
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
-        
+
         // Skip the first line (header)
         if (scan.hasNextLine()) {
             scan.nextLine();
         }
 
+        // Clear the table model before populating it
+        model.setRowCount(0);
+
         // Read each line and add rows to the table, excluding the password column
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             String[] userDetails = line.split(",");
-            
-            // Only add the relevant columns in the specified order
-            String[] rowData = {
-                userDetails[7], // user ID
-                userDetails[4], // first name
-                userDetails[5], // last name
-                userDetails[0], // email
-                userDetails[2], // phone number
-                userDetails[6], // driver's license
-                userDetails[3]  // user type
-            };
 
-            // Add the row to the table model
-            model.addRow(rowData);
+            // Ensure that each row has enough data to populate the table
+            if (userDetails.length >= 9) {
+                // Only add the relevant columns in the specified order
+                String[] rowData = {
+                        userDetails[7], // user ID
+                        userDetails[4], // first name
+                        userDetails[5], // last name
+                        userDetails[0], // email
+                        userDetails[2], // phone number
+                        userDetails[6], // driver's license
+                        userDetails[3], // user type
+                        userDetails[8] // user status
+                };
+
+                // Add the row to the table model
+                model.addRow(rowData);
+            }
         }
 
         scan.close();
-        
-        // Set the model to the JTable
+
+        // Clear the table before setting the new model (Step 1: Ensure existing rows
+        // are removed)
+        ((DefaultTableModel) table.getModel()).setRowCount(0);
+
+        // Apply the new model to the table (Step 2: Set the new model explicitly)
         table.setModel(model);
+
+        // Force the table to refresh its display (Step 3: Ensure the UI reflects the
+        // changes)
+        table.revalidate();
+        table.repaint();
     }
 
-    public static void updateUser(String userIdToEdit, String newFirstName, String newLastName, 
-                                   String newPhoneNumber, String newEmail, String loggedInUserId) throws IOException {
+    public static void updateUser(String userIdToEdit, String newFirstName, String newLastName,
+            String newPhoneNumber, String newEmail, String loggedInUserId) throws IOException {
         File file = new File("src\\storage\\userDetails.csv");
         List<String> lines = new ArrayList<>();
         boolean emailExists = false;
@@ -407,7 +426,7 @@ public class StorageFunctions {
                 if (newEmail.equals(userDetails[0])) {
                     emailExists = true;
                 }
-                
+
                 // Check if we are editing the logged-in user's record
                 if (userIdToEdit.equals(loggedInUserId)) {
                     isLoggedInUser = true;
@@ -416,15 +435,15 @@ public class StorageFunctions {
                 // Update the user details if userID matches the one to edit
                 if (userDetails[6].equals(userIdToEdit)) {
                     line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s",
-                            userDetails[0],  // Email
-                            userDetails[1],  // Password
-                            newPhoneNumber,   // New phone number
-                            userDetails[3],  // User type
-                            newFirstName,     // New first name
-                            newLastName,      // New last name
-                            userDetails[6],   // Driver's license
-                            userIdToEdit,     // ID remains the same
-                            userDetails[8]);  // Status
+                            userDetails[0], // Email
+                            userDetails[1], // Password
+                            newPhoneNumber, // New phone number
+                            userDetails[3], // User type
+                            newFirstName, // New first name
+                            newLastName, // New last name
+                            userDetails[6], // Driver's license
+                            userIdToEdit, // ID remains the same
+                            userDetails[8]); // Status
                 }
 
                 lines.add(line);
@@ -433,11 +452,13 @@ public class StorageFunctions {
 
         // Check constraints
         if (isLoggedInUser) {
-            JOptionPane.showMessageDialog(null, "Cannot edit your own information.", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Cannot edit your own information.", "Update Failed",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (emailExists) {
-            JOptionPane.showMessageDialog(null, "Email already exists in the database.", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Email already exists in the database.", "Update Failed",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -447,14 +468,68 @@ public class StorageFunctions {
                 bw.write(line);
                 bw.newLine();
             }
-            JOptionPane.showMessageDialog(null, "User information updated successfully!", "Update Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "User information updated successfully!", "Update Success",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage(), "File Write Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error writing to file: " + e.getMessage(), "File Write Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
+    public static String getCurrentUserStatus(String userID) {
+        String filePath = "src\\storage\\userDetails.csv";
+        String line;
+        String[] userDetails;
 
-	
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                userDetails = line.split(",");
+                if (userDetails[7].trim().equals(userID)) {
+                    return userDetails[8].trim(); // Return the current status
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
 
+        return null; // User not found
+    }
+
+    public static void updateUserStatus(String userID, String newStatus) {
+        String filePath = "src/storage/userDetails.csv"; // Adjust the file path as necessary
+        StringBuilder updatedContent = new StringBuilder();
+        String line;
+        String[] userDetails;
+        boolean userFound = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            while ((line = br.readLine()) != null) {
+                userDetails = line.split(",");
+
+                // Check if this is the user we want to update
+                if (userDetails[7].trim().equals(userID)) {
+                    userDetails[8] = newStatus;
+                    userFound = true;
+                }
+
+                // Append the (possibly modified) line back to the updated content
+                updatedContent.append(String.join(",", userDetails)).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+
+        if (userFound) {
+            // Write the updated content back to the file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+                bw.write(updatedContent.toString());
+            } catch (IOException e) {
+                e.printStackTrace(); // Handle the exception appropriately
+            }
+        } else {
+            // Optionally handle the case where the user was not found
+            JOptionPane.showMessageDialog(null, "User ID not found. Status update failed.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
-
