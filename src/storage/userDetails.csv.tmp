@@ -1,0 +1,6 @@
+userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID,status
+adolfaudhas@gmail.com,123,08123,Car owner,Kondwani,Kunkwenzu,,6,approved
+edn7@gmail.com,&123,+264815784920,Car owner,Eurico,Dande,,8,approved
+jcena47@gmail.com,&Test123,+246817635642,Admin,John,Cena,,9,pending
+ben10@gmail.com,bb6ddccaa428dff0efcbf9057cadb165fa7f7a72abf2f0b370901fb179b95fad,+244994638264,Admin,Ben,Ten,67389ZM0246,10,approved
+jbieber@gmail.com,4cff618d379610833bc595bc610d2d194a609e505d33eb9ba5a2b59e1b85d426,+234676489302,Admin,Justin,Bieber,657377USA474,11,pending
