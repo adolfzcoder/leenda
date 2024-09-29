@@ -16,7 +16,7 @@ public class LeendaUserDashboard {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
+        new CustomerDashboard(null);
     }
     
 }
