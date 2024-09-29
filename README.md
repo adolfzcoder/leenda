@@ -15,6 +15,16 @@ phone number:index=2
 
 user type:index=3
 
+firstName:index=4
+
+lastName:index=5
+
+driversLicense:index=6
+
+userID:index=7,
+
+status:index=8
+
 # cars.csv
 
 userEmail:index=0
