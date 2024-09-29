@@ -49,8 +49,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
         try {
 
             String carDetailsPath = "src\\storage\\cars.csv";
-
-            int fleetNumber = StorageFunctions.countCars(user.getEmail());
+            // System.out.println(user.getEmail());
+            int fleetNumber = StorageFunctions.countCarsByOwnerEmail(user.getEmail());
             lblTotalFleetNumber.setText(""+ fleetNumber); // display number of vehicles in the fleet
 
             
@@ -59,7 +59,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
             lblActiveRentals.setText(""+ activeRentals); // display current 'active' rentals
 
 
-            double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(carDetailsPath, user.getEmail()); 
+            double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(user.getEmail()); 
             lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
 
             
