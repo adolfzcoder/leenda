@@ -2,5 +2,6 @@
     "cSpell.words": [
         "adminmodules",
         "edande"
-    ]
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }
