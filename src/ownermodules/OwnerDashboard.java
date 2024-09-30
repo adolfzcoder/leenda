@@ -159,7 +159,12 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLogoutOnClick(evt);
+                try {
+                    btnLogoutOnClick(evt);
+                } catch (UnsupportedLookAndFeelException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -640,7 +645,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
+    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {// GEN-FIRST:event_btnLogoutOnClick
             this.dispose();
             new AddCar(user);
     }
