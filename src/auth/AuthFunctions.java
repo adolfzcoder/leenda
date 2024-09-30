@@ -1,19 +1,16 @@
 package auth;
 
+import adminmodules.AdminDashboard;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
-
-import adminmodules.AdminDashboard;
-
-import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import ownermodules.OwnerDashboard;
 import leendauserdashboard.CustomerDashboard;
+import models.User;
+import ownermodules.OwnerDashboard;
 
 public class AuthFunctions {
     public static void login(String userEmail, String userPassword, JFrame frame)
