@@ -14,6 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import ownermodules.OwnerDashboard;
 import leendauserdashboard.CustomerDashboard;
+import ownermodules.AddCar;
 import viewbookedcars.bookedcars;
 
 public class AuthFunctions {
@@ -38,7 +39,7 @@ public class AuthFunctions {
 
             if (loggedInUser.getUserType().equals("Car owner")) {
                 frame.dispose();
-                new bookedcars();
+                new OwnerDashboard(loggedInUser);
             }
             if (loggedInUser.getUserType().equals("Customer")) {
                 new CustomerDashboard(loggedInUser);

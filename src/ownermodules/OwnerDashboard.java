@@ -171,6 +171,16 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    jLabel7MouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
+
        
         
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -725,7 +735,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnEditPersonalInformationOnClick
 
-    
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new LoginPage();
+    }   
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed

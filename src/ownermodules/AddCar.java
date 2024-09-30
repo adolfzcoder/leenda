@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package ownermodules;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
@@ -13,14 +14,13 @@ import models.User;
  *
  * @author adolf
  */
-public User user;
 public class AddCar extends javax.swing.JFrame {
+    public User user;
 
     /**
      * Creates new form AddCar
      */
-    public AddCar(User user) {
-
+    public AddCar(User user) throws UnsupportedLookAndFeelException {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -32,7 +32,7 @@ public class AddCar extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
-        
+        this.user = user;
         initComponents();
        
     }
@@ -925,6 +925,10 @@ public class AddCar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+
+            
+
+
     private void btnAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
@@ -963,7 +967,12 @@ public class AddCar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCar(null).setVisible(true);
+                try {
+                    new AddCar(null).setVisible(true);
+                } catch (UnsupportedLookAndFeelException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
     }
