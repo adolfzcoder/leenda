@@ -171,6 +171,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
+       
+        
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(133, 62, 52));
         jLabel8.setText("Booked Cars");
