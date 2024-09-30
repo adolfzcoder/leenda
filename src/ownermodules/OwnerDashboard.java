@@ -642,7 +642,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
             this.dispose();
-            new LoginPage();
+            new AddCar(user);
     }
 
 
