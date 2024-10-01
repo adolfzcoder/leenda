@@ -4,10 +4,16 @@
  */
 package viewbookedcars;
 
+import java.io.FileNotFoundException;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import auth.LoginPage;
 import models.User;
+import ownermodules.AddCar;
+import ownermodules.OwnerDashboard;
+import storage.StorageFunctions;
 
 /**
  *
@@ -35,7 +41,48 @@ public class bookedcars extends javax.swing.JFrame {
         this.setTitle("Booked Cars");
         initComponents();
         this.user = user;
+        
+        this.setVisible(true);
+
+
+        try {
+
+
+
+            int availableCars = StorageFunctions.countAvailableCars(user.getEmail());
+            if (availableCars == 0){
+                jLabel13.setText("No available Cars");    
+            }else {
+            jLabel13.setText("" + availableCars); 
+            }
+
+            int activeRentals = StorageFunctions.countBookedCars(user.getEmail()); 
+
+            if (activeRentals == 0){
+                lblnumberOfBookedCarsDynamic.setText("No active rentals");
+
+            } else {
+                lblnumberOfBookedCarsDynamic.setText(""+ activeRentals); // display current 'active' oro currently booked vehicles rentals (booked)
+            }
+
+
+
+
+           
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        }
+
+        lblUserNameDynamic.setText(user.getFirstName() + " " + user.getLastName());
+
+        lblUserTypeDynamic.setText(user.getUserType()); // display user type
+
+
+
     }
+
+
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,10 +160,41 @@ public class bookedcars extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(133, 62, 52));
         jLabel5.setText("Booked cars");
-
+        
+        
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(133, 62, 52));
         jLabel6.setText("Add cars");
+        
+        
+        // open dashbaord when clicked
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
+        // open booked cars page when clicked
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    bookedCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+        // open add car page when clicked
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(133, 62, 52));
@@ -194,13 +272,13 @@ public class bookedcars extends javax.swing.JFrame {
 
         lblUserTypeDynamic.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         lblUserTypeDynamic.setForeground(new java.awt.Color(133, 62, 52));
-        lblUserTypeDynamic.setText("Car Owner");
+        // lblUserTypeDynamic.setText("Car Owner");
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-person-88_1.png"))); // NOI18N
 
         lblUserNameDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblUserNameDynamic.setForeground(new java.awt.Color(133, 62, 52));
-        lblUserNameDynamic.setText("Hileni Nghiishililwa");
+        // lblUserNameDynamic.setText("Hileni Nghiishililwa");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -241,7 +319,7 @@ public class bookedcars extends javax.swing.JFrame {
 
         lblnumberOfBookedCarsDynamic.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         lblnumberOfBookedCarsDynamic.setForeground(new java.awt.Color(133, 62, 52));
-        lblnumberOfBookedCarsDynamic.setText("3");
+        // lblnumberOfBookedCarsDynamic.setText("3");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -304,7 +382,7 @@ public class bookedcars extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel13.setText("2");
+        // jLabel13.setText("2");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -435,8 +513,25 @@ public class bookedcars extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new LoginPage();
+
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void ownerDashboardMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new OwnerDashboard(user);
+    }  
+
+    private void bookedCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new bookedcars(user);
+    } 
+    private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new AddCar(user);
+    } 
+
 
     /**
      * @param args the command line arguments

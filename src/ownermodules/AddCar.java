@@ -8,7 +8,9 @@ import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import auth.LoginPage;
 import models.User;
+import viewbookedcars.bookedcars;
 
 /**
  *
@@ -34,7 +36,7 @@ public class AddCar extends javax.swing.JFrame {
         }
         this.user = user;
         initComponents();
-       
+        this.setVisible(true);
     }
 
     /**
@@ -136,10 +138,27 @@ public class AddCar extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(133, 62, 52));
         jLabel2.setText("Dashboard");
 
+        // open dashbaord when clicked
+        
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         jButton1.setBackground(new java.awt.Color(242, 242, 242));
         jButton1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(133, 62, 52));
         jButton1.setText("Log out");
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(133, 62, 52));
@@ -149,9 +168,29 @@ public class AddCar extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
+        // open add car page when clicked
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(133, 62, 52));
         jLabel8.setText("Booked Cars");
+
+        // open booked cars page when clicked
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    bookedCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,6 +227,15 @@ public class AddCar extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(133, 62, 52));
         jLabel3.setText("Dashboard");
+
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(217, 186, 164));
         jPanel5.setForeground(new java.awt.Color(217, 186, 164));
@@ -603,6 +651,15 @@ public class AddCar extends javax.swing.JFrame {
         jLabel28.setForeground(new java.awt.Color(133, 62, 52));
         jLabel28.setText("Dashboard");
 
+        jLabel28.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         jButton3.setBackground(new java.awt.Color(242, 242, 242));
         jButton3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jButton3.setForeground(new java.awt.Color(133, 62, 52));
@@ -619,6 +676,16 @@ public class AddCar extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(133, 62, 52));
         jLabel31.setText("Booked Cars");
+
+        // open booked cars page when clicked
+        jLabel31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    bookedCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -917,6 +984,24 @@ public class AddCar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+
+    private void ownerDashboardMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new OwnerDashboard(user);
+    }  
+
+    private void bookedCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new bookedcars(user);
+    } 
+    private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new AddCar(user);
+    } 
+
+
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -928,6 +1013,11 @@ public class AddCar extends javax.swing.JFrame {
 
             
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        new LoginPage();
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachActionPerformed
         JFileChooser chooser = new JFileChooser();
