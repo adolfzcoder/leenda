@@ -39,7 +39,7 @@ public class AuthFunctions {
 
             if (loggedInUser.getUserType().equals("Car owner")) {
                 frame.dispose();
-                new OwnerDashboard(loggedInUser);
+                new AddCar(loggedInUser);
             }
             if (loggedInUser.getUserType().equals("Customer")) {
                 new CustomerDashboard(loggedInUser);

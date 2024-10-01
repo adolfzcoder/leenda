@@ -4,6 +4,11 @@
  */
 package viewbookedcars;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import models.User;
+
 /**
  *
  * @author nalos
@@ -13,8 +18,23 @@ public class bookedcars extends javax.swing.JFrame {
     /**
      * Creates new form bookedcars
      */
-    public bookedcars() {
+    public User user;
+    public bookedcars(User user) {
+        // Set Nimbus look and feel
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace(); // Handle any exceptions
+        }
+        this.setTitle("Booked Cars");
         initComponents();
+        this.user = user;
     }
 
     /**
@@ -448,7 +468,7 @@ public class bookedcars extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new bookedcars().setVisible(true);
+                new bookedcars(null).setVisible(true);
             }
         });
     }
