@@ -152,37 +152,7 @@ public class StorageFunctions {
         return cancelledBookingsCount;
     }
 
-    // Function to calculate total revenue from completed bookings
-    public static double calculateTotalRevenue(String filePath) throws FileNotFoundException {
-        File file = new File(filePath);
-        Scanner scan = new Scanner(file);
-        double totalRevenue = 0;
-
-        // Skip the first line (header)
-        if (scan.hasNextLine()) {
-            scan.nextLine();
-        }
-
-        while (scan.hasNextLine()) {
-            String line = scan.nextLine();
-            String[] bookingDetails = line.split(",");
-
-            // Assuming the total price is at the 5th index (totalPrice column)
-            // and the status is at the 8th index
-            String status = bookingDetails[7].trim();
-            if (status.equalsIgnoreCase("completed")) {
-                double totalPrice = Double.parseDouble(bookingDetails[4].trim());
-                totalRevenue += totalPrice;
-
-            }
-            // the admin (the company) gets 15% of all the revenue
-            // totalRevenue = totalRevenue * 0.15;
-        }
-
-        scan.close();
-        return totalRevenue;
-    }
-
+ 
 
     public static void updateUserRecord(User updatedUser) throws IOException {
         File file = new File("src\\storage\\userDetails.csv");
@@ -406,6 +376,13 @@ public class StorageFunctions {
     }
 
 
+
+    /***
+     * Car Owner dashbaord Functions
+     *
+     */
+
+
     /*
      * This method returns the number of currently booked cars. The user email for
      * the car owner is passed in as a parameter and it is used to go into the csv
@@ -537,6 +514,81 @@ public class StorageFunctions {
             String carOwnerEmailFromFile = carDetails[9];
 
             if (status.equalsIgnoreCase("available") && CarOwnerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
+                carCount++;
+            }
+        }
+
+        scan.close();
+        return carCount;
+    }
+
+
+       // Function to calculate total revenue from completed bookings
+       public static double calculateTotalRevenue(String filePath) throws FileNotFoundException {
+        File file = new File(filePath);
+        Scanner scan = new Scanner(file);
+        double totalRevenue = 0;
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+
+            // Assuming the total price is at the 5th index (totalPrice column)
+            // and the status is at the 8th index
+            String status = bookingDetails[7].trim();
+            if (status.equalsIgnoreCase("completed")) {
+                double totalPrice = Double.parseDouble(bookingDetails[4].trim());
+                totalRevenue += totalPrice;
+
+            }
+            // the admin (the company) gets 15% of all the revenue
+            // totalRevenue = totalRevenue * 0.15;
+        }
+
+        scan.close();
+        return totalRevenue;
+    }
+
+
+
+
+    /***
+     * 
+     * Booking page functions
+     * @throws FileNotFoundException 
+     * 
+     */
+
+
+    public static int countAvailableCars(String email) throws FileNotFoundException {
+        // TODO Auto-generated method stub
+        String carDetailsPath = "src\\storage\\cars.csv";
+        File file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        int carCount = 0;
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            // for(int i=0; i < bookingDetails.length; i ++){
+            // System.out.println(bookingDetails[i] + " index: " + i);
+            // }
+            // System.out.println();
+            // Assuming the status is at the 8th index (status column)
+            String status = carDetails[6].trim();
+            String carOwnerEmailFromFile = carDetails[9];
+
+            if (status.equalsIgnoreCase("available") && email.equalsIgnoreCase(carOwnerEmailFromFile)) {
                 carCount++;
             }
         }

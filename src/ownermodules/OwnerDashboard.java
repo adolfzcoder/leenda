@@ -17,6 +17,7 @@ import auth.AuthFunctions;
 import auth.LoginPage;
 import models.User;
 import storage.StorageFunctions;
+import viewbookedcars.bookedcars;
 
 /**
  *
@@ -46,6 +47,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
         this.user = user;
         initComponents();
 
+        this.setTitle("Owner Dashboard");
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -65,7 +68,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
 
             double totalCarOwnerRevenue = StorageFunctions.calculateOwnerRevenue(user.getEmail()); 
-            lblRevenue.setText(" "+ totalCarOwnerRevenue); // display the amount of revenue
+            lblRevenue.setText("N$ "+ totalCarOwnerRevenue); // display the amount of revenue
 
            
         } catch (FileNotFoundException e) {
@@ -171,9 +174,29 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
+        // open add car page when clicked
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
+        // open booked cars page
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(133, 62, 52));
         jLabel8.setText("Booked Cars");
+
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    bookedCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -629,9 +652,9 @@ public class OwnerDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
-            this.dispose();
-            new LoginPage();
-    }
+        this.dispose();
+        new LoginPage();
+    }// GEN-LAST:event_btnLogoutOnClick
 
 
 
@@ -723,7 +746,18 @@ public class OwnerDashboard extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnEditPersonalInformationOnClick
 
-    
+
+
+    private void bookedCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new bookedcars(user);
+    } 
+    private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new AddCar(user);
+    } 
+
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
