@@ -856,7 +856,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblFirstNameDynamic.setText("First name: Kondwani");
 
         lblEmailDynamic.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblEmailDynamic.setText("Email: kk30@leenda.com");
+        lblEmailDynamic.setText("Email: kk30@gmail.com");
 
         lblPhoneNumberDynamic.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblPhoneNumberDynamic.setText("Phone number: +264813257382");
@@ -1311,6 +1311,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnEditPersonalInformationOnClick
 
+
+    
     private void lblCarListingMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblCarListingMouseEntered
         Functions.changeColorOfTheLabelOfTheHeaderWhenEntering(lblCarListing);
     }// GEN-LAST:event_lblCarListingMouseEntered
