@@ -45,7 +45,7 @@ public class SelectUserDetails {
                 }
                 
             }
-            return fullLine; // return the whole user info e.g hangula@gmail.com:123:081773443:Car owner
+            return fullLine; // return the whole user info e.g hangula@leenda.com:123:081773443:Car owner
         }
 
 
