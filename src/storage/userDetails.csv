@@ -1,9 +1,4 @@
 userEmail,password,phoneNumber,userType,firstName,lastName,driversLicense,userID,status
-ben10@gmail.com,bb6ddccaa428dff0efcbf9057cadb165fa7f7a72abf2f0b370901fb179b95fad,+244994638264,Admin,Ben,Ten,67389ZM0246,10,approved
-jbieber@gmail.com,4cff618d379610833bc595bc610d2d194a609e505d33eb9ba5a2b59e1b85d426,+234676489302,Admin,Justin,Bieber,657377USA474,11,approved
-carowner@gmail.com,b6bc7b58510319a151d168ba3d5aecb3ac0a9708d06dd930f37fbc89b6cdc697,+2646166875,Car owner,Adolf,David,7321/0123/1231,12,approved
-customer@gmail.com,b6bc7b58510319a151d168ba3d5aecb3ac0a9708d06dd930f37fbc89b6cdc697,+26481772334,Customer,Jaden,Smtih,132123/1230912/123,13,approved
-admin@gmail.com,b6bc7b58510319a151d168ba3d5aecb3ac0a9708d06dd930f37fbc89b6cdc697,+264818231233,Admin,Maple,Syrup,21389312/1231,14,approved
 ben10@leenda.com,bb6ddccaa428dff0efcbf9057cadb165fa7f7a72abf2f0b370901fb179b95fad,+244994638264,Admin,Ben,Ten,67389ZM0246,10,approved
 jbieber@leenda.com,4cff618d379610833bc595bc610d2d194a609e505d33eb9ba5a2b59e1b85d426,+234676489302,Admin,Justin,Bieber,657377USA474,11,approved
 carowner@leenda.com,b6bc7b58510319a151d168ba3d5aecb3ac0a9708d06dd930f37fbc89b6cdc697,+2646166875,Car owner,Adolf,David,7321/0123/1231,12,approved
