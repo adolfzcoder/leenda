@@ -1,5 +1,5 @@
 userEmail,bookingID,startDate,endDate,totalPrice,carName,daysRenting, status, carOwnerEmail
-edn7@outlook.com, 2, 2024-04-12, 2024-04-30, 5600, Big boy, 5, completed,carowner@gmail.com
+, 2, 2024-04-12, 2024-04-30, 5600, Big boy, 5, completed,carowner@gmail.com
 edn7@outlook.com, 2, 2024-04-28, 2024-05-20, 7300, Lightning McQueen, 5, completed,carowner@gmail.com
 edn7@outlook.com, 1, 2024-09-25, 2024-09-30, 3000, Lightning McQueen, 5, pending,carowner2@gmail.com
 edn7@outlook.com, 2, 2024-09-25, 2024-09-30, 4500, Big boy, 5, cancelled,carowner2@gmail.com

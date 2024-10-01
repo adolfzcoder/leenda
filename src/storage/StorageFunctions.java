@@ -544,6 +544,40 @@ public class StorageFunctions {
         scan.close();
         return carCount;
     }
+    // get the total number of bookings the user has made.
+    public static int countBookingsByUserEmail(String userEmail) throws FileNotFoundException {
+        // TODO Auto-generated method stub
+        String bookingDetailsPath = "src\\storage\\bookings.csv";
+        File file = new File(bookingDetailsPath);
+        Scanner scan = new Scanner(file);
+        int bookingCount = 0;
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+            // for(int i=0; i < bookingDetails.length; i ++){
+            // System.out.println(bookingDetails[i] + " index: " + i);
+            // }
+            // System.out.println();
+            // Assuming the status is at the 8th index (status column)
+            String status = bookingDetails[7].trim();
+            String userEmailFromFile = bookingDetails[8];
+
+            if (status.equalsIgnoreCase("booked") && userEmail.equalsIgnoreCase(userEmailFromFile)) {
+                bookingCount++;
+            }
+        }
+
+        scan.close();
+        return bookingCount;
+
+        
+    }
 
 
 
