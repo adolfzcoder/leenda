@@ -42,6 +42,7 @@ public class AuthFunctions {
                 new OwnerDashboard(loggedInUser);
             }
             if (loggedInUser.getUserType().equals("Customer")) {
+                frame.dispose();
                 new CustomerDashboard(loggedInUser);
             }
         }
