@@ -164,6 +164,16 @@ public class AddCar extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(133, 62, 52));
         jLabel5.setText("Manage Fleet");
 
+        // open add Manage fleet page when clicked
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
@@ -984,13 +994,17 @@ public class AddCar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-
+    
+    
     private void ownerDashboardMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
         new OwnerDashboard(user);
     }  
-
+    
+    private void manageCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new ManageFleet();
+    }  
     private void bookedCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
         new bookedcars(user);

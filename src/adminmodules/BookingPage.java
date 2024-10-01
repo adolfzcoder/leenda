@@ -158,6 +158,8 @@ public class BookingPage extends javax.swing.JFrame {
             }
         });
 
+        
+
         jButton1.setBackground(new java.awt.Color(237, 233, 205));
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton1.setText("Log Out");
