@@ -1002,7 +1002,7 @@ public class AddCar extends javax.swing.JFrame {
     
     private void manageCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
-        new ManageFleet();
+        new ManageFleet(user);
     }  
     private void bookedCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
@@ -1012,8 +1012,12 @@ public class AddCar extends javax.swing.JFrame {
         this.dispose();
         new AddCar(user);
     } 
+    // manageFleetMouseClicked
 
-
+    private void manageFleetMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new ManageFleet(user);
+    } 
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:

@@ -164,7 +164,16 @@ public class bookedcars extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(133, 62, 52));
         jLabel6.setText("Add cars");
         
-        
+        // open manage fleet when clicked
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageFleetMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         // open dashbaord when clicked
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -525,11 +534,16 @@ public class bookedcars extends javax.swing.JFrame {
         this.dispose();
         new bookedcars(user);
     } 
+
+    // manageFleetMouseClicked
     private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
         new AddCar(user);
     } 
-
+    private void manageFleetMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new ManageFleet(user);
+    } 
 
     /**
      * @param args the command line arguments

@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import models.User;
+
 /**
  *
  * @author timmy
@@ -21,7 +23,8 @@ public class ManageFleet extends javax.swing.JFrame {
     /**
      * Creates new form CarListing
      */
-    public ManageFleet() {
+    public User user;
+    public ManageFleet(User user) {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -33,7 +36,7 @@ public class ManageFleet extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
-        
+        this.user = user;
         this.setTitle("Manage Fleet");
         this.setVisible(true);
          initComponents();
@@ -484,7 +487,7 @@ public class ManageFleet extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageFleet().setVisible(true);
+                new ManageFleet(null).setVisible(true);
             }
         });
     }

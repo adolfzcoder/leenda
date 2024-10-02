@@ -173,6 +173,15 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
+        // open manage fleet when cliked
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageFleetMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
         // open add car page when clicked
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -755,6 +764,12 @@ public class OwnerDashboard extends javax.swing.JFrame {
         this.dispose();
         new AddCar(user);
     } 
+
+    private void manageFleetMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new ManageFleet(user);
+    } 
+
 
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
