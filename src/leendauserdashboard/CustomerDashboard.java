@@ -55,6 +55,11 @@ public class CustomerDashboard extends javax.swing.JFrame {
             int totalBookingsFromFile = StorageFunctions.countTotalBookings(user.getEmail());
             totalBookingsText.setText(" "+ totalBookingsFromFile);
 
+            // canceledBookings
+            int  totalCanceledBookings = StorageFunctions.countCanceledBookings(user.getEmail());
+            canceledBookings.setText(" "+ totalCanceledBookings);
+
+
             
 
 
@@ -424,7 +429,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         canceledBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         canceledBookings.setForeground(new java.awt.Color(133, 62, 52));
-        canceledBookings.setText("1");
+        // canceledBookings.setText("1");
         canceledBookings.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout canceledBookingPanelLayout = new javax.swing.GroupLayout(canceledBookingPanel);

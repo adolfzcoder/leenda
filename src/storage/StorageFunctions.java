@@ -727,5 +727,37 @@ public class StorageFunctions {
         return totalBookings;
     }
 
+	public static int countCanceledBookings(String customerEmail) throws FileNotFoundException{
+		// TODO Auto-generated method stub
+        var carDetailsPath = "src\\storage\\bookings.csv";
+        File file = new File(carDetailsPath);
+        Scanner scan = new Scanner(file);
+        int cancelledBookingCount = 0;
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+            // for(int i=0; i < bookingDetails.length; i ++){
+            // System.out.println(bookingDetails[i] + " index: " + i);
+            // }
+            // System.out.println();
+            // Assuming the status is at the 8th index (status column)
+            String status = carDetails[6].trim();
+            String carOwnerEmailFromFile = carDetails[9];
+
+            if (status.equalsIgnoreCase("cancelled") && customerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
+                cancelledBookingCount++;
+            }
+        }
+
+        scan.close();
+        return cancelledBookingCount;
+	}
+
 
 }
