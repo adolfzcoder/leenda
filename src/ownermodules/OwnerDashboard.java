@@ -4,7 +4,9 @@
  */
 package ownermodules;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 import auth.AuthFunctions;
 import auth.LoginPage;
@@ -282,17 +285,26 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(217, 186, 164));
 
         jTable1.setBackground(new java.awt.Color(237, 223, 205));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Car Name", "Total Revenue", "Days Rented Out", "Return Date"
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\bookings.csv"))) {
+    String line;
+    jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {},
+        new String [] {
+            "Car Name", "Total Revenue", "Days Rented Out", "Return Date"
+        }
+            ));
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            br.readLine(); // Skip the first line
+
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data[8].equals(user.getEmail())) {
+                    model.addRow(data);
+                }
             }
-        ));
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
         jScrollPane1.setViewportView(jTable1);
 
         jLabel21.setBackground(new java.awt.Color(217, 186, 164));

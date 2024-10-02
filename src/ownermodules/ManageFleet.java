@@ -6,11 +6,15 @@ package ownermodules;
 
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 import models.User;
 
@@ -199,18 +203,29 @@ public class ManageFleet extends javax.swing.JFrame {
         );
 
         tblCarListing.setBackground(new java.awt.Color(217, 186, 164));
-        tblCarListing.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Bmw m4", "2015", "Coupe", "boOOKED", "$600", "56743"},
-                {"Audi", "2014", "Coupe", "BOOked", "$500", null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Car Name", "Car Year", "Car Type", "Status", "Daily Rate", "Vin"
+        // Create a new DefaultTableModel with the column names
+        DefaultTableModel model = new DefaultTableModel(new Object[] {"Car Name", "Car Year", "Car Type", "Status", "Daily Rate", "VIN"}, 0);
+        // Read the cars.csv file
+        String filePath = "src\\storage\\cars.csv";
+        String line;
+        String[] row;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            // Skip the header line
+            br.readLine();
+
+            while ((line = br.readLine()) != null) {
+                row = line.split(",");
+
+                // Check if the car owner's email matches the user's email
+                if (1==1) {
+                    model.addRow(new Object[] {row[0], row[1], row[2], row[3], row[4], row[5]});
+                }
             }
-        ));
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+        tblCarListing.setModel(model);
         jScrollPane1.setViewportView(tblCarListing);
 
         jPanel4.setBackground(new java.awt.Color(217, 186, 164));

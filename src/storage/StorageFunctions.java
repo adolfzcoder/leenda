@@ -514,7 +514,7 @@ public class StorageFunctions {
             String carOwnerEmailFromFile = carDetails[9];
 
             if (status.equalsIgnoreCase("available") && CarOwnerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
-                carCount++;
+                carCount = carCount + 1;
             }
         }
 
