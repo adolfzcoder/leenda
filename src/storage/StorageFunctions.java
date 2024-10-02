@@ -556,7 +556,7 @@ public class StorageFunctions {
         
     }
 
-
+    // Function is missing checking the car owners email, currently it is just fetching and adding all the values in the booking.csv
        // Function to calculate total revenue from completed bookings
        public static double calculateTotalRevenue(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
@@ -631,6 +631,101 @@ public class StorageFunctions {
         return carCount;
     }
 
+
+    /*
+     * 
+     * Customer page functions
+     * 
+     */
+    public static double getCustomerSpening(String customerEmail) throws FileNotFoundException{
+
+        File file = new File("src\\storage\\bookings.csv");
+        Scanner scan = new Scanner(file);
+        double totalSpending = 0;
+
+        // Skip the first line (header) as it contains the column details
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        while (scan.hasNextLine()) {
+            var line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+
+            // status is at the 7th index
+            // total price is at the 4th index (totalPrice column)
+            // car owner email at the 8th index
+            String status = bookingDetails[7].trim();
+            String emailFromFile = bookingDetails[8].trim();
+            if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(customerEmail)) {
+                double price = Double.parseDouble(bookingDetails[4].trim());
+                totalSpending += price;
+
+                /* Debugging statements, to check if have the right indexes */
+                // System.out.println(price);
+                // System.out.println(totalSpending);
+            }
+            // the admin (the company) gets 15% of all the revenue
+            // totalSpending = totalSpending - (totalSpending * 0.15);
+        }
+
+        scan.close();
+        return totalSpending;
+
+
+    }
+
+    public static int countTotalDaysRented(String customerEmail) throws FileNotFoundException {
+        File file = new File("src\\storage\\bookings.csv");
+        Scanner scan = new Scanner(file);
+        int totalDaysRented = 0;
+    
+        // Skip the first line (header) as it contains the column details
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+    
+        while (scan.hasNextLine()) {
+            var line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+    
+            // status is at the 7th index
+            // total price is at the 4th index (totalPrice column)
+            // car owner email at the 8th index
+            String status = bookingDetails[7].trim();
+            String emailFromFile = bookingDetails[8].trim();
+            if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(customerEmail)) {
+                int days = Integer.parseInt(bookingDetails[6].trim()); // Parse the string to an integer
+                totalDaysRented += days;
+            }
+        }
+    
+        scan.close();
+        return totalDaysRented; 
+    }
+
+    public static int countTotalBookings(String customerEmail) throws FileNotFoundException{
+        File file = new File("src\\storage\\bookings.csv");
+        Scanner scan = new Scanner(file);
+        int totalBookings = 0;
+    
+        // Skip the first line (header) as it contains the column details
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+        while (scan.hasNextLine()) {
+            var line = scan.nextLine();
+            String[] bookingDetails = line.split(",");
+
+            String emailFromFile = bookingDetails[0].trim();
+            if (emailFromFile.equalsIgnoreCase(customerEmail)) {
+                totalBookings ++;
+            }
+        }
+    
+        scan.close();
+        return totalBookings;
+    }
 
 
 }

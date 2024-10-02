@@ -5,6 +5,9 @@
 package leendauserdashboard;
 import java.io.File;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import models.User;
 import storage.StorageFunctions;
 
@@ -18,10 +21,50 @@ public class CustomerDashboard extends javax.swing.JFrame {
      * Creates new form UserDashboard
      */
     public CustomerDashboard(User user) {
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();  // Handle any exceptions
+        }
+
         this.user = user;
         initComponents();
         this.setVisible(true);
+
+        try {
+            // spendings
+            double totalSpendingsFromFile = StorageFunctions.getCustomerSpening(user.getEmail());
+            spendings.setText("NAD "+ totalSpendingsFromFile);
+
+            // completedBookings
+            int totalBookings = StorageFunctions.countBookingsByUserEmail(user.getEmail());
+            completedBookings.setText(" "+ totalBookings);
+
+            // pendingApproval
+            int totalDaysRented = StorageFunctions.countTotalDaysRented(user.getEmail());
+            pendingApproval.setText(" "+ totalDaysRented);
+
+            // totalBookingsText
+
+            int totalBookingsFromFile = StorageFunctions.countTotalBookings(user.getEmail());
+            totalBookingsText.setText(" "+ totalBookingsFromFile);
+
+            
+
+
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,7 +212,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         totalBookingsText.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         totalBookingsText.setForeground(new java.awt.Color(133, 62, 52));
-        totalBookingsText.setText("Total Bookings");
+        // totalBookingsText.setText("Total Bookings");
         totalBookingsText.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         totalBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -261,7 +304,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         spendings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         spendings.setForeground(new java.awt.Color(133, 62, 52));
-        spendings.setText("NAD 69420");
+        // spendings.setText("NAD 69420");
         spendings.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout spendingsPanelLayout = new javax.swing.GroupLayout(spendingsPanel);
@@ -296,12 +339,12 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         pendingApprovalText.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         pendingApprovalText.setForeground(new java.awt.Color(133, 62, 52));
-        pendingApprovalText.setText("Pending Approval");
+        pendingApprovalText.setText("Total Days Rented");
         pendingApprovalText.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         pendingApproval.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         pendingApproval.setForeground(new java.awt.Color(133, 62, 52));
-        pendingApproval.setText("36");
+        // pendingApproval.setText("36");
         pendingApproval.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout pendingApprovalPanelLayout = new javax.swing.GroupLayout(pendingApprovalPanel);
@@ -341,7 +384,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         completedBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         completedBookings.setForeground(new java.awt.Color(133, 62, 52));
-        completedBookings.setText("64");
+        // completedBookings.setText("64");
         completedBookings.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout completedBookingsPanelLayout = new javax.swing.GroupLayout(completedBookingsPanel);
