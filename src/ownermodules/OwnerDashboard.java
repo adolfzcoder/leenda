@@ -299,7 +299,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
                 if (data[8].equals(user.getEmail())) {
-                    model.addRow(data);
+                    
+                    model.addRow(new Object[]{data[5], data[4], data[6], data[3]});
                 }
             }
         } catch (IOException e) {

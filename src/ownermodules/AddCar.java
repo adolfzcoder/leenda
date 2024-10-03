@@ -215,7 +215,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-                    manageCarMouseClicked(evt);
+                    manageFleetMouseClicked(evt);
                 } catch (UnsupportedLookAndFeelException ex) {
                 }
             }

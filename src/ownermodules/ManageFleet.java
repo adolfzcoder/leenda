@@ -4,6 +4,7 @@
  */
 package ownermodules;
 
+import auth.LoginPage;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.io.BufferedReader;
@@ -108,29 +109,75 @@ public class ManageFleet extends javax.swing.JFrame {
         lblDashboard.setText("Dashboard");
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         
+        lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         lblCarlisting.setBackground(new java.awt.Color(133, 62, 52));
         lblCarlisting.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarlisting.setForeground(new java.awt.Color(133, 62, 52));
         lblCarlisting.setText("Manage Fleet");
 
+        lblCarlisting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageFleetMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         lblBooking.setBackground(new java.awt.Color(133, 62, 52));
         lblBooking.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblBooking.setForeground(new java.awt.Color(133, 62, 52));
-        lblBooking.setText("Booking");
+        lblBooking.setText("Booked Cars");
         lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblBooking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    bookedCarsMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
         
 
         lblUsermanagement.setBackground(new java.awt.Color(133, 62, 52));
         lblUsermanagement.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblUsermanagement.setForeground(new java.awt.Color(133, 62, 52));
-        lblUsermanagement.setText("User Management");
+        lblUsermanagement.setText("Add Car");
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+        
        
 
         btnLogout.setBackground(new java.awt.Color(237, 233, 205));
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
+
+        
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    logOutMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -204,7 +251,8 @@ public class ManageFleet extends javax.swing.JFrame {
 
         tblCarListing.setBackground(new java.awt.Color(217, 186, 164));
         // Create a new DefaultTableModel with the column names
-        DefaultTableModel model = new DefaultTableModel(new Object[] {"Car Name", "Car Year", "Car Type", "Status", "Daily Rate", "VIN"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new Object[] {"Car ID", "Car Name", "Car Year", "Car Type", 
+            "Daily Rate", "Status", "Car Image URL", "VIN"}, 0);
         // Read the cars.csv file
         String filePath = "src\\storage\\cars.csv";
         String line;
@@ -219,7 +267,7 @@ public class ManageFleet extends javax.swing.JFrame {
 
                 // Check if the car owner's email matches the user's email
                 if (1==1) {
-                    model.addRow(new Object[] {row[0], row[1], row[2], row[3], row[4], row[5]});
+                    model.addRow(new Object[] {row[1], row[2], row[3], row[4], row[5], row[6], row[8]});
                 }
             }
         } catch (IOException e) {
@@ -505,7 +553,37 @@ public class ManageFleet extends javax.swing.JFrame {
                 new ManageFleet(null).setVisible(true);
             }
         });
+
+
+        
     }
+// open car owner dashbaord when clickedd
+    private void ownerDashboardMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new OwnerDashboard(user);
+    } 
+
+
+    // open fleet management page when clicked
+    private void manageFleetMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new ManageFleet(user);
+    } 
+    // bookedCarsMouseClicked
+    private void bookedCarsMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new bookedcars(user);
+    } 
+    // addCarMouseClicked
+    private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new AddCar(user);
+    } 
+    // logOutMouseClicked
+    private void logOutMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+        this.dispose();
+        new LoginPage();
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeleteCarListing;
