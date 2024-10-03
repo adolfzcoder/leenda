@@ -1,3 +1,4 @@
 userEmail,carID,carName,carYear,carType,dailyRate,status (booked available),carImageUrl,VIN, carOwnerEmail
-edn7@leenda.com, 1, Lightning McQueen,2019, automatic, 390, booked, , 76774473,carowner@leenda.com
-edn7@leenda.com, 2, Big boy, 2020, manual, 570, available, , 674674742,carowner@leenda.com
+edn7@leenda.com, 1, Lightning McQueen,2019, Sedan, 390, booked, , 76774473,carowner@leenda.com
+,2,AMG GT3 RS,2023,Sedan,5400,available,src\carImages\4e8529a8-4a63-414c-9bda-02090049c41d.jpeg,213435445,carowner@leenda.com
+,3,Range Rover Sport,2018,SUV,3400,available,src\carImages\d0599089-90f0-4962-94fd-fd5a2f8098c0.jpeg,2345346732,carowner@leenda.com

@@ -11,6 +11,7 @@ import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
+import leendauserdashboard.CarBooking;
 
 import ownermodules.OwnerDashboard;
 import ownermodules.bookedcars;
@@ -43,7 +44,7 @@ public class AuthFunctions {
             }
             if (loggedInUser.getUserType().equals("Customer")) {
                 frame.dispose();
-                new CustomerDashboard(loggedInUser);
+                new CarBooking(loggedInUser);
             }
         }
         // If login fails, the error messages are already handled inside

@@ -3,8 +3,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ownermodules;
+import java.io.FileWriter;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.UUID;
+
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -124,6 +135,43 @@ public class AddCar extends javax.swing.JFrame {
         btnAttach = new javax.swing.JButton();
         lblFilePath = new javax.swing.JTextField();
 
+
+    
+
+        // Action for Attach button to open file chooser
+        btnAttach.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    lblFilePath.setText(selectedFile.getAbsolutePath());
+                }
+            }
+        });
+
+         // Action for Submit button to save car details
+    jButton4.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            String carName = jTextField5.getText();
+            String carYear = jTextField6.getText();
+            String carType = jTextField7.getText();
+            String dailyRate = jTextField9.getText();
+            String vin = jTextField8.getText();
+            String carImage = lblFilePath.getText(); // Get the file path from the label
+            // Save details to file
+            saveCarDetails(carName, carYear, carType, dailyRate, vin, carImage);
+        }
+    });
+
+         // JFrame properties
+         setTitle("Add Car");
+         setSize(500, 400);
+         setDefaultCloseOperation(EXIT_ON_CLOSE);
+         setVisible(true);
+
+
+         
+
         jPanel1.setBackground(new java.awt.Color(237, 223, 205));
         jPanel1.setForeground(new java.awt.Color(217, 186, 164));
 
@@ -167,7 +215,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
-                    manageCarMouseClicked(evt);
+                    manageFleetMouseClicked(evt);
                 } catch (UnsupportedLookAndFeelException ex) {
                 }
             }
@@ -810,18 +858,18 @@ public class AddCar extends javax.swing.JFrame {
         jLabel51.setBackground(new java.awt.Color(133, 62, 52));
         jLabel51.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel51.setText("Vehicle Identiification Number");
+        jLabel51.setText("Vehicle Identification Number");
 
         jLabel52.setBackground(new java.awt.Color(133, 62, 52));
         jLabel52.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel52.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel52.setText("Daily Rate (NAD)");
+        jLabel52.setText("Daily Rate (N$)");
 
         jTextField5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField5.setText("jTextField1");
+        jTextField5.setText("");
 
         jTextField6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField6.setText("jTextField2");
+        jTextField6.setText("");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -829,13 +877,13 @@ public class AddCar extends javax.swing.JFrame {
         });
 
         jTextField7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jTextField7.setText("jTextField3");
+        jTextField7.setText("");
 
         jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField8.setText("jTextField4");
+        jTextField8.setText("");
 
         jButton4.setBackground(new java.awt.Color(133, 62, 52));
-        jButton4.setText("jButton2");
+        jButton4.setText("Add Car");
 
         jLabel53.setBackground(new java.awt.Color(133, 62, 52));
         jLabel53.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -843,7 +891,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel53.setText("Car Type");
 
         jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField9.setText("jTextField4");
+        jTextField9.setText("");
 
         jLabel54.setBackground(new java.awt.Color(133, 62, 52));
         jLabel54.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -994,7 +1042,55 @@ public class AddCar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
+// Method to save car details to a flat file
+private void saveCarDetails(String carName, String carYear, String carType, String dailyRate, String vin, String carImage) {
+    File carFile = new File("src\\storage\\cars.csv");
+
+    // Check if the file exists, if not create it
+    if (!carFile.exists()) {
+        try {
+            carFile.createNewFile();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error creating file.");
+        }
+    }
+
+    // Read the last car ID from the file
+    int carId = 1;
+    boolean isFirstLine = true;
+    try (BufferedReader reader = new BufferedReader(new FileReader(carFile))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (isFirstLine) {
+                isFirstLine = false; // Skip the first line
+                continue;
+            }
+            
+            if (line.trim().isEmpty()) {
+                continue; // Skip empty lines
+            }
+            
+            String[] values = line.split(",");
+            if (values.length > 1) {
+                carId = Integer.parseInt(values[1].trim()) + 1;
+                System.out.print("CAR ID: "+ carId);
+
+            }
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error reading file.");
+    }
+    // Append the new car details to the file
+    try (FileWriter writer = new FileWriter(carFile, true)) {
+        // Ensure that the data is appended on a new line
+        // userEmail,carID,carName,carYear,carType,dailyRate,status (booked available),carImageUrl,VIN, carOwnerEmail
+        writer.write("\n"+","+carId + "," + carName + "," + carYear + "," + carType + "," + dailyRate + "," + "available" + "," + carImage + "," + vin + "," + user.getEmail());
+        JOptionPane.showMessageDialog(this, "Car details saved successfully.");
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error saving car details.");
+    }
+}
+
     private void ownerDashboardMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
         new OwnerDashboard(user);
@@ -1037,13 +1133,50 @@ public class AddCar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.showOpenDialog(null);
-        File file = chooser.getSelectedFile();
-        String fileName = file.getAbsolutePath();
-        lblFilePath.setText(fileName);
-    }//GEN-LAST:event_btnAttachActionPerformed
+    JFileChooser chooser = new JFileChooser();
+    chooser.showOpenDialog(null);
+    File file = chooser.getSelectedFile();
+    String fileName = file.getAbsolutePath();
+    lblFilePath.setText(fileName);
 
+    // Get the file name and extension
+    String originalFileName = file.getName();
+    String fileExtension = getFileExtension(originalFileName);
+
+    // Create a new file name
+    String newFileName = UUID.randomUUID().toString() + fileExtension;
+
+    // Upload the file to the directory
+    uploadFile(file, newFileName);
+}
+
+// Method to get the file extension
+private String getFileExtension(String fileName) {
+    int extensionIndex = fileName.lastIndexOf(".");
+    if (extensionIndex > 0) {
+        return fileName.substring(extensionIndex);
+    } else {
+        return "";
+    }
+}
+
+// Method to upload the file to the directory
+private void uploadFile(File file, String newFileName) {
+    try {
+        // Create a new file in the directory
+        File newFile = new File("src\\carImages\\" + newFileName);
+
+        // Copy the file to the new location
+        Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        // Update the file path label with the new file name
+        lblFilePath.setText("src\\carImages\\" + newFileName);
+
+        JOptionPane.showMessageDialog(this, "Image uploaded successfully.");
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error uploading image.");
+    }
+}
     /**
      * @param args the command line arguments
      */
