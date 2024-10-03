@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CustomerDashboard",
+            "request": "launch",
+            "mainClass": "leendauserdashboard.CustomerDashboard",
+            "projectName": "leenda_9270f8b1"
+        },
+        {
+            "type": "java",
+            "name": "Bookings",
+            "request": "launch",
+            "mainClass": "leendauserdashboard.Bookings",
+            "projectName": "leenda_9270f8b1"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
