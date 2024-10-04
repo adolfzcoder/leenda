@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "leenda_c5a1b602"
+        },
+        {
+            "type": "java",
             "name": "ManageFleet",
             "request": "launch",
             "mainClass": "ownermodules.ManageFleet",

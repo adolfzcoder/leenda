@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package adminmodules;
 
 import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenEntering;
 import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenExiting;
-import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenEntering;
-import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenExiting;
-import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.text.SimpleDateFormat;
@@ -102,6 +95,9 @@ public class CarListing extends javax.swing.JFrame {
         lblDashboard.setText("Dashboard");
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDashboardMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseEntered(evt);
             }
@@ -132,6 +128,9 @@ public class CarListing extends javax.swing.JFrame {
         lblUsermanagement.setText("User Management");
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsermanagementMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseEntered(evt);
             }
@@ -473,6 +472,16 @@ public class CarListing extends javax.swing.JFrame {
     private void lblDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseExited
        changeColorOfTheLabelOfTheHeaderWhenExiting(lblDashboard);  // TODO add your handling code here:
     }//GEN-LAST:event_lblDashboardMouseExited
+
+    private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
+        this.dispose();
+        new AdminDashboard(null);
+    }//GEN-LAST:event_lblDashboardMouseClicked
+
+    private void lblUsermanagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseClicked
+        this.dispose();
+        new UserManagementPage(null);
+    }//GEN-LAST:event_lblUsermanagementMouseClicked
 
     /**
      * @param args the command line arguments

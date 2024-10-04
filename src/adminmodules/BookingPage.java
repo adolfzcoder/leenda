@@ -2,13 +2,9 @@ package adminmodules;
 
 import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenEntering;
 import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenExiting;
-import auth.AuthFunctions;
-import auth.LoginPage;
 
 import models.User;
-import storage.StorageFunctions;
 
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -116,6 +112,9 @@ public class BookingPage extends javax.swing.JFrame {
         lblDashboard.setText("Dashboard");
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblDashboardMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseEntered(evt);
             }
@@ -150,6 +149,9 @@ public class BookingPage extends javax.swing.JFrame {
         lblUsermanagement.setText("User Management");
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblUsermanagementMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseEntered(evt);
             }
@@ -157,8 +159,6 @@ public class BookingPage extends javax.swing.JFrame {
                 lblUsermanagementMouseExited(evt);
             }
         });
-
-        
 
         jButton1.setBackground(new java.awt.Color(237, 233, 205));
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -315,11 +315,6 @@ public class BookingPage extends javax.swing.JFrame {
         btnEditBookingInformation.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnEditBookingInformation.setForeground(new java.awt.Color(255, 255, 255));
         btnEditBookingInformation.setText("Edit Booking Information");
-        btnEditBookingInformation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditPersonalInformationOnClick(evt);
-            }
-        });
 
         jComboBox1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rented", "Not Rented", "" }));
@@ -671,6 +666,16 @@ public class BookingPage extends javax.swing.JFrame {
     private void lblDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseEntered
          changeColorOfTheLabelOfTheHeaderWhenEntering(lblDashboard);// TODO add your handling code here:
     }//GEN-LAST:event_lblDashboardMouseEntered
+
+    private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
+        this.dispose();
+        new AdminDashboard(user);
+    }//GEN-LAST:event_lblDashboardMouseClicked
+
+    private void lblUsermanagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseClicked
+        this.dispose();
+        new UserManagementPage(user);
+    }//GEN-LAST:event_lblUsermanagementMouseClicked
 
     /**
      * @param args the command line arguments
