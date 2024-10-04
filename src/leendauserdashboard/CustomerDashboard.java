@@ -637,8 +637,9 @@ public class CustomerDashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                      
 
-    private void BookingMouseClicked(java.awt.event.MouseEvent evt) {                                     
-        // TODO add your handling code here:
+    private void BookingMouseClicked(java.awt.event.MouseEvent evt) {     
+        this.dispose();                                
+        new Bookings(user);
     }                                    
 
     private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {                                         
