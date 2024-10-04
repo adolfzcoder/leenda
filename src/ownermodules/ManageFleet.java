@@ -633,13 +633,90 @@ public class ManageFleet extends javax.swing.JFrame {
             String vin = txtVin.getText().trim();
 
             // Validation checks
-            if (carName.isEmpty() || carType.isEmpty() || carYear.isEmpty() || status.isEmpty() || dailyRate.isEmpty() || vin.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            int filledFields = 0;
+
+            // Read the existing values from the table for the given VIN
+            String existingCarName = "";
+            String existingCarType = "";
+            String existingCarYear = "";
+            String existingStatus = "";
+            String existingDailyRate = "";
+
+            for (int i = 0; i < tblCarListing.getRowCount(); i++) {
+                if (tblCarListing.getValueAt(i, 5).equals(vin)) {
+                    existingCarName = (String) tblCarListing.getValueAt(i, 0);
+                    existingCarType = (String) tblCarListing.getValueAt(i, 2);
+                    existingCarYear = (String) tblCarListing.getValueAt(i, 1);
+                    existingStatus = (String) tblCarListing.getValueAt(i, 4);
+                    existingDailyRate = (String) tblCarListing.getValueAt(i, 3);
+                    break;
+                }
+            }
+
+            // If fields are empty, use existing values
+            if (carName.isEmpty()) carName = existingCarName;
+            if (carType.isEmpty()) carType = existingCarType;
+            if (carYear.isEmpty()) carYear = existingCarYear;
+            if (status.isEmpty()) status = existingStatus;
+            if (dailyRate.isEmpty()) dailyRate = existingDailyRate;
+            if (!carName.isEmpty()) filledFields++;
+            if (!carType.isEmpty()) filledFields++;
+            if (!carYear.isEmpty()) filledFields++;
+            if (!status.isEmpty()) filledFields++;
+            if (!dailyRate.isEmpty()) filledFields++;
+
+            if (filledFields < 2) {
+                JOptionPane.showMessageDialog(this, "Please fill in at least 2 fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (vin.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter the VIN.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (!vin.matches("\\d+")) {
-                JOptionPane.showMessageDialog(this, "VIN should only contain numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            if (!carName.isEmpty() && carName.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Car Name should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!carType.isEmpty() && carType.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Car Type should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!carYear.isEmpty()) {
+                try {
+                    int year = Integer.parseInt(carYear);
+                    if (year < 1886 || year > new Date().getYear() + 1900) { // First car invented in 1886
+                        JOptionPane.showMessageDialog(this, "Please enter a valid Car Year.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Car Year should be a number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (!status.isEmpty() && status.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Status should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!dailyRate.isEmpty()) {
+                try {
+                    double rate = Double.parseDouble(dailyRate);
+                    if (rate < 0) {
+                        JOptionPane.showMessageDialog(this, "Daily Rate should be a positive number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Daily Rate should be a number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (!vin.matches("[A-HJ-NPR-Z0-9]{17}")) {
+                JOptionPane.showMessageDialog(this, "VIN should be 17 characters long and contain only digits and capital letters (excluding I, O, and Q).", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -696,6 +773,25 @@ public class ManageFleet extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Car data updated successfully.", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
                         // Optionally refresh your table or UI here
+                        DefaultTableModel model = (DefaultTableModel) tblCarListing.getModel();
+                        model.setRowCount(0); // Clear existing rows
+
+                        // Re-read the cars.csv file and populate the table
+                        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                            String csvLine;
+                            boolean isFirstRow = true;
+                            while ((csvLine = br.readLine()) != null) {
+                                if (isFirstRow) {
+                                    isFirstRow = false;
+                                    continue; // Skip the first row
+                                }
+                                String[] row = csvLine.split(",");
+                                // Adjust the row data to match the column order
+                                model.addRow(new Object[] {row[2], row[3], row[4], row[5], row[6], row[8], row[9]});
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         // populateTable(tblCarListing, "src/storage/carDetails.csv");
                         txtCarName.setText("");
                         txtCarType.setText("");
