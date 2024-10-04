@@ -1121,7 +1121,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void lblCarListingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarListingMouseClicked
         this.dispose();
-        new CarListing();
+        new CarListing(user);
     }//GEN-LAST:event_lblCarListingMouseClicked
 
     private void lblBookingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingsMouseClicked
