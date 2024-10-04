@@ -290,17 +290,28 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(217, 186, 164));
 
         tblBookingHistory.setBackground(new java.awt.Color(237, 223, 205));
-        tblBookingHistory.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Car Name", "Total Revenue", "Days Rented Out", "Return Date"
+        DefaultTableModel tableModel = (DefaultTableModel) tblBookingHistory.getModel();
+        tableModel.setRowCount(0); // Clear the table model
+        tableModel.addColumn("Car Name");
+        tableModel.addColumn("Total Revenue");
+        tableModel.addColumn("Days Rented Out");
+        tableModel.addColumn("Return Date");
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\bookings.csv"))) {
+            String line;
+            br.readLine(); // Skip the header
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values.length >= 9 && values[8].equals(user.getEmail())) {
+                    tableModel.addRow(new Object[] { values[2], values[6], values[6], values[5] });
+                }
             }
-        ));
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+
+        tblBookingHistory.setModel(tableModel);
+                
         jScrollPane1.setViewportView(tblBookingHistory);
 
         lblBookingHistoryTitle.setBackground(new java.awt.Color(217, 186, 164));

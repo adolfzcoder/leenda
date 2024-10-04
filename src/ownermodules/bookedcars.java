@@ -4,10 +4,14 @@
  */
 package ownermodules;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
 import auth.LoginPage;
 import models.User;
@@ -424,17 +428,26 @@ public class bookedcars extends javax.swing.JFrame {
 
         jTable1.setBackground(new java.awt.Color(217, 186, 164));
         jTable1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Car", "Car Type"
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("Car");
+        tableModel.addColumn("Car Type");
+
+        // Read the CSV file
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\cars.csv"))) {
+            String line;
+            br.readLine(); // Skip the header
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                if (values[6].equals("available") && values[0].equals(user.getEmail())) {
+                    tableModel.addRow(new Object[] { values[1], values[2] });
+                }
             }
-        ));
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+
+        // Set the table model
+        jTable1.setModel(tableModel);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
