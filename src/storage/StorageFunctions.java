@@ -543,7 +543,7 @@ public class StorageFunctions {
             // System.out.println();
             // Assuming the status is at the 8th index (status column)
             String status = bookingDetails[7].trim();
-            String userEmailFromFile = bookingDetails[8];
+            String userEmailFromFile = bookingDetails[0];
 
             if (status.equalsIgnoreCase("booked") && userEmail.equalsIgnoreCase(userEmailFromFile)) {
                 bookingCount++;
@@ -693,7 +693,7 @@ public class StorageFunctions {
             // total price is at the 4th index (totalPrice column)
             // car owner email at the 8th index
             String status = bookingDetails[7].trim();
-            String emailFromFile = bookingDetails[8].trim();
+            String emailFromFile = bookingDetails[0].trim();
             if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(customerEmail)) {
                 int days = Integer.parseInt(bookingDetails[6].trim()); // Parse the string to an integer
                 totalDaysRented += days;

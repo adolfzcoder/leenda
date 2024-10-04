@@ -47,6 +47,9 @@ public class bookedcars extends javax.swing.JFrame {
         
         this.setVisible(true);
 
+        loadBookingData();
+
+
 
         try {
 
@@ -553,7 +556,7 @@ public class bookedcars extends javax.swing.JFrame {
     } 
 
 
-    private void loadBookingData() {
+     private void loadBookingData() {
         String filePath = "src\\storage\\bookings.csv";
         String line;
         String[] row;
