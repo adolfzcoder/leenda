@@ -117,10 +117,14 @@ public class ManageFleet extends javax.swing.JFrame {
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblDashboardMouseEntered(evt);
+                lblDashboardMouseExited(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseExited(evt);
+            }
+            private void lblDashboardMouseExited(MouseEvent evt) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'lblDashboardMouseExited'");
             }
         });
 
@@ -136,13 +140,18 @@ public class ManageFleet extends javax.swing.JFrame {
         lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBooking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBookingMouseClicked(evt);
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBookingMouseEntered(evt);
+                mouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBookingMouseExited(evt);
+                mouseExited(evt);
             }
         });
 
@@ -155,8 +164,16 @@ public class ManageFleet extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseEntered(evt);
             }
+            private void lblUsermanagementMouseEntered(MouseEvent evt) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'lblUsermanagementMouseEntered'");
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseExited(evt);
+            }
+            private void lblUsermanagementMouseExited(MouseEvent evt) {
+                // TODO Auto-generated method stub
+                throw new UnsupportedOperationException("Unimplemented method 'lblUsermanagementMouseExited'");
             }
         });
 
