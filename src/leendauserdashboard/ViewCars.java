@@ -10,11 +10,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 
 import auth.LoginPage;
+import java.util.Date;
 /**
  *
  * @author Jaden
@@ -246,726 +253,7 @@ public class ViewCars extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        carListing.setBackground(new java.awt.Color(217, 186, 164));
-
-        carListing1.setBackground(new java.awt.Color(217, 186, 164));
-        carListing1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        CarImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CarImage.setText("CarImage");
-
-        javax.swing.GroupLayout carImageBoxLayout = new javax.swing.GroupLayout(carImageBox);
-        carImageBox.setLayout(carImageBoxLayout);
-        carImageBoxLayout.setHorizontalGroup(
-            carImageBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-        );
-        carImageBoxLayout.setVerticalGroup(
-            carImageBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        CarModel.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarModel.setForeground(new java.awt.Color(133, 62, 52));
-        CarModel.setText("Car Model");
-
-        CarYear.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarYear.setForeground(new java.awt.Color(133, 62, 52));
-        CarYear.setText("Car Year");
-
-        CarBrand.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarBrand.setForeground(new java.awt.Color(133, 62, 52));
-        CarBrand.setText("Car Brand");
-
-        CarRating.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarRating.setForeground(new java.awt.Color(133, 62, 52));
-        CarRating.setText("0/5");
-
-        CarOwner.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwner.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwner.setText("Car Owner");
-
-        TextCarBooked.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarBooked.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarBooked.setText("Booked:");
-
-        NumberOfBookings.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfBookings.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfBookings.setText("0");
-
-        TextCarRatings.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarRatings.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarRatings.setText("Ratings:");
-
-        TextCarDateListed.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarDateListed.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarDateListed.setText("Date Listed:");
-
-        DateCarListed.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        DateCarListed.setForeground(new java.awt.Color(133, 62, 52));
-        DateCarListed.setText("DD-MM-YYYY");
-
-        javax.swing.GroupLayout carListing1Layout = new javax.swing.GroupLayout(carListing1);
-        carListing1.setLayout(carListing1Layout);
-        carListing1Layout.setHorizontalGroup(
-            carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing1Layout.createSequentialGroup()
-                .addComponent(carImageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing1Layout.createSequentialGroup()
-                        .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CarOwner, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing1Layout.createSequentialGroup()
-                                .addComponent(CarBrand)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarModel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarYear)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 659, Short.MAX_VALUE)
-                        .addComponent(TextCarRatings)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CarRating)
-                        .addGap(8, 8, 8))
-                    .addGroup(carListing1Layout.createSequentialGroup()
-                        .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(carListing1Layout.createSequentialGroup()
-                                .addComponent(TextCarBooked)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumberOfBookings))
-                            .addGroup(carListing1Layout.createSequentialGroup()
-                                .addComponent(TextCarDateListed)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateCarListed)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        carListing1Layout.setVerticalGroup(
-            carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarModel)
-                    .addComponent(CarYear)
-                    .addComponent(CarBrand)
-                    .addComponent(CarRating)
-                    .addComponent(TextCarRatings))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CarOwner)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarBooked)
-                    .addComponent(NumberOfBookings))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarDateListed)
-                    .addComponent(DateCarListed))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(carImageBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        carListing2.setBackground(new java.awt.Color(217, 186, 164));
-        carListing2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        CarImage1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CarImage1.setText("CarImage");
-
-        javax.swing.GroupLayout carImageBox1Layout = new javax.swing.GroupLayout(carImageBox1);
-        carImageBox1.setLayout(carImageBox1Layout);
-        carImageBox1Layout.setHorizontalGroup(
-            carImageBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-        );
-        carImageBox1Layout.setVerticalGroup(
-            carImageBox1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        CarModel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarModel1.setForeground(new java.awt.Color(133, 62, 52));
-        CarModel1.setText("Car Model");
-
-        CarYear1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarYear1.setForeground(new java.awt.Color(133, 62, 52));
-        CarYear1.setText("Car Year");
-
-        CarBrand1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarBrand1.setForeground(new java.awt.Color(133, 62, 52));
-        CarBrand1.setText("Car Brand");
-
-        CarRating1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarRating1.setForeground(new java.awt.Color(133, 62, 52));
-        CarRating1.setText("0/5");
-
-        CarOwner1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwner1.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwner1.setText("Car Owner");
-
-        CarOwnerRating1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwnerRating1.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwnerRating1.setText("Owner Rating");
-
-        TextCarBooked1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarBooked1.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarBooked1.setText("Booked:");
-
-        NumberOfBookings1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfBookings1.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfBookings1.setText("0");
-
-        TextCarRatings1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarRatings1.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarRatings1.setText("Ratings:");
-
-        TextCarComments1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarComments1.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarComments1.setText("Comments:");
-
-        NumberOfComments1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfComments1.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfComments1.setText("000");
-
-        TextCarDateListed1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarDateListed1.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarDateListed1.setText("Date Listed:");
-
-        DateCarListed1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        DateCarListed1.setForeground(new java.awt.Color(133, 62, 52));
-        DateCarListed1.setText("DD-MM-YYYY");
-
-        TextOwnerRating1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextOwnerRating1.setForeground(new java.awt.Color(133, 62, 52));
-        TextOwnerRating1.setText("Rating:");
-
-        javax.swing.GroupLayout carListing2Layout = new javax.swing.GroupLayout(carListing2);
-        carListing2.setLayout(carListing2Layout);
-        carListing2Layout.setHorizontalGroup(
-            carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing2Layout.createSequentialGroup()
-                .addComponent(carImageBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing2Layout.createSequentialGroup()
-                        .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing2Layout.createSequentialGroup()
-                                .addComponent(CarOwner1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextOwnerRating1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarOwnerRating1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing2Layout.createSequentialGroup()
-                                .addComponent(CarBrand1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarModel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarYear1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextCarComments1)
-                            .addComponent(TextCarRatings1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CarRating1)
-                            .addComponent(NumberOfComments1)))
-                    .addGroup(carListing2Layout.createSequentialGroup()
-                        .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(carListing2Layout.createSequentialGroup()
-                                .addComponent(TextCarBooked1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumberOfBookings1))
-                            .addGroup(carListing2Layout.createSequentialGroup()
-                                .addComponent(TextCarDateListed1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateCarListed1)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        carListing2Layout.setVerticalGroup(
-            carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarModel1)
-                    .addComponent(CarYear1)
-                    .addComponent(CarBrand1)
-                    .addComponent(CarRating1)
-                    .addComponent(TextCarRatings1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarOwner1)
-                    .addComponent(CarOwnerRating1)
-                    .addComponent(TextCarComments1)
-                    .addComponent(NumberOfComments1)
-                    .addComponent(TextOwnerRating1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarBooked1)
-                    .addComponent(NumberOfBookings1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarDateListed1)
-                    .addComponent(DateCarListed1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(carImageBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        carListing3.setBackground(new java.awt.Color(217, 186, 164));
-        carListing3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        CarImage2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CarImage2.setText("CarImage");
-
-        javax.swing.GroupLayout carImageBox2Layout = new javax.swing.GroupLayout(carImageBox2);
-        carImageBox2.setLayout(carImageBox2Layout);
-        carImageBox2Layout.setHorizontalGroup(
-            carImageBox2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-        );
-        carImageBox2Layout.setVerticalGroup(
-            carImageBox2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        CarModel2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarModel2.setForeground(new java.awt.Color(133, 62, 52));
-        CarModel2.setText("Car Model");
-
-        CarYear2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarYear2.setForeground(new java.awt.Color(133, 62, 52));
-        CarYear2.setText("Car Year");
-
-        CarBrand2.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarBrand2.setForeground(new java.awt.Color(133, 62, 52));
-        CarBrand2.setText("Car Brand");
-
-        CarRating2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarRating2.setForeground(new java.awt.Color(133, 62, 52));
-        CarRating2.setText("0/5");
-
-        CarOwner2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwner2.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwner2.setText("Car Owner");
-
-        CarOwnerRating2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwnerRating2.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwnerRating2.setText("Owner Rating");
-
-        TextCarBooked2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarBooked2.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarBooked2.setText("Booked:");
-
-        NumberOfBookings2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfBookings2.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfBookings2.setText("0");
-
-        TextCarRatings2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarRatings2.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarRatings2.setText("Ratings:");
-
-        TextCarComments2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarComments2.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarComments2.setText("Comments:");
-
-        NumberOfComments2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfComments2.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfComments2.setText("000");
-
-        TextCarDateListed2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarDateListed2.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarDateListed2.setText("Date Listed:");
-
-        DateCarListed2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        DateCarListed2.setForeground(new java.awt.Color(133, 62, 52));
-        DateCarListed2.setText("DD-MM-YYYY");
-
-        TextOwnerRating2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextOwnerRating2.setForeground(new java.awt.Color(133, 62, 52));
-        TextOwnerRating2.setText("Rating:");
-
-        javax.swing.GroupLayout carListing3Layout = new javax.swing.GroupLayout(carListing3);
-        carListing3.setLayout(carListing3Layout);
-        carListing3Layout.setHorizontalGroup(
-            carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing3Layout.createSequentialGroup()
-                .addComponent(carImageBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing3Layout.createSequentialGroup()
-                        .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing3Layout.createSequentialGroup()
-                                .addComponent(CarOwner2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextOwnerRating2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarOwnerRating2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing3Layout.createSequentialGroup()
-                                .addComponent(CarBrand2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarModel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarYear2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextCarComments2)
-                            .addComponent(TextCarRatings2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CarRating2)
-                            .addComponent(NumberOfComments2)))
-                    .addGroup(carListing3Layout.createSequentialGroup()
-                        .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(carListing3Layout.createSequentialGroup()
-                                .addComponent(TextCarBooked2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumberOfBookings2))
-                            .addGroup(carListing3Layout.createSequentialGroup()
-                                .addComponent(TextCarDateListed2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateCarListed2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        carListing3Layout.setVerticalGroup(
-            carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarModel2)
-                    .addComponent(CarYear2)
-                    .addComponent(CarBrand2)
-                    .addComponent(CarRating2)
-                    .addComponent(TextCarRatings2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarOwner2)
-                    .addComponent(CarOwnerRating2)
-                    .addComponent(TextCarComments2)
-                    .addComponent(NumberOfComments2)
-                    .addComponent(TextOwnerRating2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarBooked2)
-                    .addComponent(NumberOfBookings2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarDateListed2)
-                    .addComponent(DateCarListed2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(carImageBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        carListing4.setBackground(new java.awt.Color(217, 186, 164));
-        carListing4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        CarImage3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CarImage3.setText("CarImage");
-
-        javax.swing.GroupLayout carImageBox3Layout = new javax.swing.GroupLayout(carImageBox3);
-        carImageBox3.setLayout(carImageBox3Layout);
-        carImageBox3Layout.setHorizontalGroup(
-            carImageBox3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage3, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-        );
-        carImageBox3Layout.setVerticalGroup(
-            carImageBox3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        CarModel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarModel3.setForeground(new java.awt.Color(133, 62, 52));
-        CarModel3.setText("Car Model");
-
-        CarYear3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarYear3.setForeground(new java.awt.Color(133, 62, 52));
-        CarYear3.setText("Car Year");
-
-        CarBrand3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarBrand3.setForeground(new java.awt.Color(133, 62, 52));
-        CarBrand3.setText("Car Brand");
-
-        CarRating3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarRating3.setForeground(new java.awt.Color(133, 62, 52));
-        CarRating3.setText("0/5");
-
-        CarOwner3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwner3.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwner3.setText("Car Owner");
-
-        CarOwnerRating3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwnerRating3.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwnerRating3.setText("Owner Rating");
-
-        TextCarBooked3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarBooked3.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarBooked3.setText("Booked:");
-
-        NumberOfBookings3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfBookings3.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfBookings3.setText("0");
-
-        TextCarRatings3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarRatings3.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarRatings3.setText("Ratings:");
-
-        TextCarComments3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarComments3.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarComments3.setText("Comments:");
-
-        NumberOfComments3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfComments3.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfComments3.setText("000");
-
-        TextCarDateListed3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarDateListed3.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarDateListed3.setText("Date Listed:");
-
-        DateCarListed3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        DateCarListed3.setForeground(new java.awt.Color(133, 62, 52));
-        DateCarListed3.setText("DD-MM-YYYY");
-
-        TextOwnerRating3.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextOwnerRating3.setForeground(new java.awt.Color(133, 62, 52));
-        TextOwnerRating3.setText("Rating:");
-
-        javax.swing.GroupLayout carListing4Layout = new javax.swing.GroupLayout(carListing4);
-        carListing4.setLayout(carListing4Layout);
-        carListing4Layout.setHorizontalGroup(
-            carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing4Layout.createSequentialGroup()
-                .addComponent(carImageBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing4Layout.createSequentialGroup()
-                        .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing4Layout.createSequentialGroup()
-                                .addComponent(CarOwner3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextOwnerRating3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarOwnerRating3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing4Layout.createSequentialGroup()
-                                .addComponent(CarBrand3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarModel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarYear3)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextCarComments3)
-                            .addComponent(TextCarRatings3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CarRating3)
-                            .addComponent(NumberOfComments3)))
-                    .addGroup(carListing4Layout.createSequentialGroup()
-                        .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(carListing4Layout.createSequentialGroup()
-                                .addComponent(TextCarBooked3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumberOfBookings3))
-                            .addGroup(carListing4Layout.createSequentialGroup()
-                                .addComponent(TextCarDateListed3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateCarListed3)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        carListing4Layout.setVerticalGroup(
-            carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarModel3)
-                    .addComponent(CarYear3)
-                    .addComponent(CarBrand3)
-                    .addComponent(CarRating3)
-                    .addComponent(TextCarRatings3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarOwner3)
-                    .addComponent(CarOwnerRating3)
-                    .addComponent(TextCarComments3)
-                    .addComponent(NumberOfComments3)
-                    .addComponent(TextOwnerRating3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarBooked3)
-                    .addComponent(NumberOfBookings3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarDateListed3)
-                    .addComponent(DateCarListed3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(carImageBox3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        carListing5.setBackground(new java.awt.Color(217, 186, 164));
-        carListing5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        CarImage4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CarImage4.setText("CarImage");
-
-        javax.swing.GroupLayout carImageBox4Layout = new javax.swing.GroupLayout(carImageBox4);
-        carImageBox4.setLayout(carImageBox4Layout);
-        carImageBox4Layout.setHorizontalGroup(
-            carImageBox4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage4, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-        );
-        carImageBox4Layout.setVerticalGroup(
-            carImageBox4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CarImage4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        CarModel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarModel4.setForeground(new java.awt.Color(133, 62, 52));
-        CarModel4.setText("Car Model");
-
-        CarYear4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarYear4.setForeground(new java.awt.Color(133, 62, 52));
-        CarYear4.setText("Car Year");
-
-        CarBrand4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        CarBrand4.setForeground(new java.awt.Color(133, 62, 52));
-        CarBrand4.setText("Car Brand");
-
-        CarRating4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarRating4.setForeground(new java.awt.Color(133, 62, 52));
-        CarRating4.setText("0/5");
-
-        CarOwner4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwner4.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwner4.setText("Car Owner");
-
-        CarOwnerRating4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwnerRating4.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwnerRating4.setText("Owner Rating");
-
-        TextCarBooked4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarBooked4.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarBooked4.setText("Booked:");
-
-        NumberOfBookings4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfBookings4.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfBookings4.setText("0");
-
-        TextCarRatings4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarRatings4.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarRatings4.setText("Ratings:");
-
-        TextCarComments4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarComments4.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarComments4.setText("Comments:");
-
-        NumberOfComments4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfComments4.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfComments4.setText("000");
-
-        TextCarDateListed4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarDateListed4.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarDateListed4.setText("Date Listed:");
-
-        DateCarListed4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        DateCarListed4.setForeground(new java.awt.Color(133, 62, 52));
-        DateCarListed4.setText("DD-MM-YYYY");
-
-        TextOwnerRating4.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextOwnerRating4.setForeground(new java.awt.Color(133, 62, 52));
-        TextOwnerRating4.setText("Rating:");
-
-        javax.swing.GroupLayout carListing5Layout = new javax.swing.GroupLayout(carListing5);
-        carListing5.setLayout(carListing5Layout);
-        carListing5Layout.setHorizontalGroup(
-            carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing5Layout.createSequentialGroup()
-                .addComponent(carImageBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing5Layout.createSequentialGroup()
-                        .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing5Layout.createSequentialGroup()
-                                .addComponent(CarOwner4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextOwnerRating4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarOwnerRating4))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing5Layout.createSequentialGroup()
-                                .addComponent(CarBrand4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarModel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarYear4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 612, Short.MAX_VALUE)
-                        .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextCarComments4)
-                            .addComponent(TextCarRatings4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CarRating4)
-                            .addComponent(NumberOfComments4)))
-                    .addGroup(carListing5Layout.createSequentialGroup()
-                        .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(carListing5Layout.createSequentialGroup()
-                                .addComponent(TextCarBooked4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(NumberOfBookings4))
-                            .addGroup(carListing5Layout.createSequentialGroup()
-                                .addComponent(TextCarDateListed4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DateCarListed4)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        carListing5Layout.setVerticalGroup(
-            carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListing5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarModel4)
-                    .addComponent(CarYear4)
-                    .addComponent(CarBrand4)
-                    .addComponent(CarRating4)
-                    .addComponent(TextCarRatings4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarOwner4)
-                    .addComponent(CarOwnerRating4)
-                    .addComponent(TextCarComments4)
-                    .addComponent(NumberOfComments4)
-                    .addComponent(TextOwnerRating4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarBooked4)
-                    .addComponent(NumberOfBookings4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TextCarDateListed4)
-                    .addComponent(DateCarListed4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(carImageBox4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout carListingLayout = new javax.swing.GroupLayout(carListing);
-        carListing.setLayout(carListingLayout);
-        carListingLayout.setHorizontalGroup(
-            carListingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(carListing5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(carListing4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(carListing3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(carListing2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(carListing1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        carListingLayout.setVerticalGroup(
-            carListingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(carListingLayout.createSequentialGroup()
-                .addComponent(carListing1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(carListing2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(carListing3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(carListing4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(carListing5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+       
 
         ListingScollingPanel.setViewportView(carListing);
 
@@ -1070,38 +358,138 @@ public class ViewCars extends javax.swing.JFrame {
         carPanel.setLayout(new FlowLayout());
         carPanel.setBorder(BorderFactory.createEtchedBorder());
 
-        JLabel carModel = new JLabel("Car Model: " + carDetails[0]);
-        JLabel carYear = new JLabel("Car Year: " + carDetails[1]);
-        JLabel carBrand = new JLabel("Car Brand: " + carDetails[2]);
-        JLabel carRating = new JLabel("Car Rating: " + carDetails[3]);
-        JLabel carOwner = new JLabel("Car Owner: " + carDetails[4]);
-        JLabel carOwnerRating = new JLabel("Car Owner Rating: " + carDetails[5]);
-        JLabel booked = new JLabel("Booked: " + carDetails[6]);
-        JLabel comments = new JLabel("Comments: " + carDetails[7]);
-        JLabel dateListed = new JLabel("Date Listed: " + carDetails[8]);
+        JLabel carModel = new JLabel("Car Name: " + carDetails[2]);
+        JLabel carYear = new JLabel("Car Year: " + carDetails[3]);
+        JLabel carBrand = new JLabel("Car Type: " + carDetails[4]);
+        JLabel carRating = new JLabel("Daily Rate: " + carDetails[5]);
+        JLabel carOwner = new JLabel("Status: " + carDetails[6]);
+        // JLabel carOwnerRating = new JLabel("VIN: " + carDetails[8]);
+        // JLabel booked = new JLabel("Booked: " + carDetails[6]);
+        // JLabel comments = new JLabel("Comments: " + carDetails[7]);
+        // JLabel dateListed = new JLabel("Date Listed: " + carDetails[8]);
 
         JButton bookButton = new JButton("Book");
         bookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add booking logic here
-                System.out.println("Book button clicked for car: " + carDetails[0]);
+                // Open a popup with fields for Start Date and End Date
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Book Car");
+                dialog.setModal(true);
+    
+                JPanel panel = new JPanel();
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    
+                JLabel startDateLabel = new JLabel("Start Date:");
+                JTextField startDateField = new JTextField(10);
+                panel.add(startDateLabel);
+                panel.add(startDateField);
+    
+                JLabel endDateLabel = new JLabel("End Date:");
+                JTextField endDateField = new JTextField(10);
+                panel.add(endDateLabel);
+                panel.add(endDateField);
+    
+                JButton bookNowButton = new JButton("Book Now");
+                bookNowButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Get the values from the fields
+                        String startDate = startDateField.getText();
+                        String endDate = endDateField.getText();
+    
+                        // Calculate the total price
+                        int daysRenting = calculateDaysRenting(startDate, endDate);
+                        double totalPrice = daysRenting * Double.parseDouble(carDetails[5]);
+    
+                        // Get the next booking ID
+                        int nextBookingId = getNextBookingId();
+    
+                        // Write the booking details to the bookings.csv file
+                        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\bookings.csv", true))) {
+                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[1] + "," + daysRenting + "," + "Booked" + "," + carDetails[9] + "," + carDetails[0]);
+                            bw.newLine();
+                        } catch (IOException ex) {
+                            System.err.println("Error writing to bookings.csv: " + ex.getMessage());
+                        }
+    
+                        // Close the dialog
+                        dialog.dispose();
+                    }
+                });
+                panel.add(bookNowButton);
+    
+                dialog.add(panel);
+                dialog.pack();
+                dialog.setVisible(true);
             }
         });
-
+    
         carPanel.add(carModel);
         carPanel.add(carYear);
         carPanel.add(carBrand);
         carPanel.add(carRating);
         carPanel.add(carOwner);
-        carPanel.add(carOwnerRating);
-        carPanel.add(booked);
-        carPanel.add(comments);
-        carPanel.add(dateListed);
+    
         carPanel.add(bookButton);
-
+    
         return carPanel;
     }
+
+
+
+    
+    private int calculateDaysRenting(String startDate, String endDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(false); // This will throw an exception if the date is not in the correct format
+    
+        try {
+            Date start = sdf.parse(startDate);
+            Date end = sdf.parse(endDate);
+    
+            if (end.before(start)) {
+                System.err.println("Error: end date is before start date.");
+                return 0;
+            }
+    
+            long diff = end.getTime() - start.getTime();
+            return (int) (diff / (1000 * 60 * 60 * 24)) + 1; // Add 1 to include the end date
+        } catch (ParseException e) {
+            System.err.println("Error: date is not in the correct format.");
+            return 0;
+        }
+    }
+
+    private int getNextBookingId() {
+        int nextBookingId = 1;
+        File file = new File("src\\storage\\bookings.csv");
+
+        if (file.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] bookingDetails = line.split(",");
+                    if (bookingDetails.length > 0) {
+                        try {
+                            nextBookingId = Integer.parseInt(bookingDetails[1]) + 1;
+                        } catch (NumberFormatException e) {
+                            // Ignore invalid booking IDs
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading bookings.csv: " + e.getMessage());
+            }
+        } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.err.println("Error creating bookings.csv: " + e.getMessage());
+            }
+        }
+
+        return nextBookingId;
+    }   
     private void EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProfileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditProfileActionPerformed
