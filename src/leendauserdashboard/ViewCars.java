@@ -337,17 +337,28 @@ public class ViewCars extends javax.swing.JFrame {
     private void displayCars() {
         carListing = new JPanel();
         carListing.setLayout(new BoxLayout(carListing, BoxLayout.Y_AXIS));
+        boolean carsFound = false;
 
         try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\cars.csv"))) {
             String line;
             br.readLine(); // skip the header
             while ((line = br.readLine()) != null) {
                 String[] carDetails = line.split(",");
-                JPanel carPanel = createCarPanel(carDetails);
-                carListing.add(carPanel);
+                if (carDetails[6].equals("completed")) {
+                    carsFound = true;
+                    JPanel carPanel = createCarPanel(carDetails);
+                    carListing.add(carPanel);
+                }
+                
             }
         } catch (IOException e) {
             System.err.println("Error reading cars.csv: " + e.getMessage());
+        }
+        if (!carsFound) {
+            JLabel noCarsLabel = new JLabel("No cars available.");
+            noCarsLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+            noCarsLabel.setHorizontalAlignment(JLabel.CENTER);
+            carListing.add(noCarsLabel);
         }
 
         ListingScollingPanel.setViewportView(carListing);
@@ -407,7 +418,7 @@ public class ViewCars extends javax.swing.JFrame {
     
                         // Write the booking details to the bookings.csv file
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\bookings.csv", true))) {
-                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[1] + "," + daysRenting + "," + "Booked" + "," + carDetails[9] + "," + carDetails[0]);
+                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[2] + "," + daysRenting + "," + "pending" + "," + carDetails[9] + "," + carDetails[1]);
                             bw.newLine();
                         } catch (IOException ex) {
                             System.err.println("Error writing to bookings.csv: " + ex.getMessage());
