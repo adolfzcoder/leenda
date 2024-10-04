@@ -1,3 +1,3 @@
 userEmail,carID,carName,carYear,carType,dailyRate,status (booked available),carImageUrl,VIN, carOwnerEmail
-,2,AMG GT3 RS,2023,Sedan,5400,available,src\carImages\4e8529a8-4a63-414c-9bda-02090049c41d.jpeg,213435445,carowner@leenda.com
+,2,AMG GT3 RS,2024,Coupe,6000,Available,src\carImages\4e8529a8-4a63-414c-9bda-02090049c41d.jpeg,213435445,carowner@leenda.com
 ,3,Range Rover Sport,2018,SUV,3400,available,src\carImages\d0599089-90f0-4962-94fd-fd5a2f8098c0.jpeg,2345346732,carowner@leenda.com

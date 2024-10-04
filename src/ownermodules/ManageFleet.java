@@ -8,8 +8,13 @@ import auth.LoginPage;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -75,22 +80,22 @@ public class ManageFleet extends javax.swing.JFrame {
         tblCarListing = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         lblRenterID = new javax.swing.JLabel();
-        txtRenterID = new javax.swing.JTextField();
+        txtCarName = new javax.swing.JTextField();
         lblCarID = new javax.swing.JLabel();
-        txtCarID = new javax.swing.JTextField();
+        txtCarType = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtCarmodel = new javax.swing.JTextField();
+        txtCarYear = new javax.swing.JTextField();
         lblCarmake = new javax.swing.JLabel();
-        txtCarmake = new javax.swing.JTextField();
+        txtStatus = new javax.swing.JTextField();
         lblDailyrate = new javax.swing.JLabel();
-        txtDailyrate = new javax.swing.JTextField();
+        txtDailyRate = new javax.swing.JTextField();
         btnEditCarListing = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtVin = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtrenterID = new javax.swing.JTextField();
+        txtVinDel = new javax.swing.JTextField();
         btnDeleteCarListing = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,13 +113,12 @@ public class ManageFleet extends javax.swing.JFrame {
         lblDashboard.setForeground(new java.awt.Color(133, 62, 52));
         lblDashboard.setText("Dashboard");
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    ownerDashboardMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblDashboardMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblDashboardMouseExited(evt);
             }
         });
 
@@ -123,61 +127,40 @@ public class ManageFleet extends javax.swing.JFrame {
         lblCarlisting.setForeground(new java.awt.Color(133, 62, 52));
         lblCarlisting.setText("Manage Fleet");
 
-        lblCarlisting.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    manageFleetMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
-            }
-        });
-
         lblBooking.setBackground(new java.awt.Color(133, 62, 52));
         lblBooking.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblBooking.setForeground(new java.awt.Color(133, 62, 52));
-        lblBooking.setText("Booked Cars");
+        lblBooking.setText("Booking");
         lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         lblBooking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    bookedCarsMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
+                lblBookingMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBookingMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBookingMouseExited(evt);
             }
         });
-        
 
         lblUsermanagement.setBackground(new java.awt.Color(133, 62, 52));
         lblUsermanagement.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblUsermanagement.setForeground(new java.awt.Color(133, 62, 52));
-        lblUsermanagement.setText("Add Car");
+        lblUsermanagement.setText("User Management");
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    addCarMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblUsermanagementMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblUsermanagementMouseExited(evt);
             }
         });
-        
-       
 
         btnLogout.setBackground(new java.awt.Color(237, 233, 205));
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
-
-        
-        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    logOutMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -250,30 +233,27 @@ public class ManageFleet extends javax.swing.JFrame {
         );
 
         tblCarListing.setBackground(new java.awt.Color(217, 186, 164));
+        tblCarListing.setBackground(new java.awt.Color(217, 186, 164));
         // Create a new DefaultTableModel with the column names
-        DefaultTableModel model = new DefaultTableModel(new Object[] {"Car ID", "Car Name", "Car Year", "Car Type", 
-            "Daily Rate", "Status", "Car Image URL", "VIN"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new Object[] {"Car Name", "Car Year", "Car Type", "Daily Rate", "Status", "VIN", "Car Owner Email"}, 0);
+        tblCarListing.setModel(model);
         // Read the cars.csv file
         String filePath = "src\\storage\\cars.csv";
-        String line;
-        String[] row;
-
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            // Skip the header line
-            br.readLine();
-
+            String line;
+            boolean isFirstRow = true;
             while ((line = br.readLine()) != null) {
-                row = line.split(",");
-
-                // Check if the car owner's email matches the user's email
-                if (1==1) {
-                    model.addRow(new Object[] {row[1], row[2], row[3], row[4], row[5], row[6], row[8]});
-                }
+            if (isFirstRow) {
+                isFirstRow = false;
+                continue; // Skip the first row
+            }
+            String[] row = line.split(",");
+            // Adjust the row data to match the column order
+            model.addRow(new Object[] {row[2], row[3], row[4], row[5], row[6], row[8], row[9]});
             }
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            e.printStackTrace();
         }
-        tblCarListing.setModel(model);
         jScrollPane1.setViewportView(tblCarListing);
 
         jPanel4.setBackground(new java.awt.Color(217, 186, 164));
@@ -284,47 +264,57 @@ public class ManageFleet extends javax.swing.JFrame {
         lblRenterID.setForeground(new java.awt.Color(133, 62, 52));
         lblRenterID.setText("Car Name");
 
-        txtRenterID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCarName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCarName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCarNameActionPerformed(evt);
+            }
+        });
 
         lblCarID.setBackground(new java.awt.Color(133, 62, 52));
         lblCarID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarID.setForeground(new java.awt.Color(133, 62, 52));
         lblCarID.setText("Car Type");
 
-        txtCarID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCarType.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         jLabel9.setBackground(new java.awt.Color(133, 62, 52));
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(133, 62, 52));
         jLabel9.setText("Car Year");
 
-        txtCarmodel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtCarYear.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         lblCarmake.setBackground(new java.awt.Color(133, 62, 52));
         lblCarmake.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarmake.setForeground(new java.awt.Color(133, 62, 52));
         lblCarmake.setText("Status");
 
-        txtCarmake.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         lblDailyrate.setBackground(new java.awt.Color(133, 62, 52));
         lblDailyrate.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDailyrate.setForeground(new java.awt.Color(133, 62, 52));
         lblDailyrate.setText("Daily Rate");
 
-        txtDailyrate.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtDailyRate.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnEditCarListing.setBackground(new java.awt.Color(133, 62, 52));
         btnEditCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnEditCarListing.setForeground(new java.awt.Color(204, 204, 255));
         btnEditCarListing.setText("Edit Car Listing Information");
+        btnEditCarListing.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditCarListingMouseClicked(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(133, 62, 52));
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel2.setText("Status");
+        jLabel2.setText("Vin");
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtVin.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -333,14 +323,14 @@ public class ManageFleet extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtVin, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtRenterID)
+                                .addComponent(txtCarName)
                                 .addComponent(lblRenterID)
                                 .addComponent(lblCarID)
-                                .addComponent(txtCarID, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                                .addComponent(txtCarType, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel4Layout.createSequentialGroup()
@@ -351,11 +341,11 @@ public class ManageFleet extends javax.swing.JFrame {
                                     .addGap(6, 6, 6)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(lblCarmake)
-                                        .addComponent(txtCarmodel)
-                                        .addComponent(txtCarmake, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                                        .addComponent(txtCarYear)
+                                        .addComponent(txtStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtDailyrate, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDailyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel2)))))
                         .addComponent(btnEditCarListing, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -370,9 +360,9 @@ public class ManageFleet extends javax.swing.JFrame {
                     .addComponent(lblDailyrate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRenterID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCarmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDailyrate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCarName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCarYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDailyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCarID)
@@ -381,9 +371,9 @@ public class ManageFleet extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCarmake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCarType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtVin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnEditCarListing)
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -401,7 +391,7 @@ public class ManageFleet extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(133, 62, 52));
         jLabel13.setText("VIN");
 
-        txtrenterID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtVinDel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnDeleteCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnDeleteCarListing.setText("Delete Car Listing Information");
@@ -423,7 +413,7 @@ public class ManageFleet extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtrenterID)
+                            .addComponent(txtVinDel)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
@@ -439,7 +429,7 @@ public class ManageFleet extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtrenterID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtVinDel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeleteCarListing)
                 .addGap(30, 30, 30))
@@ -494,7 +484,102 @@ public class ManageFleet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDeleteCarListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCarListingActionPerformed
-        // TODO add your handling code here:
+        String vin = txtVinDel.getText().trim(); // Get and trim the VIN input
+
+        // Check if the VIN is empty
+        if (vin.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter a VIN.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if VIN is empty
+        }
+
+        String filePath = "src/storage/cars.csv"; // Path to the CSV file
+        File inputFile = new File(filePath);
+        File tempFile = new File(inputFile.getAbsolutePath() + ".tmp"); // Temporary file
+
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+
+        try {
+            reader = new BufferedReader(new FileReader(inputFile));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+            String line;
+            boolean carFound = false; // Flag to check if car is found
+
+            // Read each line from the original file
+            while ((line = reader.readLine()) != null) {
+            String[] cars = line.split(",");
+            String existingVin = cars[8]; // Adjust index based on your CSV structure
+
+            // Check if the current line's VIN matches the one to delete and belongs to the logged-in user
+            if (existingVin.equals(vin) && cars[9].equals(user.getEmail())) { // Assuming the first column is the user email
+                if (existingVin.equals(vin)) {
+                    carFound = true; // Car found
+    
+                    // Ask for confirmation to delete
+                    int confirmation = JOptionPane.showConfirmDialog(this,
+                        "Are you sure you want to delete the car with VIN: " + vin + "?",
+                        "Confirm Deletion",
+                        JOptionPane.YES_NO_OPTION);
+    
+                    if (confirmation == JOptionPane.YES_OPTION) {
+                    // If confirmed, skip writing this line to temp file (i.e., delete)
+                    continue; // Skip writing this line
+                    } else {
+                    // If not confirmed, write the line back to the temporary file and exit
+                    writer.write(line);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    return; // Exit the method
+                    }
+                }
+    
+                // Write the line to the temp file if VIN does not match
+                writer.write(line);
+                writer.newLine();
+                }
+            }
+
+            // Make sure to flush and close the writer before replacing files
+            writer.flush();
+            writer.close(); // Close the writer first
+            reader.close(); // Then close the reader
+
+            // Check if car was found and deleted
+            if (carFound) {
+            // Replace the original file with the updated file
+            if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
+                JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error",
+                    JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Car data deleted successfully.", "Deletion Successful",
+                    JOptionPane.INFORMATION_MESSAGE);
+                // Optionally refresh your table or UI here
+                // populateTable(tblCarListing, "src/storage/carDetails.csv");
+                txtVinDel.setText("");
+            }
+            } else {
+            JOptionPane.showMessageDialog(this, "VIN not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading/writing to file: " + e.getMessage(), "File Error",
+                JOptionPane.ERROR_MESSAGE);
+        } finally {
+            // Ensure resources are closed in case of an exception
+            try {
+            if (reader != null) {
+                reader.close();
+            }
+            if (writer != null) {
+                writer.close();
+            }
+            } catch (IOException e) {
+            // Handle exception during resource closing
+            e.printStackTrace();
+            }
+        }
     }//GEN-LAST:event_btnDeleteCarListingActionPerformed
 
     private void btnPrintCarListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintCarListingActionPerformed
@@ -518,6 +603,115 @@ public class ManageFleet extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error printing table: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 }
     }//GEN-LAST:event_btnPrintCarListingActionPerformed
+
+    
+
+    private void txtCarNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCarNameActionPerformed
+        private void btnEditCarListingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditCarListingMouseClicked
+            // No need to get carOwnerEmail as it is the same as the logged-in user
+            String carName = txtCarName.getText().trim();
+            String carType = txtCarType.getText().trim();
+            String carYear = txtCarYear.getText().trim();
+            String status = txtStatus.getText().trim();
+            String dailyRate = txtDailyRate.getText().trim();
+            String vin = txtVin.getText().trim();
+
+            // Validation checks
+            if (carName.isEmpty() || carType.isEmpty() || carYear.isEmpty() || status.isEmpty() || dailyRate.isEmpty() || vin.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!vin.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "VIN should only contain numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String filePath = "src/storage/cars.csv"; // Path to the CSV file
+            File inputFile = new File(filePath);
+            File tempFile = new File(inputFile.getAbsolutePath() + ".tmp"); // Temporary file
+
+            BufferedReader reader = null;
+            BufferedWriter writer = null;
+
+            try {
+                reader = new BufferedReader(new FileReader(inputFile));
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+
+                String line;
+                boolean carFound = false; // Flag to check if car is found
+
+                // Read each line from the original file
+                while ((line = reader.readLine()) != null) {
+                    String[] cars = line.split(",");
+                    String existingVin = cars[8]; // Adjust index based on your CSV structure
+
+                    // Check if the current line's VIN matches the one to edit and belongs to the logged-in user
+                    if (existingVin.equals(vin) && cars[9].equals(user.getEmail())) { // Assuming the first column is the carOwner Email
+                        carFound = true; // Car found
+
+                        // Update the car details
+                        cars[2] = carName;
+                        cars[3] = carYear;
+                        cars[4] = carType;
+                        cars[6] = status;
+                        cars[5] = dailyRate;
+
+                        // Write the updated line to the temp file
+                        writer.write(String.join(",", cars));
+                        writer.newLine();
+                    } else {
+                        // Write the line to the temp file if VIN does not match
+                        writer.write(line);
+                        writer.newLine();
+                    }
+                }
+
+                // Make sure to flush and close the writer before replacing files
+                writer.flush();
+                writer.close(); // Close the writer first
+                reader.close(); // Then close the reader
+
+                // Check if car was found and updated
+                if (carFound) {
+                    // Replace the original file with the updated file
+                    if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
+                        JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Car data updated successfully.", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+                        // Optionally refresh your table or UI here
+                        // populateTable(tblCarListing, "src/storage/carDetails.csv");
+                        txtCarName.setText("");
+                        txtCarType.setText("");
+                        txtCarYear.setText("");
+                        txtStatus.setText("");
+                        txtDailyRate.setText("");
+                        txtVin.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "VIN not found.", "Update Failed", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error reading/writing to file: " + e.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                // Ensure resources are closed in case of an exception
+                try {
+                    if (reader != null) {
+                        reader.close();
+                    }
+                    if (writer != null) {
+                        writer.close();
+                    }
+                } catch (IOException e) {
+                    // Handle exception during resource closing
+
+                }
+            }
+        
+    }//GEN-LAST:event_btnEditCarListingMouseClicked
 
     
     /**
@@ -602,7 +796,6 @@ public class ManageFleet extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBooking;
     private javax.swing.JLabel lblCarID;
     private javax.swing.JLabel lblCarlisting;
@@ -612,11 +805,12 @@ public class ManageFleet extends javax.swing.JFrame {
     private javax.swing.JLabel lblRenterID;
     private javax.swing.JLabel lblUsermanagement;
     private javax.swing.JTable tblCarListing;
-    private javax.swing.JTextField txtCarID;
-    private javax.swing.JTextField txtCarmake;
-    private javax.swing.JTextField txtCarmodel;
-    private javax.swing.JTextField txtDailyrate;
-    private javax.swing.JTextField txtRenterID;
-    private javax.swing.JTextField txtrenterID;
+    private javax.swing.JTextField txtCarName;
+    private javax.swing.JTextField txtCarType;
+    private javax.swing.JTextField txtCarYear;
+    private javax.swing.JTextField txtDailyRate;
+    private javax.swing.JTextField txtStatus;
+    private javax.swing.JTextField txtVin;
+    private javax.swing.JTextField txtVinDel;
     // End of variables declaration//GEN-END:variables
 }
