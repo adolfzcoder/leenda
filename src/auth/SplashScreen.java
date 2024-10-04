@@ -29,13 +29,9 @@ public class SplashScreen extends javax.swing.JWindow {
         while (count <= 100) {
             progressBar.setValue(count);// allowing the progressBar to iterate from 0 to 100
 
-            if (count % 2 == 0)
-                lblLoading.setVisible(false);
-            else
-                lblLoading.setVisible(true);
             // Optionally add a delay to keep it visible
             try {
-                Thread.sleep(30); // Show for 3 seconds
+                Thread.sleep(90); // Show for 3 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
