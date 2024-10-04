@@ -625,7 +625,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
     private void ViewCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewCarMouseClicked
         this.dispose();
-        new CarBooking(user);
+        new ViewCars(user);
     }//GEN-LAST:event_ViewCarMouseClicked
 
     private void ViewCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCarActionPerformed

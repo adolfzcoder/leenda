@@ -11,7 +11,7 @@ import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
-import leendauserdashboard.CarBooking;
+import leendauserdashboard.ViewCars;
 
 import ownermodules.OwnerDashboard;
 import ownermodules.bookedcars;

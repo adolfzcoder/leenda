@@ -17,14 +17,14 @@ import javax.swing.*;
  *
  * @author Jaden
  */
-public class CarBooking extends javax.swing.JFrame {
+public class ViewCars extends javax.swing.JFrame {
     public User user;
     private JPanel carListing;
     private JScrollPane ListingScollingPanel;
     /**
      * Creates new form UserDashboard
      */
-    public CarBooking(User user) {
+    public ViewCars(User user) {
         this.user = user;
         initComponents();
         this.setVisible(true);
@@ -1157,7 +1157,7 @@ public class CarBooking extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CarBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewCars.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -1169,7 +1169,7 @@ public class CarBooking extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new CarBooking(null).setVisible(true);
+            new ViewCars(null).setVisible(true);
         });
     }
 
