@@ -6,6 +6,7 @@ package ownermodules;
 
 import auth.LoginPage;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -114,11 +115,11 @@ public class ManageFleet extends javax.swing.JFrame {
         lblDashboard.setText("Dashboard");
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                mouseExited(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    ownerDashboardMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
             }
         });
 
@@ -126,42 +127,57 @@ public class ManageFleet extends javax.swing.JFrame {
         lblCarlisting.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarlisting.setForeground(new java.awt.Color(133, 62, 52));
         lblCarlisting.setText("Manage Fleet");
-
+        lblCarlisting.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageFleetMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
         lblBooking.setBackground(new java.awt.Color(133, 62, 52));
         lblBooking.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblBooking.setForeground(new java.awt.Color(133, 62, 52));
-        lblBooking.setText("Booking");
-        lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblBooking.setText("Booked Cars");
+
         lblBooking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                mouseExited(evt);
+                try {
+                    bookedCarsMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
             }
         });
+        lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lblUsermanagement.setBackground(new java.awt.Color(133, 62, 52));
         lblUsermanagement.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblUsermanagement.setForeground(new java.awt.Color(133, 62, 52));
-        lblUsermanagement.setText("User Management");
+        lblUsermanagement.setText("Add Car");
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
         lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                mouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                mouseExited(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    addCarMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
             }
         });
-
         btnLogout.setBackground(new java.awt.Color(237, 233, 205));
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
-
+        
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    logOutMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -772,7 +788,7 @@ public class ManageFleet extends javax.swing.JFrame {
         new AddCar(user);
     } 
     // logOutMouseClicked
-    private void logOutMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
+    private void logOutMouseClicked(ActionEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();
         new LoginPage();
     } 

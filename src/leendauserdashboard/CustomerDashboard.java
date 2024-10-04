@@ -6,6 +6,7 @@ package leendauserdashboard;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import auth.LoginPage;
 import models.User;
 import storage.StorageFunctions;
 
@@ -621,7 +622,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_EditProfileMouseClicked
 
     private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
-        // TODO add your handling code here:
+        new LoginPage();
     }//GEN-LAST:event_LogOutMouseClicked
 
     private void ViewCarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ViewCarMouseClicked
