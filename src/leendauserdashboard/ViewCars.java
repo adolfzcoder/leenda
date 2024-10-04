@@ -334,121 +334,6 @@ public class ViewCars extends javax.swing.JFrame {
 
 
 
-    private void displayCars() {
-        carListing = new JPanel();
-        carListing.setLayout(new BoxLayout(carListing, BoxLayout.Y_AXIS));
-        boolean carsFound = false;
-
-        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\cars.csv"))) {
-            String line;
-            br.readLine(); // skip the header
-            while ((line = br.readLine()) != null) {
-                String[] carDetails = line.split(",");
-                if (carDetails[6].equals("available")) {
-                    carsFound = true;
-                    JPanel carPanel = createCarPanel(carDetails);
-                    carListing.add(carPanel);
-                }
-                
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading cars.csv: " + e.getMessage());
-        }
-        if (!carsFound) {
-            JLabel noCarsLabel = new JLabel("No cars available.");
-            noCarsLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
-            noCarsLabel.setHorizontalAlignment(JLabel.CENTER);
-            carListing.add(noCarsLabel);
-        }
-
-        ListingScollingPanel.setViewportView(carListing);
-    }
-
-    private JPanel createCarPanel(String[] carDetails) {
-        JPanel carPanel = new JPanel();
-        carPanel.setLayout(new FlowLayout());
-        carPanel.setBorder(BorderFactory.createEtchedBorder());
-
-        JLabel carModel = new JLabel("Car Name: " + carDetails[2]);
-        JLabel carYear = new JLabel("Car Year: " + carDetails[3]);
-        JLabel carBrand = new JLabel("Car Type: " + carDetails[4]);
-        JLabel carRating = new JLabel("Daily Rate: " + carDetails[5]);
-        JLabel carOwner = new JLabel("Status: " + carDetails[6]);
-        // JLabel carOwnerRating = new JLabel("VIN: " + carDetails[8]);
-        // JLabel booked = new JLabel("Booked: " + carDetails[6]);
-        // JLabel comments = new JLabel("Comments: " + carDetails[7]);
-        // JLabel dateListed = new JLabel("Date Listed: " + carDetails[8]);
-
-        JButton bookButton = new JButton("Book");
-        bookButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Open a popup with fields for Start Date and End Date
-                JDialog dialog = new JDialog();
-                dialog.setTitle("Book Car");
-                dialog.setModal(true);
-    
-                JPanel panel = new JPanel();
-                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-    
-                JLabel startDateLabel = new JLabel("Start Date:");
-                JTextField startDateField = new JTextField(10);
-                panel.add(startDateLabel);
-                panel.add(startDateField);
-    
-                JLabel endDateLabel = new JLabel("End Date:");
-                JTextField endDateField = new JTextField(10);
-                panel.add(endDateLabel);
-                panel.add(endDateField);
-    
-                JButton bookNowButton = new JButton("Book Now");
-                bookNowButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        // Get the values from the fields
-                        String startDate = startDateField.getText();
-                        String endDate = endDateField.getText();
-    
-                        // Calculate the total price
-                        int daysRenting = calculateDaysRenting(startDate, endDate);
-                        double totalPrice = daysRenting * Double.parseDouble(carDetails[5]);
-    
-                        // Get the next booking ID
-                        int nextBookingId = getNextBookingId();
-    
-                        // Write the booking details to the bookings.csv file
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\bookings.csv", true))) {
-                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[2] + "," + daysRenting + "," + "booked" + "," + carDetails[9] + "," + carDetails[1]);
-                            bw.newLine();
-                        } catch (IOException ex) {
-                            System.err.println("Error writing to bookings.csv: " + ex.getMessage());
-                        }
-    
-                        // Close the dialog
-                        dialog.dispose();
-                    }
-                });
-                panel.add(bookNowButton);
-    
-                dialog.add(panel);
-                dialog.pack();
-                dialog.setVisible(true);
-            }
-        });
-    
-        carPanel.add(carModel);
-        carPanel.add(carYear);
-        carPanel.add(carBrand);
-        carPanel.add(carRating);
-        carPanel.add(carOwner);
-    
-        carPanel.add(bookButton);
-    
-        return carPanel;
-    }
-
-
-
     
     private int calculateDaysRenting(String startDate, String endDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -578,6 +463,118 @@ public class ViewCars extends javax.swing.JFrame {
             new ViewCars(null).setVisible(true);
         });
     }
+    // Populates the carListing panel with the cars from the cars.csv file and includes images of the cars while respecting the layout.
+    private void displayCars() {
+        carListing = new JPanel();
+        carListing.setLayout(new BoxLayout(carListing, BoxLayout.Y_AXIS));
+        boolean carsFound = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\cars.csv"))) {
+            String line;
+            br.readLine(); // skip the header
+            while ((line = br.readLine()) != null) {
+                String[] carDetails = line.split(",");
+                if (carDetails[6].equals("available")) {
+                    carsFound = true;
+                    JPanel carPanel = createCarPanel(carDetails);
+                    carListing.add(carPanel);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading cars.csv: " + e.getMessage());
+        }
+        if (!carsFound) {
+            JLabel noCarsLabel = new JLabel("No cars available.");
+            noCarsLabel.setFont(new Font("Century Gothic", Font.BOLD, 24));
+            noCarsLabel.setHorizontalAlignment(JLabel.CENTER);
+            carListing.add(noCarsLabel);
+        }
+
+        ListingScollingPanel.setViewportView(carListing);
+    }
+
+    private JPanel createCarPanel(String[] carDetails) {
+        JPanel carPanel = new JPanel();
+        carPanel.setLayout(new FlowLayout());
+        carPanel.setBorder(BorderFactory.createEtchedBorder());
+
+        JLabel carImage = new JLabel();
+        carImage.setIcon(new ImageIcon("src\\carImages\\" + carDetails[0] + ".jpeg")); // Assuming the first column is the car ID and images are named as carID.jpg
+
+        JLabel carModel = new JLabel("Car Name: " + carDetails[2]);
+        JLabel carYear = new JLabel("Car Year: " + carDetails[3]);
+        JLabel carBrand = new JLabel("Car Type: " + carDetails[4]);
+        JLabel carRating = new JLabel("Daily Rate: " + carDetails[5]);
+        JLabel carOwner = new JLabel("Status: " + carDetails[6]);
+
+        JButton bookButton = new JButton("Book");
+        bookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Open a popup with fields for Start Date and End Date
+                JDialog dialog = new JDialog();
+                dialog.setTitle("Book Car");
+                dialog.setModal(true);
+
+                JPanel panel = new JPanel();
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+                JLabel startDateLabel = new JLabel("Start Date:");
+                JTextField startDateField = new JTextField(10);
+                panel.add(startDateLabel);
+                panel.add(startDateField);
+
+                JLabel endDateLabel = new JLabel("End Date:");
+                JTextField endDateField = new JTextField(10);
+                panel.add(endDateLabel);
+                panel.add(endDateField);
+
+                JButton bookNowButton = new JButton("Book Now");
+                bookNowButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Get the values from the fields
+                        String startDate = startDateField.getText();
+                        String endDate = endDateField.getText();
+
+                        // Calculate the total price
+                        int daysRenting = calculateDaysRenting(startDate, endDate);
+                        double totalPrice = daysRenting * Double.parseDouble(carDetails[5]);
+
+                        // Get the next booking ID
+                        int nextBookingId = getNextBookingId();
+
+                        // Write the booking details to the bookings.csv file
+                        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\bookings.csv", true))) {
+                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[2] + "," + daysRenting + "," + "booked" + "," + carDetails[9] + "," + carDetails[1]);
+                            bw.newLine();
+                        } catch (IOException ex) {
+                            System.err.println("Error writing to bookings.csv: " + ex.getMessage());
+                        }
+
+                        // Close the dialog
+                        dialog.dispose();
+                    }
+                });
+                panel.add(bookNowButton);
+
+                dialog.add(panel);
+                dialog.pack();
+                dialog.setVisible(true);
+            }
+        });
+
+        carPanel.add(carImage);
+        carPanel.add(carModel);
+        carPanel.add(carYear);
+        carPanel.add(carBrand);
+        carPanel.add(carRating);
+        carPanel.add(carOwner);
+        carPanel.add(bookButton);
+
+        return carPanel;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
