@@ -617,13 +617,54 @@ public class ManageFleet extends javax.swing.JFrame {
             String vin = txtVin.getText().trim();
 
             // Validation checks
-            if (carName.isEmpty() || carType.isEmpty() || carYear.isEmpty() || status.isEmpty() || dailyRate.isEmpty() || vin.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            if (vin.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter the VIN.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (!vin.matches("\\d+")) {
-                JOptionPane.showMessageDialog(this, "VIN should only contain numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            if (!carName.isEmpty() && carName.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Car Name should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!carType.isEmpty() && carType.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Car Type should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!carYear.isEmpty()) {
+                try {
+                    int year = Integer.parseInt(carYear);
+                    if (year < 1886 || year > new Date().getYear() + 1900) { // First car invented in 1886
+                        JOptionPane.showMessageDialog(this, "Please enter a valid Car Year.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Car Year should be a number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (!status.isEmpty() && status.length() < 3) {
+                JOptionPane.showMessageDialog(this, "Status should be at least 3 characters long.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (!dailyRate.isEmpty()) {
+                try {
+                    double rate = Double.parseDouble(dailyRate);
+                    if (rate < 0) {
+                        JOptionPane.showMessageDialog(this, "Daily Rate should be a positive number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Daily Rate should be a number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (!vin.matches("[A-HJ-NPR-Z0-9]{17}")) {
+                JOptionPane.showMessageDialog(this, "VIN should be 17 characters long and contain only digits and capital letters (excluding I, O, and Q).", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

@@ -1,6 +1,6 @@
 userEmail,carID,carName,carYear,carType,dailyRate,status (booked available),carImageUrl,VIN, carOwnerEmail
 ,2,AMG GT3 RS,2024,Coupe,6000,Available,src\carImages\4e8529a8-4a63-414c-9bda-02090049c41d.jpeg,213435445,carowner@leenda.com
 ,3,Range Rover Sport,2018,SUV,3400,available,src\carImages\d0599089-90f0-4962-94fd-fd5a2f8098c0.jpeg,2345346732,carowner@leenda.com
-,4,Tesla Model S,2022,Sedan,5000,available,src\carImages\tesla_model_s.jpeg,5YJSA1E26JF123456,carowner@leenda.com
+,4,,,,6900,,src\carImages\tesla_model_s.jpeg,5YJSA1E26JF123456,carowner@leenda.com
 ,5,Ford Mustang,2021,Coupe,4500,available,src\carImages\ford_mustang.jpeg,1FA6P8TH5M5101234,carowner@leenda.com
 ,6,Chevrolet Camaro,2020,Coupe,4000,available,src\carImages\chevrolet_camaro.jpeg,1G1FB1RS1L0101234,carowner@leenda.com
