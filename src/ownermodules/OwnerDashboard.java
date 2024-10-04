@@ -810,7 +810,6 @@ public class OwnerDashboard extends javax.swing.JFrame {
     private void btnLogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogOutMouseClicked
         this.dispose();
         new LoginPage();
-        
     }//GEN-LAST:event_btnLogOutMouseClicked
 
     private void lblManageFleetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblManageFleetMouseClicked
