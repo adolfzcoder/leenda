@@ -6,16 +6,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 import adminmodules.AdminDashboard;
-
+import leendauserdashboard.CustomerDashboard;
 import models.User;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import ownermodules.OwnerDashboard;
-import ownermodules.bookedcars;
-import leendauserdashboard.CustomerDashboard;
-import ownermodules.AddCar;
+
 
 public class AuthFunctions {
     public static void login(String userEmail, String userPassword, JFrame frame)

@@ -190,7 +190,7 @@ public class CarBooking extends javax.swing.JFrame {
                 + "Car Name: " + carData[2] + "<br>"
                 + "Car Year: " + carData[3] + "<br>"
                 + "Car Type: " + carData[4] + "<br>"
-                + "Daily Rate: $" + carData[5] + "<br>"
+                + "Daily Rate: N$" + carData[5] + "<br>"
                 + "Status: " + carData[6] + "<br>"
                 + "VIN: " + carData[8] + "<br>"
                 + "Owner Email: " + carData[9] + "<br>"
