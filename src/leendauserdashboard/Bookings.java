@@ -233,6 +233,8 @@ public class Bookings extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+
+    
     private void ViewCarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCarsActionPerformed
         this.dispose();
         new ViewCars(user);

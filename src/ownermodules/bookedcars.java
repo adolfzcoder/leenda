@@ -4,6 +4,7 @@
  */
 package ownermodules;
 
+import java.awt.BorderLayout;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -372,7 +373,15 @@ public class bookedcars extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTable2);
+        jTable1.setGridColor(new java.awt.Color(237, 223, 205));
+        jTable1.setIntercellSpacing(new java.awt.Dimension(5, 5));
+        jTable1.setSelectionBackground(new java.awt.Color(217, 181, 164));
+        jTable1.setShowGrid(true);
+        jTable1.setShowHorizontalLines(true);
+        jTable1.setShowVerticalLines(true);
+        jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1, BorderLayout.CENTER);
         jPanel6.setBackground(new java.awt.Color(217, 186, 164));
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -429,7 +438,7 @@ public class bookedcars extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(217, 186, 164));
         jTable1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.addColumn("Car");
+        tableModel.addColumn("Car Name");
         tableModel.addColumn("Car Type");
 
         // Read the CSV file
@@ -438,8 +447,8 @@ public class bookedcars extends javax.swing.JFrame {
             br.readLine(); // Skip the header
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values[6].equals("available") && values[0].equals(user.getEmail())) {
-                    tableModel.addRow(new Object[] { values[1], values[2] });
+                if (values[6].equals("available")) {
+                    tableModel.addRow(new Object[] { values[2], values[4] });
                 }
             }
         } catch (IOException e) {
@@ -543,6 +552,31 @@ public class bookedcars extends javax.swing.JFrame {
         new bookedcars(user);
     } 
 
+
+    private void loadBookingData() {
+        String filePath = "src\\storage\\bookings.csv";
+        String line;
+        String[] row;
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            // Skip the header line
+            br.readLine();
+
+            while ((line = br.readLine()) != null) {
+                row = line.split(",");
+                model.addRow(new Object[] {
+                    row[0], // Name
+                    row[5], // Car
+                    row[10], // Phone Number
+                    row[8] // Email
+                });
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     // manageFleetMouseClicked
     private void addCarMouseClicked(java.awt.event.MouseEvent evt) throws UnsupportedLookAndFeelException {                                     
         this.dispose();

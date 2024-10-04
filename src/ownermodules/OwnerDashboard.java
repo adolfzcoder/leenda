@@ -303,7 +303,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 if (values.length >= 9 && values[8].equals(user.getEmail())) {
-                    tableModel.addRow(new Object[] { values[2], values[6], values[6], values[5] });
+                    
+                    tableModel.addRow(new Object[] { values[2], values[4], values[6], values[3] });
                 }
             }
         } catch (IOException e) {

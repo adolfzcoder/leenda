@@ -31,7 +31,7 @@ public class SplashScreen extends javax.swing.JWindow {
 
             // Optionally add a delay to keep it visible
             try {
-                Thread.sleep(90); // Show for 3 seconds
+                Thread.sleep(30); // Show for 3 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
