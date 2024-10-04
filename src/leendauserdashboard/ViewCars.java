@@ -344,7 +344,7 @@ public class ViewCars extends javax.swing.JFrame {
             br.readLine(); // skip the header
             while ((line = br.readLine()) != null) {
                 String[] carDetails = line.split(",");
-                if (carDetails[6].equals("completed")) {
+                if (carDetails[6].equals("available")) {
                     carsFound = true;
                     JPanel carPanel = createCarPanel(carDetails);
                     carListing.add(carPanel);
@@ -418,7 +418,7 @@ public class ViewCars extends javax.swing.JFrame {
     
                         // Write the booking details to the bookings.csv file
                         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src\\storage\\bookings.csv", true))) {
-                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[2] + "," + daysRenting + "," + "pending" + "," + carDetails[9] + "," + carDetails[1]);
+                            bw.write(user.getEmail() + "," + nextBookingId + "," + startDate + "," + endDate + "," + totalPrice + "," + carDetails[2] + "," + daysRenting + "," + "booked" + "," + carDetails[9] + "," + carDetails[1]);
                             bw.newLine();
                         } catch (IOException ex) {
                             System.err.println("Error writing to bookings.csv: " + ex.getMessage());

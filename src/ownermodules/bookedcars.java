@@ -55,13 +55,8 @@ public class bookedcars extends javax.swing.JFrame {
             }
 
             int activeRentals = StorageFunctions.countBookedCars(user.getEmail()); 
-
-            if (activeRentals == 0){
-                lblnumberOfBookedCarsDynamic.setText("No active rentals");
-
-            } else {
-                lblnumberOfBookedCarsDynamic.setText(""+ activeRentals); // display current 'active' oro currently booked vehicles rentals (booked)
-            }
+            lblnumberOfBookedCarsDynamic.setText(""+ activeRentals); // display current 'active' oro currently booked vehicles rentals (booked)
+            
 
 
 
