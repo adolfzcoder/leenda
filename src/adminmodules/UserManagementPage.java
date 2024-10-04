@@ -579,101 +579,77 @@ public class UserManagementPage extends javax.swing.JFrame {
         Functions.changeColorOfTheLabelOfTheHeaderWhenExiting(lblDashboard);
     }// GEN-LAST:event_lblDashboardMouseExited
 
-    private void btnDeletePersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeletePersonalInformationOnClick
-        String userID = txtUserIDToDeleteOrChangeStatus.getText().trim(); // Get and trim the user ID input
+        private void btnDeletePersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeletePersonalInformationOnClick
+            String userID = txtUserIDToDeleteOrChangeStatus.getText().trim(); // Get and trim the user ID input
 
-        // Check if the user ID is empty
-        if (Validation.checkIfTheTextFieldIsEmpty(userID, "user ID")) {
-            return; // Exit if user ID is empty
-        }
+            // Check if the user ID is empty
+            if (Validation.checkIfTheTextFieldIsEmpty(userID, "user ID")) {
+                return; // Exit if user ID is empty
+            }
 
-        String filePath = "src/storage/userDetails.csv"; // Path to the CSV file
-        File inputFile = new File(filePath);
-        File tempFile = new File(inputFile.getAbsolutePath() + ".tmp"); // Temporary file
+            String filePath = "src/storage/userDetails.csv"; // Path to the CSV file
+            List<String[]> users = new ArrayList<>();
+            boolean userFound = false;
 
-        BufferedReader reader = null;
-        BufferedWriter writer = null;
+            // Read existing user data
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] userDetails = line.split(",");
+                    if (userDetails.length < 9)
+                        continue; // Adjust based on your actual CSV structure
 
-        try {
-            reader = new BufferedReader(new FileReader(inputFile));
-            writer = new BufferedWriter(new FileWriter(tempFile));
+                    // Check if the current user ID matches the one to be deleted
+                    if (userDetails[7].equals(userID)) {
+                        userFound = true; // User found
 
-            String line;
-            boolean userFound = false; // Flag to check if user is found
+                        // Ask for confirmation to delete
+                        int confirmation = JOptionPane.showConfirmDialog(this,
+                                "Are you sure you want to delete the data for user ID: " + userID + "?",
+                                "Confirm Deletion",
+                                JOptionPane.YES_NO_OPTION);
 
-            // Read each line from the original file
-            while ((line = reader.readLine()) != null) {
-                String[] userDetails = line.split(",");
-                String existingUserID = userDetails[7]; // Adjust index based on your CSV structure
-
-                // Check if the current line's user ID matches the one to delete
-                if (existingUserID.equals(userID)) {
-                    userFound = true; // User found
-
-                    // Ask for confirmation to delete
-                    int confirmation = JOptionPane.showConfirmDialog(this,
-                            "Are you sure you want to delete the data for user ID: " + userID + "?",
-                            "Confirm Deletion",
-                            JOptionPane.YES_NO_OPTION);
-
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        // If confirmed, skip writing this line to temp file (i.e., delete)
-                        continue; // Skip writing this line
-                    } else {
-                        // If not confirmed, write the line back to the temporary file and exit
-                        writer.write(line);
-                        writer.newLine();
-                        JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        return; // Exit the method
+                        if (confirmation == JOptionPane.YES_OPTION) {
+                            continue; // Skip adding this user to the list (i.e., delete)
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            return; // Exit the method
+                        }
                     }
-                }
 
-                // Write the line to the temp file if user ID does not match
-                writer.write(line);
-                writer.newLine();
-            }
-
-            // Make sure to flush and close the writer before replacing files
-            writer.flush();
-            writer.close(); // Close the writer first
-            reader.close(); // Then close the reader
-
-            // Check if user was found and deleted
-            if (userFound) {
-                // Replace the original file with the updated file
-                if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
-                    JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error",
-                            JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "User data deleted successfully.", "Deletion Successful",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    // Optionally refresh your table or UI here
-                    populateTable(tblUsers, "src/storage/userDetails.csv");
-                    txtUserIDToDeleteOrChangeStatus.setText("");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "User ID not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading/writing to file: " + e.getMessage(), "File Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // Ensure resources are closed in case of an exception
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (writer != null) {
-                    writer.close();
+                    users.add(userDetails); // Add user data (not deleted) to the list
                 }
             } catch (IOException e) {
-                // Handle exception during resource closing
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error reading user details: " + e.getMessage(), "File Read Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return; // Exit on error
             }
-        }
-    }// GEN-LAST:event_btnDeletePersonalInformationOnClick
+
+            // Check if the user ID was found
+            if (!userFound) {
+                JOptionPane.showMessageDialog(this, "User ID not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
+                return; // Exit if user not found
+            }
+
+            // Write updated user data back to the CSV file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+                for (String[] user : users) {
+                    bw.write(String.join(",", user)); // Join fields with commas
+                    bw.newLine(); // Add a newline after each user record
+                }
+                JOptionPane.showMessageDialog(this, "User data deleted successfully.", "Deletion Successful",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // Optionally refresh your table or UI here
+                this.revalidate();
+                this.repaint();
+                populateTable(tblUsers, "src/storage/userDetails.csv");
+                txtUserIDToDeleteOrChangeStatus.setText("");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing user details: " + e.getMessage(), "File Write Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }// GEN-LAST:event_btnDeletePersonalInformationOnClick
 
     private void btnEditUsersPersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditUsersPersonalInformationOnClick
         String userID = txtUserID.getText().trim();
@@ -694,50 +670,50 @@ public class UserManagementPage extends javax.swing.JFrame {
         // Validate first name if it's not empty
         if (!firstName.isEmpty()) {
             if (Validation.validateName(firstName)) {
-                filledFieldCount++; // Increment only if the name is valid
+            filledFieldCount++; // Increment only if the name is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid first name.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid first name.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate last name if it's not empty
         if (!lastName.isEmpty()) {
             if (Validation.validateName(lastName)) {
-                filledFieldCount++; // Increment only if the last name is valid
+            filledFieldCount++; // Increment only if the last name is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid last name.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid last name.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate email if it's not empty
         if (!email.isEmpty()) {
             if (Validation.validateEmail(email)) {
-                if (!AuthFunctions.doesEmailExist(email)) {
-                    filledFieldCount++; // Increment if the email is valid and doesn't already exist
-                } else {
-                    JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.",
-                            "Email Exists", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (!AuthFunctions.doesEmailExist(email)) {
+                filledFieldCount++; // Increment if the email is valid and doesn't already exist
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid email address.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.",
+                    "Email Exists", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            } else {
+            JOptionPane.showMessageDialog(this, "Invalid email address.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate phone number if it's not empty
         if (!phoneNumber.isEmpty()) {
             if (Validation.validatePhoneNumber(phoneNumber)) {
-                filledFieldCount++; // Increment if the phone number is valid
+            filledFieldCount++; // Increment if the phone number is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid phone number.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid phone number.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
@@ -746,11 +722,11 @@ public class UserManagementPage extends javax.swing.JFrame {
             filledFieldCount++; // No validation needed for driver's license as it's optional
         }
 
-        // Check if at least one additional field is filled
-        if (filledFieldCount == 0) {
-            JOptionPane.showMessageDialog(this, "You must fill at least one field other than user ID.",
-                    "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return; // Exit if no other fields are filled
+        // Check if at least two additional fields are filled
+        if (filledFieldCount < 2) {
+            JOptionPane.showMessageDialog(this, "You must fill at least two fields other than user ID.",
+                "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if less than two other fields are filled
         }
 
         // Update logic
