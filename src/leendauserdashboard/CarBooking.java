@@ -5,12 +5,22 @@
 package leendauserdashboard;
 import models.User;
 
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.*;
 /**
  *
  * @author Jaden
  */
 public class CarBooking extends javax.swing.JFrame {
     public User user;
+    private JPanel carListing;
+    private JScrollPane ListingScollingPanel;
     /**
      * Creates new form UserDashboard
      */
@@ -18,6 +28,7 @@ public class CarBooking extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         this.setVisible(true);
+        displayCars();
     }
 
     /**
@@ -34,6 +45,7 @@ public class CarBooking extends javax.swing.JFrame {
         Leenda = new javax.swing.JLabel();
         Booking = new javax.swing.JButton();
         Dashboard = new javax.swing.JButton();
+        Booking1 = new javax.swing.JButton();
         BookingsPanel = new javax.swing.JPanel();
         Bookings14B = new javax.swing.JLabel();
         ListingScollingPanel = new javax.swing.JScrollPane();
@@ -46,15 +58,11 @@ public class CarBooking extends javax.swing.JFrame {
         CarBrand = new javax.swing.JLabel();
         CarRating = new javax.swing.JLabel();
         CarOwner = new javax.swing.JLabel();
-        CarOwnerRating = new javax.swing.JLabel();
         TextCarBooked = new javax.swing.JLabel();
         NumberOfBookings = new javax.swing.JLabel();
         TextCarRatings = new javax.swing.JLabel();
-        TextCarComments = new javax.swing.JLabel();
-        NumberOfComments = new javax.swing.JLabel();
         TextCarDateListed = new javax.swing.JLabel();
         DateCarListed = new javax.swing.JLabel();
-        TextOwnerRating = new javax.swing.JLabel();
         carListing2 = new javax.swing.JPanel();
         carImageBox1 = new javax.swing.JPanel();
         CarImage1 = new javax.swing.JLabel();
@@ -172,6 +180,22 @@ public class CarBooking extends javax.swing.JFrame {
             }
         });
 
+        Booking1.setBackground(new java.awt.Color(237, 223, 205));
+        Booking1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        Booking1.setForeground(new java.awt.Color(133, 62, 52));
+        Booking1.setText("View Cars");
+        Booking1.setToolTipText("Check out the catalog, something might catch your eye.");
+        Booking1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Booking1MouseClicked(evt);
+            }
+        });
+        Booking1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Booking1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout NavPanelLayout = new javax.swing.GroupLayout(NavPanel);
         NavPanel.setLayout(NavPanelLayout);
         NavPanelLayout.setHorizontalGroup(
@@ -181,7 +205,9 @@ public class CarBooking extends javax.swing.JFrame {
                 .addComponent(Leenda, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Booking1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Booking, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -191,8 +217,9 @@ public class CarBooking extends javax.swing.JFrame {
                 .addGroup(NavPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Leenda, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Dashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Booking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(Booking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Booking1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         BookingsPanel.setBackground(new java.awt.Color(237, 223, 205));
@@ -201,7 +228,7 @@ public class CarBooking extends javax.swing.JFrame {
         Bookings14B.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         Bookings14B.setForeground(new java.awt.Color(133, 62, 52));
         Bookings14B.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Bookings14B.setText("Bookings");
+        Bookings14B.setText("View Cars");
 
         javax.swing.GroupLayout BookingsPanelLayout = new javax.swing.GroupLayout(BookingsPanel);
         BookingsPanel.setLayout(BookingsPanelLayout);
@@ -256,10 +283,6 @@ public class CarBooking extends javax.swing.JFrame {
         CarOwner.setForeground(new java.awt.Color(133, 62, 52));
         CarOwner.setText("Car Owner");
 
-        CarOwnerRating.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        CarOwnerRating.setForeground(new java.awt.Color(133, 62, 52));
-        CarOwnerRating.setText("Owner Rating");
-
         TextCarBooked.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         TextCarBooked.setForeground(new java.awt.Color(133, 62, 52));
         TextCarBooked.setText("Booked:");
@@ -272,14 +295,6 @@ public class CarBooking extends javax.swing.JFrame {
         TextCarRatings.setForeground(new java.awt.Color(133, 62, 52));
         TextCarRatings.setText("Ratings:");
 
-        TextCarComments.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextCarComments.setForeground(new java.awt.Color(133, 62, 52));
-        TextCarComments.setText("Comments:");
-
-        NumberOfComments.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        NumberOfComments.setForeground(new java.awt.Color(133, 62, 52));
-        NumberOfComments.setText("000");
-
         TextCarDateListed.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         TextCarDateListed.setForeground(new java.awt.Color(133, 62, 52));
         TextCarDateListed.setText("Date Listed:");
@@ -287,10 +302,6 @@ public class CarBooking extends javax.swing.JFrame {
         DateCarListed.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         DateCarListed.setForeground(new java.awt.Color(133, 62, 52));
         DateCarListed.setText("DD-MM-YYYY");
-
-        TextOwnerRating.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        TextOwnerRating.setForeground(new java.awt.Color(133, 62, 52));
-        TextOwnerRating.setText("Rating:");
 
         javax.swing.GroupLayout carListing1Layout = new javax.swing.GroupLayout(carListing1);
         carListing1.setLayout(carListing1Layout);
@@ -302,28 +313,18 @@ public class CarBooking extends javax.swing.JFrame {
                 .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, carListing1Layout.createSequentialGroup()
                         .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing1Layout.createSequentialGroup()
-                                .addComponent(CarOwner)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TextOwnerRating)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CarOwnerRating))
+                            .addComponent(CarOwner, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, carListing1Layout.createSequentialGroup()
                                 .addComponent(CarBrand)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CarModel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CarYear)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextCarComments)
-                            .addGroup(carListing1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(TextCarRatings)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 659, Short.MAX_VALUE)
+                        .addComponent(TextCarRatings)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CarRating)
-                            .addComponent(NumberOfComments)))
+                        .addComponent(CarRating)
+                        .addGap(8, 8, 8))
                     .addGroup(carListing1Layout.createSequentialGroup()
                         .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(carListing1Layout.createSequentialGroup()
@@ -334,8 +335,7 @@ public class CarBooking extends javax.swing.JFrame {
                                 .addComponent(TextCarDateListed)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(DateCarListed)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         carListing1Layout.setVerticalGroup(
             carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,12 +348,7 @@ public class CarBooking extends javax.swing.JFrame {
                     .addComponent(CarRating)
                     .addComponent(TextCarRatings))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CarOwner)
-                    .addComponent(CarOwnerRating)
-                    .addComponent(TextCarComments)
-                    .addComponent(NumberOfComments)
-                    .addComponent(TextOwnerRating))
+                .addComponent(CarOwner)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(carListing1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextCarBooked)
@@ -896,7 +891,7 @@ public class CarBooking extends javax.swing.JFrame {
                                 .addComponent(CarModel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(CarYear4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 612, Short.MAX_VALUE)
                         .addGroup(carListing5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(TextCarComments4)
                             .addComponent(TextCarRatings4))
@@ -1013,7 +1008,7 @@ public class CarBooking extends javax.swing.JFrame {
                 .addComponent(LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
             .addComponent(NavPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(ListingScollingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
+            .addComponent(ListingScollingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1167, Short.MAX_VALUE)
             .addComponent(BookingsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BackgroundLayout.setVerticalGroup(
@@ -1047,37 +1042,103 @@ public class CarBooking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DashboardActionPerformed
 
+
+    private void displayCars() {
+        carListing = new JPanel();
+        carListing.setLayout(new BoxLayout(carListing, BoxLayout.Y_AXIS));
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src\\storage\\cars.csv"))) {
+            String line;
+            br.readLine(); // skip the header
+            while ((line = br.readLine()) != null) {
+                String[] carDetails = line.split(",");
+                JPanel carPanel = createCarPanel(carDetails);
+                carListing.add(carPanel);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading cars.csv: " + e.getMessage());
+        }
+
+        ListingScollingPanel.setViewportView(carListing);
+    }
+
+    private JPanel createCarPanel(String[] carDetails) {
+        JPanel carPanel = new JPanel();
+        carPanel.setLayout(new FlowLayout());
+        carPanel.setBorder(BorderFactory.createEtchedBorder());
+
+        JLabel carModel = new JLabel("Car Model: " + carDetails[0]);
+        JLabel carYear = new JLabel("Car Year: " + carDetails[1]);
+        JLabel carBrand = new JLabel("Car Brand: " + carDetails[2]);
+        JLabel carRating = new JLabel("Car Rating: " + carDetails[3]);
+        JLabel carOwner = new JLabel("Car Owner: " + carDetails[4]);
+        JLabel carOwnerRating = new JLabel("Car Owner Rating: " + carDetails[5]);
+        JLabel booked = new JLabel("Booked: " + carDetails[6]);
+        JLabel comments = new JLabel("Comments: " + carDetails[7]);
+        JLabel dateListed = new JLabel("Date Listed: " + carDetails[8]);
+
+        JButton bookButton = new JButton("Book");
+        bookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add booking logic here
+                System.out.println("Book button clicked for car: " + carDetails[0]);
+            }
+        });
+
+        carPanel.add(carModel);
+        carPanel.add(carYear);
+        carPanel.add(carBrand);
+        carPanel.add(carRating);
+        carPanel.add(carOwner);
+        carPanel.add(carOwnerRating);
+        carPanel.add(booked);
+        carPanel.add(comments);
+        carPanel.add(dateListed);
+        carPanel.add(bookButton);
+
+        return carPanel;
+    }
     private void EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditProfileActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_EditProfileActionPerformed
-
-    private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LogOutActionPerformed
-
-    private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DashboardMouseClicked
-
-    private void BookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BookingMouseClicked
 
     private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_EditProfileMouseClicked
 
+    private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_LogOutActionPerformed
+
     private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_LogOutMouseClicked
 
+    private void Booking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Booking1ActionPerformed
+
+    private void Booking1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Booking1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Booking1MouseClicked
+
+    private void DashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DashboardActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DashboardActionPerformed
+
+    private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DashboardMouseClicked
+
     private void BookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BookingActionPerformed
+
+    private void BookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BookingMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1115,6 +1176,7 @@ public class CarBooking extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Background;
     private javax.swing.JButton Booking;
+    private javax.swing.JButton Booking1;
     private javax.swing.JLabel Bookings14B;
     private javax.swing.JPanel BookingsPanel;
     private javax.swing.JLabel CarBrand;
@@ -1137,7 +1199,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JLabel CarOwner2;
     private javax.swing.JLabel CarOwner3;
     private javax.swing.JLabel CarOwner4;
-    private javax.swing.JLabel CarOwnerRating;
     private javax.swing.JLabel CarOwnerRating1;
     private javax.swing.JLabel CarOwnerRating2;
     private javax.swing.JLabel CarOwnerRating3;
@@ -1160,7 +1221,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JLabel DateCarListed4;
     private javax.swing.JButton EditProfile;
     private javax.swing.JLabel Leenda;
-    private javax.swing.JScrollPane ListingScollingPanel;
     private javax.swing.JButton LogOut;
     private javax.swing.JPanel NavPanel;
     private javax.swing.JLabel NumberOfBookings;
@@ -1168,7 +1228,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JLabel NumberOfBookings2;
     private javax.swing.JLabel NumberOfBookings3;
     private javax.swing.JLabel NumberOfBookings4;
-    private javax.swing.JLabel NumberOfComments;
     private javax.swing.JLabel NumberOfComments1;
     private javax.swing.JLabel NumberOfComments2;
     private javax.swing.JLabel NumberOfComments3;
@@ -1178,7 +1237,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JLabel TextCarBooked2;
     private javax.swing.JLabel TextCarBooked3;
     private javax.swing.JLabel TextCarBooked4;
-    private javax.swing.JLabel TextCarComments;
     private javax.swing.JLabel TextCarComments1;
     private javax.swing.JLabel TextCarComments2;
     private javax.swing.JLabel TextCarComments3;
@@ -1193,7 +1251,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JLabel TextCarRatings2;
     private javax.swing.JLabel TextCarRatings3;
     private javax.swing.JLabel TextCarRatings4;
-    private javax.swing.JLabel TextOwnerRating;
     private javax.swing.JLabel TextOwnerRating1;
     private javax.swing.JLabel TextOwnerRating2;
     private javax.swing.JLabel TextOwnerRating3;
@@ -1203,7 +1260,6 @@ public class CarBooking extends javax.swing.JFrame {
     private javax.swing.JPanel carImageBox2;
     private javax.swing.JPanel carImageBox3;
     private javax.swing.JPanel carImageBox4;
-    private javax.swing.JPanel carListing;
     private javax.swing.JPanel carListing1;
     private javax.swing.JPanel carListing2;
     private javax.swing.JPanel carListing3;

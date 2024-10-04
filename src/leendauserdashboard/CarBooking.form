@@ -61,7 +61,7 @@
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               </Group>
               <Component id="NavPanel" alignment="0" max="32767" attributes="0"/>
-              <Component id="ListingScollingPanel" alignment="0" pref="1023" max="32767" attributes="0"/>
+              <Component id="ListingScollingPanel" alignment="0" pref="1167" max="32767" attributes="0"/>
               <Component id="BookingsPanel" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
@@ -102,7 +102,9 @@
                       <Component id="Leenda" min="-2" pref="399" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Dashboard" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="Booking1" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="Booking" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -115,8 +117,9 @@
                           <Component id="Leenda" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="Dashboard" alignment="3" max="32767" attributes="0"/>
                           <Component id="Booking" alignment="3" max="32767" attributes="0"/>
+                          <Component id="Booking1" alignment="3" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -171,6 +174,25 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DashboardActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="Booking1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cd" green="df" red="ed" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="12" style="0"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="34" green="3e" red="85" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="View Cars"/>
+                <Property name="toolTipText" type="java.lang.String" value="Check out the catalog, something might catch your eye."/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Booking1MouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Booking1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="BookingsPanel">
@@ -209,7 +231,7 @@
                   <Color blue="34" green="3e" red="85" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Bookings"/>
+                <Property name="text" type="java.lang.String" value="View Cars"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -273,13 +295,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="CarOwner" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="TextOwnerRating" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="CarOwnerRating" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="CarOwner" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="CarBrand" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
@@ -288,19 +304,11 @@
                                               <Component id="CarYear" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="TextCarComments" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                              <Component id="TextCarRatings" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <EmptySpace pref="659" max="32767" attributes="0"/>
+                                      <Component id="TextCarRatings" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CarRating" min="-2" max="-2" attributes="0"/>
-                                          <Component id="NumberOfComments" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="CarRating" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -315,10 +323,9 @@
                                               <Component id="DateCarListed" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -334,13 +341,7 @@
                                   <Component id="TextCarRatings" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="CarOwner" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CarOwnerRating" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TextCarComments" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="NumberOfComments" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TextOwnerRating" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="CarOwner" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="TextCarBooked" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -436,17 +437,6 @@
                         <Property name="text" type="java.lang.String" value="Car Owner"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="CarOwnerRating">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="34" green="3e" red="85" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Owner Rating"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="TextCarBooked">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -480,28 +470,6 @@
                         <Property name="text" type="java.lang.String" value="Ratings:"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="TextCarComments">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="34" green="3e" red="85" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Comments:"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="NumberOfComments">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="34" green="3e" red="85" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="000"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JLabel" name="TextCarDateListed">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -522,17 +490,6 @@
                           <Color blue="34" green="3e" red="85" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="DD-MM-YYYY"/>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="TextOwnerRating">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Century Gothic" size="14" style="0"/>
-                        </Property>
-                        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="34" green="3e" red="85" type="rgb"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Rating:"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1419,7 +1376,7 @@
                                               <Component id="CarYear4" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="468" max="32767" attributes="0"/>
+                                      <EmptySpace pref="612" max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="TextCarComments4" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="TextCarRatings4" alignment="1" min="-2" max="-2" attributes="0"/>

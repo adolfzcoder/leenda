@@ -44,7 +44,7 @@ public class AuthFunctions {
             }
             if (loggedInUser.getUserType().equals("Customer")) {
                 frame.dispose();
-                new CarBooking(loggedInUser);
+                new CustomerDashboard(loggedInUser);
             }
         }
         // If login fails, the error messages are already handled inside
