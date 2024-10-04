@@ -22,9 +22,9 @@ import java.awt.print.PrinterException;
  * @author kondwani
  */
 public class BookingPage extends javax.swing.JFrame {
-    public User user;
+    public static User user;
  
-    public BookingPage() {
+    public BookingPage(User user) {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -36,7 +36,7 @@ public class BookingPage extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             e.printStackTrace();  // Handle any exceptions
         }
-        this.user = user;
+        
         this.setTitle("BookingPage");
         this.setVisible(true);
         
@@ -44,7 +44,7 @@ public class BookingPage extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+        this.user = user;
     }
 
     /**
@@ -702,7 +702,7 @@ public class BookingPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookingPage().setVisible(true);
+                new BookingPage(user);
             }
         });
     }

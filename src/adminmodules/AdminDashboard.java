@@ -1126,7 +1126,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void lblBookingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingsMouseClicked
         this.dispose();
-        new BookingPage();
+        new BookingPage(user);
     }//GEN-LAST:event_lblBookingsMouseClicked
 
     private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditPersonalInformationOnClick

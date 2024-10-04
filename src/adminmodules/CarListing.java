@@ -447,7 +447,7 @@ public class CarListing extends javax.swing.JFrame {
 
     private void lblBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingMouseClicked
         this.dispose();
-        new BookingPage();        // TODO add your handling code here:
+        new BookingPage(user);        // TODO add your handling code here:
     }//GEN-LAST:event_lblBookingMouseClicked
 
     private void lblBookingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingMouseEntered
