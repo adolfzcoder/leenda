@@ -115,10 +115,10 @@ public class ManageFleet extends javax.swing.JFrame {
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblDashboardMouseEntered(evt);
+                mouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblDashboardMouseExited(evt);
+                mouseExited(evt);
             }
         });
 
@@ -134,13 +134,13 @@ public class ManageFleet extends javax.swing.JFrame {
         lblBooking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBooking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblBookingMouseClicked(evt);
+                mouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBookingMouseEntered(evt);
+                mouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblBookingMouseExited(evt);
+                mouseExited(evt);
             }
         });
 
@@ -151,10 +151,10 @@ public class ManageFleet extends javax.swing.JFrame {
         lblUsermanagement.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblUsermanagement.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblUsermanagementMouseEntered(evt);
+                mouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblUsermanagementMouseExited(evt);
+                mouseExited(evt);
             }
         });
 
@@ -485,35 +485,34 @@ public class ManageFleet extends javax.swing.JFrame {
 
     private void btnDeleteCarListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCarListingActionPerformed
         String vin = txtVinDel.getText().trim(); // Get and trim the VIN input
-
+    
         // Check if the VIN is empty
         if (vin.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter a VIN.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit if VIN is empty
         }
-
+    
         String filePath = "src/storage/cars.csv"; // Path to the CSV file
         File inputFile = new File(filePath);
         File tempFile = new File(inputFile.getAbsolutePath() + ".tmp"); // Temporary file
-
+    
         BufferedReader reader = null;
         BufferedWriter writer = null;
-
+    
         try {
             reader = new BufferedReader(new FileReader(inputFile));
             writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
-
+    
             String line;
             boolean carFound = false; // Flag to check if car is found
-
+    
             // Read each line from the original file
             while ((line = reader.readLine()) != null) {
-            String[] cars = line.split(",");
-            String existingVin = cars[8]; // Adjust index based on your CSV structure
-
-            // Check if the current line's VIN matches the one to delete and belongs to the logged-in user
-            if (existingVin.equals(vin) && cars[9].equals(user.getEmail())) { // Assuming the first column is the user email
-                if (existingVin.equals(vin)) {
+                String[] cars = line.split(",");
+                String existingVin = cars[8]; // Adjust index based on your CSV structure
+    
+                // Check if the current line's VIN matches the one to delete and belongs to the logged-in user
+                if (existingVin.equals(vin) && cars[9].equals(user.getEmail())) { // Assuming the first column is the user email
                     carFound = true; // Car found
     
                     // Ask for confirmation to delete
@@ -523,61 +522,60 @@ public class ManageFleet extends javax.swing.JFrame {
                         JOptionPane.YES_NO_OPTION);
     
                     if (confirmation == JOptionPane.YES_OPTION) {
-                    // If confirmed, skip writing this line to temp file (i.e., delete)
-                    continue; // Skip writing this line
+                        // If confirmed, skip writing this line to temp file (i.e., delete)
+                        continue; // Skip writing this line
                     } else {
-                    // If not confirmed, write the line back to the temporary file and exit
+                        // If not confirmed, write the line back to the temporary file and exit
+                        writer.write(line);
+                        writer.newLine();
+                        JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
+                            JOptionPane.INFORMATION_MESSAGE);
+                        return; // Exit the method
+                    }
+                } else {
+                    // Write the line to the temp file if VIN does not match
                     writer.write(line);
                     writer.newLine();
-                    JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
-                        JOptionPane.INFORMATION_MESSAGE);
-                    return; // Exit the method
-                    }
-                }
-    
-                // Write the line to the temp file if VIN does not match
-                writer.write(line);
-                writer.newLine();
                 }
             }
-
+    
             // Make sure to flush and close the writer before replacing files
             writer.flush();
             writer.close(); // Close the writer first
             reader.close(); // Then close the reader
-
+    
             // Check if car was found and deleted
             if (carFound) {
-            // Replace the original file with the updated file
-            if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
-                JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error",
-                    JOptionPane.ERROR_MESSAGE);
+                // Replace the original file with the updated file
+                if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
+                    JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error",
+                        JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Car data deleted successfully.", "Deletion Successful",
+                        JOptionPane.INFORMATION_MESSAGE);
+                    // Optionally refresh your table or UI here
+                    // populateTable(tblCarListing, "src/storage/carDetails.csv");
+                    txtVinDel.setText("");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Car data deleted successfully.", "Deletion Successful",
-                    JOptionPane.INFORMATION_MESSAGE);
-                // Optionally refresh your table or UI here
-                // populateTable(tblCarListing, "src/storage/carDetails.csv");
-                txtVinDel.setText("");
+                JOptionPane.showMessageDialog(this, "VIN not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
             }
-            } else {
-            JOptionPane.showMessageDialog(this, "VIN not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
-            }
-
+    
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading/writing to file: " + e.getMessage(), "File Error",
                 JOptionPane.ERROR_MESSAGE);
         } finally {
             // Ensure resources are closed in case of an exception
             try {
-            if (reader != null) {
-                reader.close();
-            }
-            if (writer != null) {
-                writer.close();
-            }
+                if (reader != null) {
+                    reader.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
             } catch (IOException e) {
-            // Handle exception during resource closing
-            e.printStackTrace();
+                // Handle exception during resource closing
+                e.printStackTrace();
             }
         }
     }//GEN-LAST:event_btnDeleteCarListingActionPerformed
