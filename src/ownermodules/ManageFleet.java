@@ -617,6 +617,42 @@ public class ManageFleet extends javax.swing.JFrame {
             String vin = txtVin.getText().trim();
 
             // Validation checks
+            int filledFields = 0;
+
+            // Read the existing values from the table for the given VIN
+            String existingCarName = "";
+            String existingCarType = "";
+            String existingCarYear = "";
+            String existingStatus = "";
+            String existingDailyRate = "";
+
+            for (int i = 0; i < tblCarListing.getRowCount(); i++) {
+                if (tblCarListing.getValueAt(i, 5).equals(vin)) {
+                    existingCarName = (String) tblCarListing.getValueAt(i, 0);
+                    existingCarType = (String) tblCarListing.getValueAt(i, 2);
+                    existingCarYear = (String) tblCarListing.getValueAt(i, 1);
+                    existingStatus = (String) tblCarListing.getValueAt(i, 4);
+                    existingDailyRate = (String) tblCarListing.getValueAt(i, 3);
+                    break;
+                }
+            }
+
+            // If fields are empty, use existing values
+            if (carName.isEmpty()) carName = existingCarName;
+            if (carType.isEmpty()) carType = existingCarType;
+            if (carYear.isEmpty()) carYear = existingCarYear;
+            if (status.isEmpty()) status = existingStatus;
+            if (dailyRate.isEmpty()) dailyRate = existingDailyRate;
+            if (!carName.isEmpty()) filledFields++;
+            if (!carType.isEmpty()) filledFields++;
+            if (!carYear.isEmpty()) filledFields++;
+            if (!status.isEmpty()) filledFields++;
+            if (!dailyRate.isEmpty()) filledFields++;
+
+            if (filledFields < 2) {
+                JOptionPane.showMessageDialog(this, "Please fill in at least 2 fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (vin.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter the VIN.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -721,6 +757,25 @@ public class ManageFleet extends javax.swing.JFrame {
                     } else {
                         JOptionPane.showMessageDialog(this, "Car data updated successfully.", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
                         // Optionally refresh your table or UI here
+                        DefaultTableModel model = (DefaultTableModel) tblCarListing.getModel();
+                        model.setRowCount(0); // Clear existing rows
+
+                        // Re-read the cars.csv file and populate the table
+                        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                            String csvLine;
+                            boolean isFirstRow = true;
+                            while ((csvLine = br.readLine()) != null) {
+                                if (isFirstRow) {
+                                    isFirstRow = false;
+                                    continue; // Skip the first row
+                                }
+                                String[] row = csvLine.split(",");
+                                // Adjust the row data to match the column order
+                                model.addRow(new Object[] {row[2], row[3], row[4], row[5], row[6], row[8], row[9]});
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         // populateTable(tblCarListing, "src/storage/carDetails.csv");
                         txtCarName.setText("");
                         txtCarType.setText("");
