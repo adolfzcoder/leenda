@@ -4,8 +4,15 @@
  */
 package ownermodules;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +24,7 @@ import auth.AuthFunctions;
 import auth.LoginPage;
 import models.User;
 import storage.StorageFunctions;
+import validations.Validation;
 import viewbookedcars.bookedcars;
 
 /**
@@ -97,7 +105,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -132,11 +140,15 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        textFirstName = new javax.swing.JTextField();
+        textLastName = new javax.swing.JTextField();
+        textPhoneNumber = new javax.swing.JTextField();
+        textDriversLicense = new javax.swing.JTextField();
+        textEmail = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
         btnEditPersonalInformation = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        textUserID = new javax.swing.JTextField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -156,13 +168,13 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(133, 62, 52));
         jLabel2.setText("Dashboard");
 
-        jButton1.setBackground(new java.awt.Color(237, 223, 205));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        jButton1.setText("Log Out");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogout.setBackground(new java.awt.Color(242, 242, 242));
+        btnLogout.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(133, 62, 52));
+        btnLogout.setText("Log out");
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLogoutOnClick(evt);
+                btnLogoutMouseClicked(evt);
             }
         });
 
@@ -174,29 +186,9 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(133, 62, 52));
         jLabel7.setText("Add Car");
 
-        // open add car page when clicked
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    addCarMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
-            }
-        });
-
-        // open booked cars page
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(133, 62, 52));
         jLabel8.setText("Booked Cars");
-
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    bookedCarMouseClicked(evt);
-                } catch (UnsupportedLookAndFeelException ex) {
-                }
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -214,7 +206,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnLogout)
                 .addGap(38, 38, 38))
         );
         jPanel2Layout.setVerticalGroup(
@@ -224,7 +216,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1)
+                    .addComponent(btnLogout)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)))
@@ -239,13 +231,14 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         lblUserTypeDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblUserTypeDynamic.setForeground(new java.awt.Color(133, 62, 52));
+        lblUserTypeDynamic.setText("Car Owner");
         lblUserTypeDynamic.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
 
         lblFirstNameDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblFirstNameDynamic.setForeground(new java.awt.Color(133, 62, 52));
-        
+        lblFirstNameDynamic.setText("Adolf David");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -333,9 +326,10 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(133, 62, 52));
         jLabel6.setText("Active Rentals");
-        // will be the dynamic active rentals depending on the user email
+
         lblActiveRentals.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblActiveRentals.setForeground(new java.awt.Color(133, 62, 52));
+        lblActiveRentals.setText("5");
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cars-85.png"))); // NOI18N
 
@@ -378,6 +372,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         lblTotalFleetNumber.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblTotalFleetNumber.setForeground(new java.awt.Color(133, 62, 52));
+        lblTotalFleetNumber.setText("4");
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/garadge-icon.png"))); // NOI18N
 
@@ -440,6 +435,7 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         lblRevenue.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblRevenue.setForeground(new java.awt.Color(133, 62, 52));
+        lblRevenue.setText("NAD 69420");
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-payment-history-88.png"))); // NOI18N
 
@@ -452,10 +448,10 @@ public class OwnerDashboard extends javax.swing.JFrame {
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel17)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lblRevenue, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
@@ -463,14 +459,14 @@ public class OwnerDashboard extends javax.swing.JFrame {
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(24, 24, 24)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblRevenue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel15)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(217, 186, 164));
@@ -483,12 +479,12 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel23.setBackground(new java.awt.Color(133, 62, 52));
         jLabel23.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel23.setText("Name");
+        jLabel23.setText("Firstname");
 
         jLabel24.setBackground(new java.awt.Color(133, 62, 52));
         jLabel24.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel24.setText("Email");
+        jLabel24.setText("Lastname");
 
         jLabel25.setBackground(new java.awt.Color(133, 62, 52));
         jLabel25.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -500,86 +496,124 @@ public class OwnerDashboard extends javax.swing.JFrame {
         jLabel26.setForeground(new java.awt.Color(133, 62, 52));
         jLabel26.setText("Driver License");
 
-        jTextField1.setText("");
-
-        jTextField2.setText("");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        textLastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                textLastNameActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("");
+        textDriversLicense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDriversLicenseActionPerformed(evt);
+            }
+        });
 
-        jTextField4.setText("");
+        jLabel27.setBackground(new java.awt.Color(133, 62, 52));
+        jLabel27.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(133, 62, 52));
+        jLabel27.setText("Email");
 
         btnEditPersonalInformation.setBackground(new java.awt.Color(133, 62, 52));
-        btnEditPersonalInformation.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnEditPersonalInformation.setForeground(new java.awt.Color(237, 223, 205));
-        btnEditPersonalInformation.setText("Edit personal information");
-        btnEditPersonalInformation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditPersonalInformation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditPersonalInformationOnClick(evt);
+        btnEditPersonalInformation.setText("Edit Profile");
+        btnEditPersonalInformation.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEditPersonalInformationMouseClicked(evt);
             }
         });
+        btnEditPersonalInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditPersonalInformationActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setBackground(new java.awt.Color(133, 62, 52));
+        jLabel28.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(133, 62, 52));
+        jLabel28.setText("UserID");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(175, 175, 175)
+                .addComponent(jLabel19)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel19))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addGap(121, 121, 121)
+                                .addGap(186, 186, 186)
                                 .addComponent(jLabel20))
-                            .addComponent(jLabel25)
-                            .addComponent(jTextField3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel23)
+                            .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                            .addComponent(jLabel26)
-                            .addComponent(jTextField4)))
+                            .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel27))
+                                .addGap(109, 109, 109))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textPhoneNumber))
+                                .addGap(9, 9, 9)))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textDriversLicense)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel26)
+                                    .addComponent(jLabel28))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(textUserID)))
+                    .addComponent(btnEditPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel20))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel24)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addComponent(textFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(textPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textDriversLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(btnEditPersonalInformation)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -651,98 +685,150 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void btnLogoutOnClick(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
-        this.dispose();
-        new LoginPage();
-    }// GEN-LAST:event_btnLogoutOnClick
+    
+    private void btnEditPersonalInformationActionPerformed(java.awt.event.ActionEvent evt) throws UnsupportedLookAndFeelException{// GEN-FIRST:event_btnEditUsersPersonalInformationOnClick
+        String userID = textUserID.getText().trim();
+        String firstName = textFirstName.getText().trim();
+        String lastName = textLastName.getText().trim();
+        String email = textEmail.getText().trim();
+        String phoneNumber = textPhoneNumber.getText().trim();
+        String driverLicense = textDriversLicense.getText().trim();
 
+        // Check if the user ID is empty
+        if (Validation.checkIfTheTextFieldIsEmpty(userID, "user ID")) {
+            return; // Exit if user ID is empty
+        }
 
+        // Counter for filled fields
+        int filledFieldCount = 0;
 
-
-        private void btnEditPersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditPersonalInformationOnClick
-        // Regular expressions
-        String nameRegex = "^(?!.*\\s)(!?[A-Z][a-zA-Z]*)$"; // First letter uppercase, then letters or '!'
-        String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-z]{2,4}$"; // Basic email validation
-        String phoneRegex = "^\\+\\d{1,4}\\d+$"; // Phone number starts with + followed by digits
-
-        // Variables declaration and assignment (trim input to remove leading/trailing
-        // spaces)
-        String firstName = jTextField1.getText().trim();
-        //String lastName = txtLastName.getText().trim(); // Use getText(), not getName() for JTextField
-        String email = jTextField2.getText().trim();
-        String phoneNumber = jTextField3.getText().trim();
-        String driverLicense = jTextField4.getText().trim();
-
-        // Check if at least one field is filled
-        if (firstName.equals("") && email.equals("") && phoneNumber.equals("")
-                && driverLicense.equals("")) {
-            JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed",
-                    JOptionPane.ERROR_MESSAGE);
-        } else {
-            // Check if at least one field is filled
-            if (firstName.equals("") && email.equals("") && phoneNumber.equals("")) {
-                JOptionPane.showMessageDialog(null, "At least one field must be filled to update!", "Update Failed",
-                        JOptionPane.ERROR_MESSAGE);
+        // Validate first name if it's not empty
+        if (!firstName.isEmpty()) {
+            if (Validation.validateName(firstName)) {
+                filledFieldCount++; // Increment only if the name is valid
             } else {
-                // Validation for each non-empty field
-                // if (!firstName.equals("") && !firstName.matches(nameRegex)) {
-                //     JOptionPane.showMessageDialog(this,
-                //             "First name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.",
-                //             "Invalid First Name", JOptionPane.ERROR_MESSAGE);
-                //     return; // Stop if validation fails
-                // }
-                // if (!lastName.equals("") && !lastName.matches(nameRegex)) {
-                //     JOptionPane.showMessageDialog(this,
-                //             "Last name is invalid. \nOnly letters and '!' are allowed, and it must start with an uppercase letter or '!' followed by an uppercase letter.",
-                //             "Invalid Last Name", JOptionPane.ERROR_MESSAGE);
-                //     return; // Stop if validation fails
-                // }
-                if (!email.equals("") && !email.matches(emailRegex)) {
-                    JOptionPane.showMessageDialog(this, "Please enter a valid email address.", "Invalid Email",
-                            JOptionPane.ERROR_MESSAGE);
-                    return; // Stop if validation fails
-                }
-                if (!phoneNumber.equals("") && !phoneNumber.matches(phoneRegex)) {
-                    JOptionPane.showMessageDialog(this,
-                            "Phone number must start with +country code \nand contain only numbers.",
-                            "Invalid Phone Number", JOptionPane.ERROR_MESSAGE);
-                    return; // Stop if validation fails
-                }
-
-                if (AuthFunctions.doesEmailExist(email)) {
-                    JOptionPane.showMessageDialog(this, "Email is already in use. Please choose another one.",
-                            "Email Exists", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    // Check and update each field only if it's not empty
-                    if (!firstName.equals("")) {
-                        user.setFirstName(firstName);
-                        String[] nameParts = firstName.split(" ");
-                        // Get first name (index 0) and last name (index 1)
-                        
-                        String lastName = nameParts[1];
-                        user.setLastName(lastName);
-                    }
-                    
-                    if (!email.equals("")) {
-                        user.setEmail(email);
-                    }
-                    if (!phoneNumber.equals("")) {
-                        user.setPhoneNumber(phoneNumber);
-                    }
-                    if (!driverLicense.equals("")) {
-                        user.setDriversLicense(driverLicense);
-                    }
-
-                    // Now update the user in the CSV file
-                    try {
-                        StorageFunctions.updateUserRecord(user);
-                        JOptionPane.showMessageDialog(null, "User updated successfully!");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Error updating user data.");
-                    }
-                }
+                JOptionPane.showMessageDialog(this, "Invalid first name.", "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
             }
+        }
+
+        // Validate last name if it's not empty
+        if (!lastName.isEmpty()) {
+            if (Validation.validateName(lastName)) {
+                filledFieldCount++; // Increment only if the last name is valid
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid last name.", "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Validate email if it's not empty
+        if (!email.isEmpty()) {
+            if (Validation.validateEmail(email)) {
+                if (!AuthFunctions.doesEmailExist(email)) {
+                    filledFieldCount++; // Increment if the email is valid and doesn't already exist
+                } else {
+                    JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.",
+                            "Email Exists", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid email address.", "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Validate phone number if it's not empty
+        if (!phoneNumber.isEmpty()) {
+            if (Validation.validatePhoneNumber(phoneNumber)) {
+                filledFieldCount++; // Increment if the phone number is valid
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid phone number.", "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        // Increment the counter for the driver's license if it's filled
+        if (!driverLicense.isEmpty()) {
+            filledFieldCount++; // No validation needed for driver's license as it's optional
+        }
+
+        // Check if at least one additional field is filled
+        if (filledFieldCount == 0) {
+            JOptionPane.showMessageDialog(this, "You must fill at least one field other than user ID.",
+                    "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if no other fields are filled
+        }
+
+        // Update logic
+        final String USER_DETAILS_FILE_PATH = "src/storage/userDetails.csv"; // Path to your user details file
+
+        // Read existing user data
+        List<String[]> users = new ArrayList<>();
+        boolean userFound = false;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(USER_DETAILS_FILE_PATH))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] userDetails = line.split(",");
+                if (userDetails.length < 9)
+                    continue; // Adjust based on your actual CSV structure
+
+                // Check if the current user ID matches the one to be updated
+                if (userDetails[7].equals(userID)) {
+                    userFound = true; // User found
+
+                    // Update fields if they are not empty
+                    if (!firstName.isEmpty())
+                        userDetails[4] = firstName; // Update first name
+                    if (!lastName.isEmpty())
+                        userDetails[5] = lastName; // Update last name
+                    if (!email.isEmpty())
+                        userDetails[0] = email; // Update email
+                    if (!phoneNumber.isEmpty())
+                        userDetails[2] = phoneNumber; // Update phone number
+                    if (!driverLicense.isEmpty())
+                        userDetails[6] = driverLicense; // Update driver license
+                }
+                users.add(userDetails); // Add user data (updated or not) to the list
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading user details: " + e.getMessage(), "File Read Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return; // Exit on error
+        }
+
+        // Check if the user ID was found
+        if (!userFound) {
+            JOptionPane.showMessageDialog(this, "User ID not found.", "Update Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if user not found
+        }
+
+        // Write updated user data back to the CSV file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(USER_DETAILS_FILE_PATH))) {
+            for (String[] user : users) {
+                bw.write(String.join(",", user)); // Join fields with commas
+                bw.newLine(); // Add a newline after each user record
+            }
+            JOptionPane.showMessageDialog(this, "User details updated successfully.", "Update Success, Relogin to see changes",
+                    JOptionPane.INFORMATION_MESSAGE);
+            // Clear input fields
+            textUserID.setText("");
+            textFirstName.setText("");
+            textLastName.setText("");
+            textEmail.setText("");
+            textPhoneNumber.setText("");
+            textDriversLicense.setText("");
+            // this.dispose();
+            // new OwnerDashboard(user);
+            
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing user details: " + e.getMessage(), "File Write Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_btnEditPersonalInformationOnClick
 
@@ -758,9 +844,22 @@ public class OwnerDashboard extends javax.swing.JFrame {
     } 
 
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void textLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textLastNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_textLastNameActionPerformed
+
+    private void textDriversLicenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDriversLicenseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDriversLicenseActionPerformed
+
+    private void btnEditPersonalInformationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditPersonalInformationMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditPersonalInformationMouseClicked
+
+    private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutOnClick
+        this.dispose();
+        new LoginPage();
+    }// GEN-LAST:event_btnLogoutOnClick
 
     /**
      * @param args the command line arguments
@@ -804,19 +903,16 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton btnEditPersonalInformation;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel lblFirstNameDynamic;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel lblTotalFleetNumber;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel lblRevenue;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -826,13 +922,13 @@ public class OwnerDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel lblUserTypeDynamic;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lblActiveRentals;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel14;
@@ -845,9 +941,16 @@ public class OwnerDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblActiveRentals;
+    private javax.swing.JLabel lblFirstNameDynamic;
+    private javax.swing.JLabel lblRevenue;
+    private javax.swing.JLabel lblTotalFleetNumber;
+    private javax.swing.JLabel lblUserTypeDynamic;
+    private javax.swing.JTextField textDriversLicense;
+    private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textFirstName;
+    private javax.swing.JTextField textLastName;
+    private javax.swing.JTextField textPhoneNumber;
+    private javax.swing.JTextField textUserID;
     // End of variables declaration//GEN-END:variables
 }
