@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.*;
+
+import auth.LoginPage;
 /**
  *
  * @author Jaden
@@ -192,7 +194,7 @@ public class ViewCars extends javax.swing.JFrame {
         });
         Booking1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Booking1ActionPerformed(evt);
+                viewCarsActionPerformed(evt);
             }
         });
 
@@ -1109,15 +1111,18 @@ public class ViewCars extends javax.swing.JFrame {
     }//GEN-LAST:event_EditProfileMouseClicked
 
     private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new LoginPage();
     }//GEN-LAST:event_LogOutActionPerformed
 
     private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
+        new LoginPage();
     }//GEN-LAST:event_LogOutMouseClicked
 
-    private void Booking1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
-        // TODO add your handling code here:
+    private void viewCarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Booking1ActionPerformed
+        this.dispose();
+        new ViewCars(user);
     }//GEN-LAST:event_Booking1ActionPerformed
 
     private void Booking1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Booking1MouseClicked
@@ -1129,7 +1134,8 @@ public class ViewCars extends javax.swing.JFrame {
     }//GEN-LAST:event_DashboardActionPerformed
 
     private void DashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
+        new CustomerDashboard(user);
     }//GEN-LAST:event_DashboardMouseClicked
 
     private void BookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingActionPerformed
@@ -1137,7 +1143,8 @@ public class ViewCars extends javax.swing.JFrame {
     }//GEN-LAST:event_BookingActionPerformed
 
     private void BookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
+        new Bookings(user);
     }//GEN-LAST:event_BookingMouseClicked
 
     /**

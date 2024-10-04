@@ -612,7 +612,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_DashboardMouseClicked
 
     private void BookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
+        new Bookings(user);
     }//GEN-LAST:event_BookingMouseClicked
 
     private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked
