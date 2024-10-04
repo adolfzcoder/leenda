@@ -4,12 +4,21 @@ import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenEnterin
 import static adminmodules.Functions.changeColorOfTheLabelOfTheHeaderWhenExiting;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 
+import auth.LoginPage;
 import models.User;
 
 /**
@@ -18,7 +27,7 @@ import models.User;
  */
 public class CarListing extends javax.swing.JFrame {
     public static User user;
-    
+
     public CarListing(User user) {
         // Set Nimbus look and feel
         try {
@@ -28,27 +37,113 @@ public class CarListing extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();  // Handle any exceptions
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e) {
+            e.printStackTrace(); // Handle any exceptions
         }
-        
+
         this.setTitle("CarListing");
-        this.setVisible(true);
-         initComponents();
-        
+        initComponents();
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         this.user = user;
+
+        try {
+            // Call the method and pass the path to your CSV file
+            populateCarListingTable(tblCarListing);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        this.setVisible(true);
     }
 
+    public static void populateCarListingTable(JTable table) throws FileNotFoundException {
+        // Define the column names for the car listing table
+        String[] columnNames = { "Renter ID", "Car ID", "Car Model", "Car Make", "Daily Rate" };
+
+        // Create a new table model
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Load user details from userDetails.csv into a Map
+        Map<String, String> userMap = loadUserDetailsForCarListing("src\\storage\\userDetails.csv");
+
+        // Open and read the cars.csv file
+        File file = new File("src\\storage\\cars.csv");
+        Scanner scan = new Scanner(file);
+
+        // Skip the first line (header)
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        // Clear the table model before populating it
+        model.setRowCount(0);
+
+        // Read each line from cars.csv and merge data from userDetails.csv
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] carDetails = line.split(",");
+
+            // Ensure the carDetails array has enough data to populate the table
+            if (carDetails.length >= 5) {
+                String carID = carDetails[1];
+                String carModel = carDetails[2];  // Car Name
+                String carMake = carDetails[3];   // Car Type
+                String dailyRate = carDetails[5];
+                String carOwnerEmail = carDetails[9]; // carOwnerEmail
+
+                // Look up renter ID (car owner's user ID) from the user map using carOwnerEmail
+                String renterID = userMap.getOrDefault(carOwnerEmail, "Unknown");
+
+                // Add the merged data as a row in the table model
+                model.addRow(new Object[] { renterID, carID, carModel, carMake, dailyRate });
+            }
+        }
+
+        scan.close();
+
+        // Apply the model to the table
+        table.setModel(model);
+        table.revalidate();
+        table.repaint();
+    }
+
+    // Load user details into a map: key = userEmail, value = userID
+    private static Map<String, String> loadUserDetailsForCarListing(String filePath) throws FileNotFoundException {
+        Map<String, String> userMap = new HashMap<>();
+        File file = new File(filePath);
+        Scanner scan = new Scanner(file);
+
+        // Skip the header
+        if (scan.hasNextLine()) {
+            scan.nextLine();
+        }
+
+        // Read each line and store user details
+        while (scan.hasNextLine()) {
+            String line = scan.nextLine();
+            String[] userDetails = line.split(",");
+            if (userDetails.length >= 8) {
+                // Key is userEmail, value is userID
+                userMap.put(userDetails[0], userDetails[7]); // userEmail -> userID
+            }
+        }
+
+        scan.close();
+        return userMap;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -99,9 +194,11 @@ public class CarListing extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseExited(evt);
             }
@@ -117,9 +214,11 @@ public class CarListing extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblBookingMouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBookingMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblBookingMouseExited(evt);
             }
@@ -132,50 +231,58 @@ public class CarListing extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseClicked(evt);
             }
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblUsermanagementMouseExited(evt);
             }
         });
 
-        btnLogout.setBackground(new java.awt.Color(237, 233, 205));
+        btnLogout.setBackground(new java.awt.Color(237, 223, 205));
         btnLogout.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnLogout.setText("Log Out");
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLogoutMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblDashboard)
-                .addGap(54, 54, 54)
-                .addComponent(lblCarlisting)
-                .addGap(76, 76, 76)
-                .addComponent(lblBooking)
-                .addGap(79, 79, 79)
-                .addComponent(lblUsermanagement)
-                .addGap(101, 101, 101)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134,
+                                        Short.MAX_VALUE)
+                                .addComponent(lblDashboard)
+                                .addGap(54, 54, 54)
+                                .addComponent(lblCarlisting)
+                                .addGap(76, 76, 76)
+                                .addComponent(lblBooking)
+                                .addGap(79, 79, 79)
+                                .addComponent(lblUsermanagement)
+                                .addGap(101, 101, 101)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 112,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()));
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblDashboard)
-                    .addComponent(lblCarlisting)
-                    .addComponent(lblBooking)
-                    .addComponent(btnLogout)
-                    .addComponent(lblUsermanagement))
-                .addGap(12, 12, 12))
-        );
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap(16, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(lblDashboard)
+                                        .addComponent(lblCarlisting)
+                                        .addComponent(lblBooking)
+                                        .addComponent(btnLogout)
+                                        .addComponent(lblUsermanagement))
+                                .addGap(12, 12, 12)));
 
         jPanel3.setBackground(new java.awt.Color(237, 223, 205));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -183,9 +290,10 @@ public class CarListing extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("Car Listing");
 
-        btnPrintCarListing.setBackground(new java.awt.Color(237, 233, 205));
+        btnPrintCarListing.setBackground(new java.awt.Color(237, 223, 205));
         btnPrintCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnPrintCarListing.setText("Print Car Listing");
+        btnPrintCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPrintCarListing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintCarListingActionPerformed(evt);
@@ -195,37 +303,34 @@ public class CarListing extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(273, 273, 273)
-                .addComponent(btnPrintCarListing)
-                .addContainerGap())
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addGap(273, 273, 273)
+                                .addComponent(btnPrintCarListing)
+                                .addContainerGap()));
         jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(btnPrintCarListing))
-                .addGap(11, 11, 11))
-        );
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap(15, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(btnPrintCarListing))
+                                .addGap(11, 11, 11)));
 
         tblCarListing.setBackground(new java.awt.Color(237, 223, 205));
         tblCarListing.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"111", "2345", "BMW", "Sedan", "$600"},
-                {"121", "4567", "Audi", "coupe", null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Renter ID", "Car ID", "Car Model", "Car Make", "Daily Rate"
-            }
-        ));
+                new Object[][] {
+                        { "111", "2345", "BMW", "Sedan", "$600" },
+                        { "121", "4567", "Audi", "coupe", null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null },
+                        { null, null, null, null, null }
+                },
+                new String[] {
+                        "Renter ID", "Car ID", "Car Model", "Car Make", "Daily Rate"
+                }));
         jScrollPane1.setViewportView(tblCarListing);
 
         jPanel4.setBackground(new java.awt.Color(217, 186, 164));
@@ -234,88 +339,115 @@ public class CarListing extends javax.swing.JFrame {
         lblRenterID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblRenterID.setText("Renter ID");
 
+        txtRenterID.setBackground(new java.awt.Color(237, 223, 205));
         txtRenterID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         lblCarID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarID.setText("Car ID");
 
+        txtCarID.setBackground(new java.awt.Color(237, 223, 205));
         txtCarID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel9.setText("Car Model");
 
+        txtCarmodel.setBackground(new java.awt.Color(237, 223, 205));
         txtCarmodel.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         lblCarmake.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblCarmake.setText("Car Make");
 
+        txtCarmake.setBackground(new java.awt.Color(237, 223, 205));
         txtCarmake.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         lblDailyrate.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lblDailyrate.setText("Daily Rate");
 
+        txtDailyrate.setBackground(new java.awt.Color(237, 223, 205));
         txtDailyrate.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
         btnEditCarListing.setBackground(new java.awt.Color(133, 62, 52));
         btnEditCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnEditCarListing.setForeground(new java.awt.Color(204, 204, 255));
         btnEditCarListing.setText("Edit Car Listing Information");
+        btnEditCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtRenterID)
-                            .addComponent(lblRenterID)
-                            .addComponent(lblCarID)
-                            .addComponent(txtCarID, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(106, 106, 106)
-                                .addComponent(lblDailyrate))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblCarmake)
-                                    .addComponent(txtCarmodel)
-                                    .addComponent(txtCarmake, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDailyrate, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(btnEditCarListing, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel4Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnEditCarListing, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addGroup(jPanel4Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
+                                                                false)
+                                                        .addComponent(txtRenterID)
+                                                        .addComponent(lblRenterID)
+                                                        .addComponent(lblCarID)
+                                                        .addComponent(txtCarID, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                171, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(jPanel4Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                .addComponent(jLabel9)
+                                                                .addGap(106, 106, 106)
+                                                                .addComponent(lblDailyrate))
+                                                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addGroup(jPanel4Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(lblCarmake)
+                                                                        .addComponent(txtCarmodel)
+                                                                        .addComponent(txtCarmake,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                158, Short.MAX_VALUE))
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(txtDailyrate,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 169,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addContainerGap(14, Short.MAX_VALUE)));
         jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRenterID)
-                    .addComponent(jLabel9)
-                    .addComponent(lblDailyrate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRenterID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCarmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDailyrate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCarID)
-                    .addComponent(lblCarmake))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCarID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCarmake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(btnEditCarListing)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
+                jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblRenterID)
+                                        .addComponent(jLabel9)
+                                        .addComponent(lblDailyrate))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtRenterID, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCarmodel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDailyrate, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblCarID)
+                                        .addComponent(lblCarmake))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtCarID, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtCarmake, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addComponent(btnEditCarListing)
+                                .addContainerGap(27, Short.MAX_VALUE)));
 
         jPanel5.setBackground(new java.awt.Color(217, 186, 164));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -327,10 +459,14 @@ public class CarListing extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel13.setText("Renter ID");
 
+        txtrenterID.setBackground(new java.awt.Color(237, 223, 205));
         txtrenterID.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
+        btnDeleteCarListing.setBackground(new java.awt.Color(237, 223, 205));
         btnDeleteCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnDeleteCarListing.setForeground(new java.awt.Color(133, 62, 52));
         btnDeleteCarListing.setText("Delete Car Listing Information");
+        btnDeleteCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDeleteCarListing.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteCarListingActionPerformed(evt);
@@ -340,92 +476,110 @@ public class CarListing extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnDeleteCarListing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtrenterID)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel12))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(btnDeleteCarListing, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                .addGap(15, 15, 15)
+                                                .addGroup(jPanel5Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtrenterID)
+                                                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                                                .addGroup(jPanel5Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel13)
+                                                                        .addComponent(jLabel12))
+                                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addContainerGap()));
         jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel12)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtrenterID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeleteCarListing)
-                .addGap(30, 30, 30))
-        );
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel12)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtrenterID, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDeleteCarListing)
+                                .addGap(30, 30, 30)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 19, Short.MAX_VALUE))))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(jPanel4,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jPanel5,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE))
+                                                        .addComponent(jScrollPane1,
+                                                                javax.swing.GroupLayout.Alignment.TRAILING))
+                                                .addContainerGap()))));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 15, Short.MAX_VALUE))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 6, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDeleteCarListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCarListingActionPerformed
+    private void btnDeleteCarListingActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteCarListingActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDeleteCarListingActionPerformed
+    }// GEN-LAST:event_btnDeleteCarListingActionPerformed
 
-    private void btnPrintCarListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintCarListingActionPerformed
+    private void btnPrintCarListingActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPrintCarListingActionPerformed
         try {
-             String title = "Leenda - Car Listing";
+            String title = "Leenda - Car Listing";
 
             // Get the current date and time to display at the bottom (footer) of the page
             String footer = "Generated on: " + new SimpleDateFormat("EEEE, d MMM yyyy hh:mm:ss a").format(new Date());
@@ -441,57 +595,67 @@ public class CarListing extends javax.swing.JFrame {
             }
         } catch (HeadlessException | PrinterException ex) {
             // If an error occurs during printing, show an error message
-            JOptionPane.showMessageDialog(null, "Error printing table: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-}
-    }//GEN-LAST:event_btnPrintCarListingActionPerformed
+            JOptionPane.showMessageDialog(null, "Error printing table: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }// GEN-LAST:event_btnPrintCarListingActionPerformed
 
-    private void lblBookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingMouseClicked
+    private void lblBookingMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblBookingMouseClicked
         this.dispose();
-        new BookingPage(user);        // TODO add your handling code here:
-    }//GEN-LAST:event_lblBookingMouseClicked
+        new BookingPage(user); // TODO add your handling code here:
+    }// GEN-LAST:event_lblBookingMouseClicked
 
-    private void lblBookingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingMouseEntered
-       changeColorOfTheLabelOfTheHeaderWhenEntering(lblBooking);
-    }//GEN-LAST:event_lblBookingMouseEntered
+    private void lblBookingMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblBookingMouseEntered
+        changeColorOfTheLabelOfTheHeaderWhenEntering(lblBooking);
+    }// GEN-LAST:event_lblBookingMouseEntered
 
-    private void lblBookingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingMouseExited
-       changeColorOfTheLabelOfTheHeaderWhenExiting(lblBooking); 
-    }//GEN-LAST:event_lblBookingMouseExited
+    private void lblBookingMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblBookingMouseExited
+        changeColorOfTheLabelOfTheHeaderWhenExiting(lblBooking);
+    }// GEN-LAST:event_lblBookingMouseExited
 
-    private void lblUsermanagementMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseEntered
-       changeColorOfTheLabelOfTheHeaderWhenEntering(lblUsermanagement);// 
-    }//GEN-LAST:event_lblUsermanagementMouseEntered
+    private void lblUsermanagementMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblUsermanagementMouseEntered
+        changeColorOfTheLabelOfTheHeaderWhenEntering(lblUsermanagement);//
+    }// GEN-LAST:event_lblUsermanagementMouseEntered
 
-    private void lblUsermanagementMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseExited
-       changeColorOfTheLabelOfTheHeaderWhenExiting(lblUsermanagement);// 
-    }//GEN-LAST:event_lblUsermanagementMouseExited
+    private void lblUsermanagementMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblUsermanagementMouseExited
+        changeColorOfTheLabelOfTheHeaderWhenExiting(lblUsermanagement);//
+    }// GEN-LAST:event_lblUsermanagementMouseExited
 
-    private void lblDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseEntered
+    private void lblDashboardMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblDashboardMouseEntered
         changeColorOfTheLabelOfTheHeaderWhenEntering(lblDashboard); // TODO add your handling code here:
-    }//GEN-LAST:event_lblDashboardMouseEntered
+    }// GEN-LAST:event_lblDashboardMouseEntered
 
-    private void lblDashboardMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseExited
-       changeColorOfTheLabelOfTheHeaderWhenExiting(lblDashboard);  // TODO add your handling code here:
-    }//GEN-LAST:event_lblDashboardMouseExited
+    private void lblDashboardMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblDashboardMouseExited
+        changeColorOfTheLabelOfTheHeaderWhenExiting(lblDashboard); // TODO add your handling code here:
+    }// GEN-LAST:event_lblDashboardMouseExited
 
-    private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
+    private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblDashboardMouseClicked
         this.dispose();
         new AdminDashboard(user);
-    }//GEN-LAST:event_lblDashboardMouseClicked
+    }// GEN-LAST:event_lblDashboardMouseClicked
 
-    private void lblUsermanagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseClicked
+    private void lblUsermanagementMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblUsermanagementMouseClicked
         this.dispose();
         new UserManagementPage(user);
-    }//GEN-LAST:event_lblUsermanagementMouseClicked
+    }// GEN-LAST:event_lblUsermanagementMouseClicked
+
+    private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLogoutMouseClicked
+        this.dispose();
+        new LoginPage();
+    }// GEN-LAST:event_btnLogoutMouseClicked
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -501,15 +665,19 @@ public class CarListing extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarListing.class.getName()).log(java.util.logging.Level.SEVERE, null,
+                    ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
