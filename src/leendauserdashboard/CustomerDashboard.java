@@ -639,7 +639,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
     private void BookingMouseClicked(java.awt.event.MouseEvent evt) {     
         this.dispose();                                
-        new Bookings(user.getEmail());
+        new Bookings(user);
     }                                    
 
     private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {                                         
