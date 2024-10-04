@@ -10,16 +10,16 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import models.User;
+
 /**
  *
- * @author timmy
+ * @author kondwani
  */
 public class CarListing extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CarListing
-     */
-    public CarListing() {
+    public static User user;
+    
+    public CarListing(User user) {
         // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -39,6 +39,7 @@ public class CarListing extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
+        this.user = user;
     }
 
     /**
@@ -475,12 +476,12 @@ public class CarListing extends javax.swing.JFrame {
 
     private void lblDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDashboardMouseClicked
         this.dispose();
-        new AdminDashboard(null);
+        new AdminDashboard(user);
     }//GEN-LAST:event_lblDashboardMouseClicked
 
     private void lblUsermanagementMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUsermanagementMouseClicked
         this.dispose();
-        new UserManagementPage(null);
+        new UserManagementPage(user);
     }//GEN-LAST:event_lblUsermanagementMouseClicked
 
     /**
@@ -513,7 +514,7 @@ public class CarListing extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CarListing().setVisible(true);
+                new CarListing(user);
             }
         });
     }

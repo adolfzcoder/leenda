@@ -17,18 +17,13 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.HeadlessException;
 import java.awt.print.PrinterException;
 
-
-
-
 /**
  *
  * @author kondwani
  */
 public class BookingPage extends javax.swing.JFrame {
     public User user;
-    /**
-     * Creates new form BookingPage
-     */
+ 
     public BookingPage() {
         // Set Nimbus look and feel
         try {
@@ -639,7 +634,7 @@ public class BookingPage extends javax.swing.JFrame {
 
     private void lblCarListingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarListingMouseClicked
         this.dispose();
-        new CarListing();
+        new CarListing(user);
         // new CarListing();        
     }//GEN-LAST:event_lblCarListingMouseClicked
 
