@@ -9,6 +9,7 @@ import auth.LoginPage;
 import javax.swing.JOptionPane;
 
 import models.User;
+import ownermodules.ManageFleet;
 import storage.StorageFunctions;
 
 import java.io.FileNotFoundException;
@@ -203,7 +204,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         lblDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lblCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblCarListing.setText("Car listing");
+        // lblCarListing.setText("Car listing");
         lblCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCarListing.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -215,8 +216,10 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
 
+   
+
         lblBookings.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblBookings.setText("Bookings");
+        // lblBookings.setText("Bookings");
         lblBookings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBookings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -254,7 +257,11 @@ public class AdminDashboard extends javax.swing.JFrame {
                 btnLogoutOnClick(evt);
             }
         });
-
+        lblUserManagement.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    userManagmentOnClick(evt);
+                }
+            });
         pnlSubHeader.setBackground(new java.awt.Color(237, 223, 205));
         pnlSubHeader.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -1312,6 +1319,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }// GEN-LAST:event_btnEditPersonalInformationOnClick
 
 
+
     
     private void lblCarListingMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblCarListingMouseEntered
         Functions.changeColorOfTheLabelOfTheHeaderWhenEntering(lblCarListing);
@@ -1350,6 +1358,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code

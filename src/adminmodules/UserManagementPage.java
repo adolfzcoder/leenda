@@ -139,7 +139,7 @@ public class UserManagementPage extends javax.swing.JFrame {
         });
 
         lblCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblCarListing.setText("Car listing");
+        // lblCarListing.setText("Car listing");
         lblCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCarListing.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -152,7 +152,7 @@ public class UserManagementPage extends javax.swing.JFrame {
         });
 
         lblBookings.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblBookings.setText("Bookings");
+        // lblBookings.setText("Bookings");
         lblBookings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBookings.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AdminDashboard",
+            "request": "launch",
+            "mainClass": "adminmodules.AdminDashboard",
+            "projectName": "leenda_9270f8b1"
+        },
+        {
+            "type": "java",
+            "name": "CarListing",
+            "request": "launch",
+            "mainClass": "adminmodules.CarListing",
+            "projectName": "leenda_9270f8b1"
+        },
+        {
+            "type": "java",
             "name": "CustomerDashboard",
             "request": "launch",
             "mainClass": "leendauserdashboard.CustomerDashboard",

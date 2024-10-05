@@ -132,7 +132,7 @@ public class BookingPage extends javax.swing.JFrame {
         jLabel3.setText("Leenda");
 
         lblCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblCarListing.setText("Car Listing");
+        //lblCarListing.setText("Car Listing");
         lblCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCarListing.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
