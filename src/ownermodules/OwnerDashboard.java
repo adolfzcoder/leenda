@@ -87,7 +87,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         lblUserTypeDynamic.setText(user.getUserType()); // display user type
 
-
+        this.setResizable(false);
+        
         this.setVisible(true);
     }
 
@@ -310,6 +311,11 @@ public class OwnerDashboard extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("Error reading CSV file: " + e.getMessage());
         }
+
+        jLabel21.setBackground(new java.awt.Color(217, 186, 164));
+        jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(133, 62, 52));
+        jLabel21.setText("Bookings");
 
         tblBookingHistory.setModel(tableModel);
                 

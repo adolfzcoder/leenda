@@ -46,6 +46,11 @@ public class bookedcars extends javax.swing.JFrame {
         this.user = user;
         
         this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+
+        loadBookingData();
+
 
         loadBookingData();
 
@@ -61,9 +66,11 @@ public class bookedcars extends javax.swing.JFrame {
             }else {
             jLabel13.setText("" + availableCars); 
             }
+            // currently booked cars
+            int currentlyBookedCars = StorageFunctions.countBookedCarsForCarOwner("src\\storage\\cars.csv", user.getEmail()); 
+            
+            lblnumberOfBookedCarsDynamic.setText(""+ currentlyBookedCars); // display current 'active' oro currently booked vehicles rentals (booked)
 
-            int activeRentals = StorageFunctions.countBookedCars(user.getEmail()); 
-            lblnumberOfBookedCarsDynamic.setText(""+ activeRentals); // display current 'active' oro currently booked vehicles rentals (booked)
             
 
 
@@ -366,14 +373,12 @@ public class bookedcars extends javax.swing.JFrame {
         jTable2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+           
             },
             new String [] {
-                "Name", "Car", "Phone Number", "Email"
+                "Customer Email", "Car Name", "Status", "Days Renting"
             }
+
         ));
         jScrollPane2.setViewportView(jTable2);
         jTable1.setGridColor(new java.awt.Color(237, 223, 205));
@@ -561,7 +566,8 @@ public class bookedcars extends javax.swing.JFrame {
         String line;
         String[] row;
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // Skip the header line
@@ -570,10 +576,11 @@ public class bookedcars extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 row = line.split(",");
                 model.addRow(new Object[] {
-                    row[0], // Name
-                    row[5], // Car
-                    row[10], // Phone Number
-                    row[8] // Email
+                    row[0], // Customer Email
+                    row[5], // Car Name
+                    row[7], // Status
+                    row[6] // Days Renting
+
                 });
             }
         } catch (IOException e) {

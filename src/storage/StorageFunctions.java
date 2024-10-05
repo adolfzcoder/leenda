@@ -68,7 +68,7 @@ public class StorageFunctions {
     public static int countBookedCars(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
-        int availableCarsCount = 0;
+        int bookedCars = 1;
 
         // Skip the first line (header)
         if (scan.hasNextLine()) {
@@ -83,16 +83,33 @@ public class StorageFunctions {
             String status = carDetails[6].trim();
 
             if (status.equalsIgnoreCase("booked")) {
-                availableCarsCount++;
+                bookedCars++;
             }
-        }
 
+            
+        }
         scan.close();
-        return availableCarsCount;
+        
+
+        if (bookedCars == 1){
+            bookedCars = 0;
+            return bookedCars;
+        }
+        return bookedCars;
     }
 
     
-
+    // Function to count the currentl ybooked cars accoriding to the car owner 
+    public static int currentlyBookedCars(String carOwnerEmail){
+        String carDetailsPath = "src\\storage\\cars.csv";
+        int bookedCars = 0;
+        try {
+            bookedCars = countBookedCarsForCarOwner(carDetailsPath, carOwnerEmail);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bookedCars;
+    }
 
     // Function to count completed bookings
     public static int countCompletedBookings(String filePath) throws FileNotFoundException {
@@ -406,7 +423,7 @@ public class StorageFunctions {
 
             // Assuming the status is at the 7th index (status column)
             String status = carDetails[6].trim();
-            String email = carDetails[0];
+            String email = carDetails[8];
 
             if (status.equalsIgnoreCase("booked") && email.equalsIgnoreCase(userEmail)) {
                 availableCarsCount++;
@@ -495,7 +512,7 @@ public class StorageFunctions {
         String carDetailsPath = "src\\storage\\cars.csv";
         File file = new File(carDetailsPath);
         Scanner scan = new Scanner(file);
-        int carCount = 0;
+        int carCount = 1;
 
         // Skip the first line (header)
         if (scan.hasNextLine()) {
@@ -516,6 +533,13 @@ public class StorageFunctions {
             if (status.equalsIgnoreCase("available") && CarOwnerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
                 carCount = carCount + 1;
             }
+            
+        }
+        scan.close();
+
+        if (carCount == 1){
+            carCount = 0;
+            return 0;
         }
 
         scan.close();
@@ -656,7 +680,7 @@ public class StorageFunctions {
             // total price is at the 4th index (totalPrice column)
             // car owner email at the 8th index
             String status = bookingDetails[7].trim();
-            String emailFromFile = bookingDetails[8].trim();
+            String emailFromFile = bookingDetails[0].trim();
             if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(customerEmail)) {
                 double price = Double.parseDouble(bookingDetails[4].trim());
                 totalSpending += price;
@@ -748,7 +772,7 @@ public class StorageFunctions {
             // System.out.println();
             // Assuming the status is at the 8th index (status column)
             String status = carDetails[6].trim();
-            String carOwnerEmailFromFile = carDetails[9];
+            String carOwnerEmailFromFile = carDetails[0];
 
             if (status.equalsIgnoreCase("cancelled") && customerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
                 cancelledBookingCount++;

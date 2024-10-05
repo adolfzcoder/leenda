@@ -101,7 +101,9 @@ public class BookingPage extends javax.swing.JFrame {
                         String endDate = bookingDetails[3];
                         String totalPrice = bookingDetails[4];
                         String status = bookingDetails[7]; // booking status
-                        String carID = bookingDetails[9]; // car ID
+
+                        String carID = "NaN"; // car ID
+
 
                         // Look up renter and rentee names using the user map
                         String[] renterDetails = userMap.get(renterEmail);
@@ -113,7 +115,9 @@ public class BookingPage extends javax.swing.JFrame {
 
                         // Look up car name using the car map
                         String[] carDetails = carMap.get(carID);
-                        String carName = carDetails != null ? carDetails[1] : "Unknown";
+
+                        String carName = carDetails != null ? carDetails[2] : "Unknown";
+
 
                         // Add the merged data as a row in the table model
                         model.addRow(new Object[] { bookingID, renterName, renteeName, startDate, endDate, totalPrice,
@@ -1070,3 +1074,4 @@ public class BookingPage extends javax.swing.JFrame {
                                                                                // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         }
 }
+

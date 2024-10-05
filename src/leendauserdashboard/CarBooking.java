@@ -17,6 +17,8 @@ public class CarBooking extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         this.setVisible(true);
+        this.setResizable(false);
+
         loadCarData();
     }
 

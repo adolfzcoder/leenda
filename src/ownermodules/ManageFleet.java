@@ -50,8 +50,9 @@ public class ManageFleet extends javax.swing.JFrame {
         this.user = user;
         this.setTitle("Manage Fleet");
         this.setVisible(true);
-         initComponents();
-        
+        initComponents();
+        this.setResizable(false);
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -259,13 +260,21 @@ public class ManageFleet extends javax.swing.JFrame {
             String line;
             boolean isFirstRow = true;
             while ((line = br.readLine()) != null) {
-            if (isFirstRow) {
-                isFirstRow = false;
-                continue; // Skip the first row
-            }
-            String[] row = line.split(",");
-            // Adjust the row data to match the column order
-            model.addRow(new Object[] {row[2], row[3], row[4], row[5], row[6], row[8], row[9]});
+                row = line.split(",");
+
+                // Check if the car owner's email matches the user's email
+                // carId index 1, 
+                //carName index 2, 
+                //carYear index 3,
+                // carType index 4,
+                // dailyRate index 5,
+                 //status index 6,
+                 // carImageURL index 7
+                 // vin index 8
+                if (1==1) {
+                    model.addRow(new Object[] {row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]});
+                }
+
             }
         } catch (IOException e) {
             e.printStackTrace();

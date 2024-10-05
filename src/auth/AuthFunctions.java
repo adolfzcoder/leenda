@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import ownermodules.OwnerDashboard;
+import leendauserdashboard.CustomerDashboard;
 
 
 public class AuthFunctions {
