@@ -81,7 +81,8 @@ public class OwnerDashboard extends javax.swing.JFrame {
 
         lblUserTypeDynamic.setText(user.getUserType()); // display user type
 
-
+        this.setResizable(false);
+        
         this.setVisible(true);
     }
 

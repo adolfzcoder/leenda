@@ -46,6 +46,9 @@ public class AddCar extends javax.swing.JFrame {
         }
         this.user = user;
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+
         this.setVisible(true);
     }
 

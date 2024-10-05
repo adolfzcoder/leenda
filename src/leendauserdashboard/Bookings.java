@@ -38,6 +38,8 @@ public class Bookings extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         this.setVisible(true);
+        this.setResizable(false);
+
         populateTable();
     }
 
@@ -241,7 +243,8 @@ public class Bookings extends javax.swing.JFrame {
     }//GEN-LAST:event_ViewCarsActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        new LoginPage();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -45,7 +45,8 @@ public class ManageFleet extends javax.swing.JFrame {
         this.setTitle("Manage Fleet");
         this.setVisible(true);
          initComponents();
-        
+         this.setResizable(false);
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         

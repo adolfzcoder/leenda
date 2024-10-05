@@ -46,6 +46,8 @@ public class bookedcars extends javax.swing.JFrame {
         this.user = user;
         
         this.setVisible(true);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
 
         loadBookingData();
 
