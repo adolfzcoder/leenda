@@ -74,7 +74,7 @@ public class UserManagementPage extends javax.swing.JFrame {
      */
 
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         pnlMain = new javax.swing.JPanel();
@@ -128,37 +128,39 @@ public class UserManagementPage extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseClicked(evt);
             }
-
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblDashboardMouseExited(evt);
             }
         });
 
         lblCarListing.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        // lblCarListing.setText("Car listing");
+        lblCarListing.setText("Car listing");
         lblCarListing.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblCarListing.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCarListingMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblCarListingMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblCarListingMouseExited(evt);
             }
         });
 
         lblBookings.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        // lblBookings.setText("Bookings");
+        lblBookings.setText("Bookings");
         lblBookings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblBookings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBookingsMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblBookingsMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblBookingsMouseExited(evt);
             }
@@ -187,92 +189,85 @@ public class UserManagementPage extends javax.swing.JFrame {
         javax.swing.GroupLayout pnlSubHeaderLayout = new javax.swing.GroupLayout(pnlSubHeader);
         pnlSubHeader.setLayout(pnlSubHeaderLayout);
         pnlSubHeaderLayout.setHorizontalGroup(
-                pnlSubHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlSubHeaderLayout.createSequentialGroup()
-                                .addGap(425, 425, 425)
-                                .addComponent(lblDashboardHeader)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            pnlSubHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSubHeaderLayout.createSequentialGroup()
+                .addGap(425, 425, 425)
+                .addComponent(lblDashboardHeader)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
         pnlSubHeaderLayout.setVerticalGroup(
-                pnlSubHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlSubHeaderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblDashboardHeader)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            pnlSubHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlSubHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblDashboardHeader)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pnlHeaderLayout = new javax.swing.GroupLayout(pnlHeader);
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
-                pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlHeaderLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(lblLeenda)
-                                .addGap(167, 167, 167)
-                                .addComponent(lblDashboard)
-                                .addGap(54, 54, 54)
-                                .addComponent(lblCarListing)
-                                .addGap(58, 58, 58)
-                                .addComponent(lblBookings)
-                                .addGap(59, 59, 59)
-                                .addComponent(lblUserManagement)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 94,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                        .addComponent(pnlSubHeader, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE));
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblLeenda)
+                .addGap(167, 167, 167)
+                .addComponent(lblDashboard)
+                .addGap(54, 54, 54)
+                .addComponent(lblCarListing)
+                .addGap(58, 58, 58)
+                .addComponent(lblBookings)
+                .addGap(59, 59, 59)
+                .addComponent(lblUserManagement)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(pnlSubHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         pnlHeaderLayout.setVerticalGroup(
-                pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlHeaderLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(
-                                        pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(lblLeenda, javax.swing.GroupLayout.DEFAULT_SIZE, 37,
-                                                        Short.MAX_VALUE)
-                                                .addComponent(lblUserManagement, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lblBookings, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lblCarListing, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(lblDashboard, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btnLogout))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pnlSubHeader, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+            pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLeenda, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(lblUserManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCarListing, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDashboard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogout))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlSubHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         tblUsers.setBackground(new java.awt.Color(217, 186, 164));
         tblUsers.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         tblUsers.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null },
-                        { null, null, null, null, null, null, null, null }
-                },
-                new String[] {
-                        "ID", "First name", "Last Name", "Email", "Phone number", "Driver license", "User type",
-                        "Status"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false, false, false, false
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "First name", "Last Name", "Email", "Phone number", "Driver license", "User type", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         tblUsers.setGridColor(new java.awt.Color(237, 223, 205));
@@ -338,112 +333,76 @@ public class UserManagementPage extends javax.swing.JFrame {
         txtFirstName.setBackground(new java.awt.Color(237, 223, 205));
         txtFirstName.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        javax.swing.GroupLayout pnlEditUserPersonalInformationLayout = new javax.swing.GroupLayout(
-                pnlEditUserPersonalInformation);
+        javax.swing.GroupLayout pnlEditUserPersonalInformationLayout = new javax.swing.GroupLayout(pnlEditUserPersonalInformation);
         pnlEditUserPersonalInformation.setLayout(pnlEditUserPersonalInformationLayout);
         pnlEditUserPersonalInformationLayout.setHorizontalGroup(
-                pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlEditUserPersonalInformationLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblUserID)
-                                                        .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtFirstName,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 185,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblFirstName))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtLastName,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 185,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblLastName)))
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblEmail)
-                                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblPhoneNumber)
-                                                        .addComponent(txtPhoneNumber,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 185,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlEditUserPersonalInformationLayout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblDriverLicense)
-                                                        .addComponent(txtDriverLicense,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 185,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(btnEditUsersPersonalInformation,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(16, Short.MAX_VALUE)));
+            pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUserID)
+                            .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFirstName))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblLastName)))
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPhoneNumber)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDriverLicense)
+                            .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnEditUsersPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
         pnlEditUserPersonalInformationLayout.setVerticalGroup(
-                pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                .addContainerGap(12, Short.MAX_VALUE)
-                                .addGroup(pnlEditUserPersonalInformationLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlEditUserPersonalInformationLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                        .addComponent(lblUserID)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                        .addComponent(lblLastName)
-                                                        .addPreferredGap(
-                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(txtLastName,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addComponent(lblFirstName)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pnlEditUserPersonalInformationLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addComponent(lblEmail)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addComponent(lblPhoneNumber)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
-                                                .addComponent(lblDriverLicense)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEditUsersPersonalInformation)
-                                .addContainerGap()));
+                            .addComponent(lblUserID)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtUserID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                            .addComponent(lblLastName)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addComponent(lblFirstName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlEditUserPersonalInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addComponent(lblEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addComponent(lblPhoneNumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlEditUserPersonalInformationLayout.createSequentialGroup()
+                        .addComponent(lblDriverLicense)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDriverLicense, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnEditUsersPersonalInformation)
+                .addContainerGap())
+        );
 
         jPanel1.setBackground(new java.awt.Color(217, 186, 164));
 
@@ -466,8 +425,7 @@ public class UserManagementPage extends javax.swing.JFrame {
 
         cboUserStatus.setBackground(new java.awt.Color(237, 223, 205));
         cboUserStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        cboUserStatus
-                .setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "approved", "pending", "declined" }));
+        cboUserStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "approved", "pending", "declined" }));
         cboUserStatus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         lblStatus.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -487,54 +445,41 @@ public class UserManagementPage extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(btnChangeUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 370,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnDeletePersonalInformation,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE, 370,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblUserIDToDelete)
-                                                        .addComponent(txtUserIDToDeleteOrChangeStatus,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 171,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(jPanel1Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblStatus)
-                                                        .addComponent(cboUserStatus,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 185,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(14, Short.MAX_VALUE)));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnChangeUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeletePersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblUserIDToDelete)
+                            .addComponent(txtUserIDToDeleteOrChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus)
+                            .addComponent(cboUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lblUserIDToDelete)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtUserIDToDeleteOrChangeStatus,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lblStatus)
-                                                .addGap(31, 31, 31))
-                                        .addComponent(cboUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChangeUserStatus)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnDeletePersonalInformation)
-                                .addContainerGap()));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblUserIDToDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUserIDToDeleteOrChangeStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblStatus)
+                        .addGap(31, 31, 31))
+                    .addComponent(cboUserStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnChangeUserStatus)
+                .addGap(18, 18, 18)
+                .addComponent(btnDeletePersonalInformation)
+                .addContainerGap())
+        );
 
         btnPrintUserRecords.setBackground(new java.awt.Color(237, 223, 205));
         btnPrintUserRecords.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -549,65 +494,61 @@ public class UserManagementPage extends javax.swing.JFrame {
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
-                pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                pnlMainLayout.createSequentialGroup()
-                                                        .addGap(0, 0, Short.MAX_VALUE)
-                                                        .addComponent(btnPrintUserRecords,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 179,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout
-                                                .createSequentialGroup()
-                                                .addComponent(pnlEditUserPersonalInformation,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addContainerGap()));
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPrintUserRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                        .addComponent(pnlEditUserPersonalInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
         pnlMainLayout.setVerticalGroup(
-                pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPrintUserRecords)
-                                .addGap(13, 13, 13)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(pnlEditUserPersonalInformation,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap()));
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addComponent(pnlHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnPrintUserRecords)
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlEditUserPersonalInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblCarListingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCarListingMouseClicked
+        this.dispose();
+        new CarListing(user);
+    }//GEN-LAST:event_lblCarListingMouseClicked
+
+    private void lblBookingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBookingsMouseClicked
+        this.dispose();
+        new BookingPage(user);
+    }//GEN-LAST:event_lblBookingsMouseClicked
 
     private void lblCarListingMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_lblCarListingMouseEntered
         Functions.changeColorOfTheLabelOfTheHeaderWhenEntering(lblCarListing);
@@ -638,101 +579,77 @@ public class UserManagementPage extends javax.swing.JFrame {
         Functions.changeColorOfTheLabelOfTheHeaderWhenExiting(lblDashboard);
     }// GEN-LAST:event_lblDashboardMouseExited
 
-    private void btnDeletePersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeletePersonalInformationOnClick
-        String userID = txtUserIDToDeleteOrChangeStatus.getText().trim(); // Get and trim the user ID input
+        private void btnDeletePersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeletePersonalInformationOnClick
+            String userID = txtUserIDToDeleteOrChangeStatus.getText().trim(); // Get and trim the user ID input
 
-        // Check if the user ID is empty
-        if (Validation.checkIfTheTextFieldIsEmpty(userID, "user ID")) {
-            return; // Exit if user ID is empty
-        }
+            // Check if the user ID is empty
+            if (Validation.checkIfTheTextFieldIsEmpty(userID, "user ID")) {
+                return; // Exit if user ID is empty
+            }
 
-        String filePath = "src/storage/userDetails.csv"; // Path to the CSV file
-        File inputFile = new File(filePath);
-        File tempFile = new File(inputFile.getAbsolutePath() + ".tmp"); // Temporary file
+            String filePath = "src/storage/userDetails.csv"; // Path to the CSV file
+            List<String[]> users = new ArrayList<>();
+            boolean userFound = false;
 
-        BufferedReader reader = null;
-        BufferedWriter writer = null;
+            // Read existing user data
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String[] userDetails = line.split(",");
+                    if (userDetails.length < 9)
+                        continue; // Adjust based on your actual CSV structure
 
-        try {
-            reader = new BufferedReader(new FileReader(inputFile));
-            writer = new BufferedWriter(new FileWriter(tempFile));
+                    // Check if the current user ID matches the one to be deleted
+                    if (userDetails[7].equals(userID)) {
+                        userFound = true; // User found
 
-            String line;
-            boolean userFound = false; // Flag to check if user is found
+                        // Ask for confirmation to delete
+                        int confirmation = JOptionPane.showConfirmDialog(this,
+                                "Are you sure you want to delete the data for user ID: " + userID + "?",
+                                "Confirm Deletion",
+                                JOptionPane.YES_NO_OPTION);
 
-            // Read each line from the original file
-            while ((line = reader.readLine()) != null) {
-                String[] userDetails = line.split(",");
-                String existingUserID = userDetails[7]; // Adjust index based on your CSV structure
-
-                // Check if the current line's user ID matches the one to delete
-                if (existingUserID.equals(userID)) {
-                    userFound = true; // User found
-
-                    // Ask for confirmation to delete
-                    int confirmation = JOptionPane.showConfirmDialog(this,
-                            "Are you sure you want to delete the data for user ID: " + userID + "?",
-                            "Confirm Deletion",
-                            JOptionPane.YES_NO_OPTION);
-
-                    if (confirmation == JOptionPane.YES_OPTION) {
-                        // If confirmed, skip writing this line to temp file (i.e., delete)
-                        continue; // Skip writing this line
-                    } else {
-                        // If not confirmed, write the line back to the temporary file and exit
-                        writer.write(line);
-                        writer.newLine();
-                        JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        return; // Exit the method
+                        if (confirmation == JOptionPane.YES_OPTION) {
+                            continue; // Skip adding this user to the list (i.e., delete)
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Deletion cancelled.", "Deletion Cancelled",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            return; // Exit the method
+                        }
                     }
-                }
 
-                // Write the line to the temp file if user ID does not match
-                writer.write(line);
-                writer.newLine();
-            }
-
-            // Make sure to flush and close the writer before replacing files
-            writer.flush();
-            writer.close(); // Close the writer first
-            reader.close(); // Then close the reader
-
-            // Check if user was found and deleted
-            if (userFound) {
-                // Replace the original file with the updated file
-                if (!inputFile.delete() || !tempFile.renameTo(inputFile)) {
-                    JOptionPane.showMessageDialog(this, "Error updating file. Please try again.", "File Update Error",
-                            JOptionPane.ERROR_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "User data deleted successfully.", "Deletion Successful",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    // Optionally refresh your table or UI here
-                    populateTable(tblUsers, "src/storage/userDetails.csv");
-                    txtUserIDToDeleteOrChangeStatus.setText("");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "User ID not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "Error reading/writing to file: " + e.getMessage(), "File Error",
-                    JOptionPane.ERROR_MESSAGE);
-        } finally {
-            // Ensure resources are closed in case of an exception
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-                if (writer != null) {
-                    writer.close();
+                    users.add(userDetails); // Add user data (not deleted) to the list
                 }
             } catch (IOException e) {
-                // Handle exception during resource closing
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error reading user details: " + e.getMessage(), "File Read Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return; // Exit on error
             }
-        }
-    }// GEN-LAST:event_btnDeletePersonalInformationOnClick
+
+            // Check if the user ID was found
+            if (!userFound) {
+                JOptionPane.showMessageDialog(this, "User ID not found.", "Deletion Failed", JOptionPane.ERROR_MESSAGE);
+                return; // Exit if user not found
+            }
+
+            // Write updated user data back to the CSV file
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+                for (String[] user : users) {
+                    bw.write(String.join(",", user)); // Join fields with commas
+                    bw.newLine(); // Add a newline after each user record
+                }
+                JOptionPane.showMessageDialog(this, "User data deleted successfully.", "Deletion Successful",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // Optionally refresh your table or UI here
+                this.revalidate();
+                this.repaint();
+                populateTable(tblUsers, "src/storage/userDetails.csv");
+                txtUserIDToDeleteOrChangeStatus.setText("");
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(this, "Error writing user details: " + e.getMessage(), "File Write Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }// GEN-LAST:event_btnDeletePersonalInformationOnClick
 
     private void btnEditUsersPersonalInformationOnClick(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEditUsersPersonalInformationOnClick
         String userID = txtUserID.getText().trim();
@@ -753,50 +670,50 @@ public class UserManagementPage extends javax.swing.JFrame {
         // Validate first name if it's not empty
         if (!firstName.isEmpty()) {
             if (Validation.validateName(firstName)) {
-                filledFieldCount++; // Increment only if the name is valid
+            filledFieldCount++; // Increment only if the name is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid first name.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid first name.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate last name if it's not empty
         if (!lastName.isEmpty()) {
             if (Validation.validateName(lastName)) {
-                filledFieldCount++; // Increment only if the last name is valid
+            filledFieldCount++; // Increment only if the last name is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid last name.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid last name.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate email if it's not empty
         if (!email.isEmpty()) {
             if (Validation.validateEmail(email)) {
-                if (!AuthFunctions.doesEmailExist(email)) {
-                    filledFieldCount++; // Increment if the email is valid and doesn't already exist
-                } else {
-                    JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.",
-                            "Email Exists", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (!AuthFunctions.doesEmailExist(email)) {
+                filledFieldCount++; // Increment if the email is valid and doesn't already exist
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid email address.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.",
+                    "Email Exists", JOptionPane.ERROR_MESSAGE);
                 return;
+            }
+            } else {
+            JOptionPane.showMessageDialog(this, "Invalid email address.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
         // Validate phone number if it's not empty
         if (!phoneNumber.isEmpty()) {
             if (Validation.validatePhoneNumber(phoneNumber)) {
-                filledFieldCount++; // Increment if the phone number is valid
+            filledFieldCount++; // Increment if the phone number is valid
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid phone number.", "Validation Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
+            JOptionPane.showMessageDialog(this, "Invalid phone number.", "Validation Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
             }
         }
 
@@ -805,11 +722,11 @@ public class UserManagementPage extends javax.swing.JFrame {
             filledFieldCount++; // No validation needed for driver's license as it's optional
         }
 
-        // Check if at least one additional field is filled
-        if (filledFieldCount == 0) {
-            JOptionPane.showMessageDialog(this, "You must fill at least one field other than user ID.",
-                    "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return; // Exit if no other fields are filled
+        // Check if at least two additional fields are filled
+        if (filledFieldCount < 2) {
+            JOptionPane.showMessageDialog(this, "You must fill at least two fields other than user ID.",
+                "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit if less than two other fields are filled
         }
 
         // Update logic
