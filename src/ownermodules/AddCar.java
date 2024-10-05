@@ -351,7 +351,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel21.setBackground(new java.awt.Color(217, 186, 164));
         jLabel21.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel21.setText("Booking History");
+        jLabel21.setText("Bookings");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

@@ -68,7 +68,7 @@ public class StorageFunctions {
     public static int countBookedCars(String filePath) throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
-        int availableCarsCount = 0;
+        int bookedCars = 1;
 
         // Skip the first line (header)
         if (scan.hasNextLine()) {
@@ -83,12 +83,19 @@ public class StorageFunctions {
             String status = carDetails[6].trim();
 
             if (status.equalsIgnoreCase("booked")) {
-                availableCarsCount++;
+                bookedCars++;
             }
-        }
 
+            
+        }
         scan.close();
-        return availableCarsCount;
+        
+
+        if (bookedCars == 1){
+            bookedCars = 0;
+            return bookedCars;
+        }
+        return bookedCars;
     }
 
     
@@ -495,7 +502,7 @@ public class StorageFunctions {
         String carDetailsPath = "src\\storage\\cars.csv";
         File file = new File(carDetailsPath);
         Scanner scan = new Scanner(file);
-        int carCount = 0;
+        int carCount = 1;
 
         // Skip the first line (header)
         if (scan.hasNextLine()) {
@@ -516,6 +523,13 @@ public class StorageFunctions {
             if (status.equalsIgnoreCase("available") && CarOwnerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
                 carCount = carCount + 1;
             }
+            
+        }
+        scan.close();
+
+        if (carCount == 1){
+            carCount = 0;
+            return 0;
         }
 
         scan.close();
