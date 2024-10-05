@@ -275,7 +275,7 @@ public class ViewCars extends javax.swing.JFrame {
         EditProfile.setBackground(new java.awt.Color(217, 186, 164));
         EditProfile.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         EditProfile.setForeground(new java.awt.Color(133, 62, 52));
-        EditProfile.setText("Edit Profile");
+        // EditProfile.setText("Edit Profile");
         EditProfile.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditProfileMouseClicked(evt);
