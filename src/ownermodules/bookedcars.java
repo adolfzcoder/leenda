@@ -52,6 +52,9 @@ public class bookedcars extends javax.swing.JFrame {
         loadBookingData();
 
 
+        loadBookingData();
+
+
 
         try {
 
@@ -67,6 +70,7 @@ public class bookedcars extends javax.swing.JFrame {
             int currentlyBookedCars = StorageFunctions.countBookedCarsForCarOwner("src\\storage\\cars.csv", user.getEmail()); 
             
             lblnumberOfBookedCarsDynamic.setText(""+ currentlyBookedCars); // display current 'active' oro currently booked vehicles rentals (booked)
+
             
 
 
@@ -564,6 +568,7 @@ public class bookedcars extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
 
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // Skip the header line
             br.readLine();
@@ -575,6 +580,7 @@ public class bookedcars extends javax.swing.JFrame {
                     row[5], // Car Name
                     row[7], // Status
                     row[6] // Days Renting
+
                 });
             }
         } catch (IOException e) {

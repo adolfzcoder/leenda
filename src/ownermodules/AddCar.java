@@ -309,7 +309,7 @@ public class AddCar extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel11.setText("Adolf David");
+        // jLabel11.setText("Adolf David");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -747,6 +747,16 @@ public class AddCar extends javax.swing.JFrame {
             }
         });
 
+        // open manage fleet when clicked
+        jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                try {
+                    manageFleetMouseClicked(evt);
+                } catch (UnsupportedLookAndFeelException ex) {
+                }
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -788,18 +798,24 @@ public class AddCar extends javax.swing.JFrame {
 
         jLabel33.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel33.setText("Car Owner");
+        // jLabel33.setText("Car Owner");
+        jLabel33.setText(user.getUserType()); // display user type
+
         jLabel33.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-user-88 (2).png"))); // NOI18N
 
         jLabel35.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(133, 62, 52));
-        jLabel35.setText("Adolf");
+        // jLabel35.setText("Adolf");
+        jLabel35.setText(user.getFirstName());
+
 
         lblLastNameDynamic.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         lblLastNameDynamic.setForeground(new java.awt.Color(133, 62, 52));
-        lblLastNameDynamic.setText("David");
+        // lblLastNameDynamic.setText("David");
+        lblLastNameDynamic.setText(user.getLastName());
+
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
