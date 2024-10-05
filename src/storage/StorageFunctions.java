@@ -680,7 +680,7 @@ public class StorageFunctions {
             // total price is at the 4th index (totalPrice column)
             // car owner email at the 8th index
             String status = bookingDetails[7].trim();
-            String emailFromFile = bookingDetails[8].trim();
+            String emailFromFile = bookingDetails[0].trim();
             if (status.equalsIgnoreCase("completed") && emailFromFile.equalsIgnoreCase(customerEmail)) {
                 double price = Double.parseDouble(bookingDetails[4].trim());
                 totalSpending += price;
@@ -772,7 +772,7 @@ public class StorageFunctions {
             // System.out.println();
             // Assuming the status is at the 8th index (status column)
             String status = carDetails[6].trim();
-            String carOwnerEmailFromFile = carDetails[9];
+            String carOwnerEmailFromFile = carDetails[0];
 
             if (status.equalsIgnoreCase("cancelled") && customerEmail.equalsIgnoreCase(carOwnerEmailFromFile)) {
                 cancelledBookingCount++;

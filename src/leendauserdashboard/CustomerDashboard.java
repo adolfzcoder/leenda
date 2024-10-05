@@ -37,7 +37,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         try {
             // spendings
             double totalSpendingsFromFile = StorageFunctions.getCustomerSpening(user.getEmail());
-            spendings.setText("NAD "+ totalSpendingsFromFile);
+            spendings.setText("N$ "+ totalSpendingsFromFile);
 
             // completedBookings
             int totalBookings = StorageFunctions.countBookingsByUserEmail(user.getEmail());
@@ -386,7 +386,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         canceledBookingText.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         canceledBookingText.setForeground(new java.awt.Color(133, 62, 52));
-        canceledBookingText.setText("Canceled Bookings");
+        canceledBookingText.setText("Cancelled Bookings");
         canceledBookingText.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
         canceledBookings.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -488,7 +488,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         ViewCar.setBackground(new java.awt.Color(237, 223, 205));
         ViewCar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         ViewCar.setForeground(new java.awt.Color(133, 62, 52));
-        ViewCar.setText("View Car");
+        ViewCar.setText("View Cars");
         ViewCar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ViewCarMouseClicked(evt);
@@ -612,7 +612,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_DashboardMouseClicked
 
     private void BookingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingMouseClicked
-        // TODO add your handling code here:
+        new Bookings(user);
     }//GEN-LAST:event_BookingMouseClicked
 
     private void EditProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditProfileMouseClicked

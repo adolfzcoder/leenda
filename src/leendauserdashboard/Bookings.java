@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 
 import auth.LoginPage;
 import models.User;
-
 /**
  *
  * @author rejoi
@@ -25,6 +24,7 @@ public class Bookings extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public Bookings(User user) {
+        // Set Nimbus look and feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -56,6 +56,8 @@ public class Bookings extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        ViewCars = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -71,13 +73,6 @@ public class Bookings extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(133, 62, 52));
         jButton1.setText("Dashboard");
 
-
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(133, 62, 52));
         jButton2.setText("Bookings");
@@ -91,6 +86,24 @@ public class Bookings extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(133, 62, 52));
         jLabel2.setText("Leenda");
 
+        ViewCars.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        ViewCars.setForeground(new java.awt.Color(133, 62, 52));
+        ViewCars.setText("View Cars");
+        ViewCars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewCarsActionPerformed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(133, 62, 52));
+        jButton3.setText("Log out");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -98,11 +111,15 @@ public class Bookings extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 404, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ViewCars)
+                .addGap(14, 14, 14)
                 .addComponent(jButton2)
-                .addGap(370, 370, 370))
+                .addGap(273, 273, 273)
+                .addComponent(jButton3)
+                .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +128,9 @@ public class Bookings extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(ViewCars)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -183,41 +202,48 @@ public class Bookings extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private void populateTable() {
-    try (BufferedReader br = new BufferedReader(new FileReader("src/storage/bookings.csv"))) {
-        String line;
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        model.setRowCount(0); // clear the table
-        br.readLine(); // skip the first line as it contains the table header
-
-        int rowIndex = 0;
-        while ((line = br.readLine()) != null) {
-            String[] columns = line.split(",");
-            String[] newRow = new String[7];
-
-            newRow[0] = columns[1]; // Booking ID
-            newRow[1] = columns[2]; // Start Date
-            newRow[2] = columns[3]; // End Date
-            newRow[3] = columns[4]; // Total Price
-            newRow[4] = columns[5]; // Car Name
-            newRow[5] = columns[6]; // Days Renting
-            newRow[6] = columns[7]; // Status
-
-            model.addRow(newRow);
-            rowIndex++;
+    private void populateTable() {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/storage/bookings.csv"))) {
+            String line;
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            model.setRowCount(0); // clear the table
+            br.readLine(); // skip the first line as it contains the table header
+    
+            int rowIndex = 0;
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split(",");
+                String[] newRow = new String[7];
+    
+                newRow[0] = columns[1]; // Booking ID
+                newRow[1] = columns[2]; // Start Date
+                newRow[2] = columns[3]; // End Date
+                newRow[3] = columns[4]; // Total Price
+                newRow[4] = columns[5]; // Car Name
+                newRow[5] = columns[6]; // Days Renting
+                newRow[6] = columns[7]; // Status
+    
+                model.addRow(newRow);
+                rowIndex++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-        new CustomerDashboard(user);
 
-    }
+
+    
+    private void ViewCarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewCarsActionPerformed
+        this.dispose();
+        new ViewCars(user);
+    }//GEN-LAST:event_ViewCarsActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -254,9 +280,11 @@ private void populateTable() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ViewCars;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
