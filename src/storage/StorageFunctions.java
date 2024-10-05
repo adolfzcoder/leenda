@@ -99,7 +99,17 @@ public class StorageFunctions {
     }
 
     
-
+    // Function to count the currentl ybooked cars accoriding to the car owner 
+    public static int currentlyBookedCars(String carOwnerEmail){
+        String carDetailsPath = "src\\storage\\cars.csv";
+        int bookedCars = 0;
+        try {
+            bookedCars = countBookedCarsForCarOwner(carDetailsPath, carOwnerEmail);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return bookedCars;
+    }
 
     // Function to count completed bookings
     public static int countCompletedBookings(String filePath) throws FileNotFoundException {
@@ -413,7 +423,7 @@ public class StorageFunctions {
 
             // Assuming the status is at the 7th index (status column)
             String status = carDetails[6].trim();
-            String email = carDetails[0];
+            String email = carDetails[8];
 
             if (status.equalsIgnoreCase("booked") && email.equalsIgnoreCase(userEmail)) {
                 availableCarsCount++;

@@ -62,7 +62,7 @@ public class bookedcars extends javax.swing.JFrame {
             jLabel13.setText("" + availableCars); 
             }
             // currently booked cars
-            int currentlyBookedCars = StorageFunctions.countBookedCars(user.getEmail()); 
+            int currentlyBookedCars = StorageFunctions.countBookedCarsForCarOwner("src\\storage\\cars.csv", user.getEmail()); 
             
             lblnumberOfBookedCarsDynamic.setText(""+ currentlyBookedCars); // display current 'active' oro currently booked vehicles rentals (booked)
             
@@ -367,13 +367,10 @@ public class bookedcars extends javax.swing.JFrame {
         jTable2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+           
             },
             new String [] {
-                "Start Date", "Car Name", "Status", "Customer Email"
+                "Customer Email", "Car Name", "Status", "Days Renting"
             }
 
         ));
@@ -563,7 +560,7 @@ public class bookedcars extends javax.swing.JFrame {
         String line;
         String[] row;
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             // Skip the header line
@@ -572,10 +569,10 @@ public class bookedcars extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 row = line.split(",");
                 model.addRow(new Object[] {
-                    row[2], // Start Date
-                    row[6], // Car Name
+                    row[0], // Customer Email
+                    row[5], // Car Name
                     row[7], // Status
-                    row[0] // Customer Email
+                    row[6] // Days Renting
                 });
             }
         } catch (IOException e) {
